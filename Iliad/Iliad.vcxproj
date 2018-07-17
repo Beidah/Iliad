@@ -151,12 +151,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Compiler.h" />
+    <ClInclude Include="src\Scanner.h" />
     <ClInclude Include="src\Chunk.h" />
     <ClInclude Include="src\stdafx.h" />
     <ClInclude Include="src\Value.h" />
     <ClInclude Include="src\VM.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Compiler.cpp" />
+    <ClCompile Include="src\Scanner.cpp" />
     <ClCompile Include="src\Chunk.cpp" />
     <ClCompile Include="src\Illiad.cpp" />
     <ClCompile Include="src\stdafx.cpp">

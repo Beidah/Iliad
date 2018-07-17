@@ -1,8 +1,15 @@
 #include "stdafx.h"
 #include "VM.h"
 
+#include "Compiler.h"
+
 VM::VM() {
 	m_StackTop = m_Stack;
+}
+
+InterpretResults VM::Interpret(std::string source) {
+	Compile(source);
+	return InterpretResults::OK;
 }
 
 InterpretResults VM::Interpret(Chunk * chunk) {

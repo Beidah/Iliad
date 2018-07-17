@@ -21,6 +21,7 @@ private:
 public:
 	VM();
 
+	InterpretResults Interpret(std::string source);
 	InterpretResults Interpret(Chunk* chunk);
 
 private:
