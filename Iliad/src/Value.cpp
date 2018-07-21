@@ -27,9 +27,9 @@ Value Value::operator+(Value value) const {
 	}
 
 	if (value.m_Type == ValueType::Float) {
-		b = as.Float;
+		b = value.as.Float;
 	} else if (value.m_Type == ValueType::Int) {
-		b = as.Int;
+		b = value.as.Int;
 	}
 
 	c = a + b;
@@ -52,9 +52,9 @@ Value Value::operator-(Value value) const {
 	}
 
 	if (value.m_Type == ValueType::Float) {
-		b = as.Float;
+		b = value.as.Float;
 	} else if (value.m_Type == ValueType::Int) {
-		b = as.Int;
+		b = value.as.Int;
 	}
 
 	c = a - b;
@@ -77,9 +77,9 @@ Value Value::operator*(Value value) const {
 	}
 
 	if (value.m_Type == ValueType::Float) {
-		b = as.Float;
+		b = value.as.Float;
 	} else if (value.m_Type == ValueType::Int) {
-		b = as.Int;
+		b = value.as.Int;
 	}
 
 	c = a * b;
@@ -101,9 +101,9 @@ Value Value::operator/(Value value) const {
 	}
 
 	if (value.m_Type == ValueType::Float) {
-		b = as.Float;
+		b = value.as.Float;
 	} else if (value.m_Type == ValueType::Int) {
-		b = as.Int;
+		b = value.as.Int;
 	}
 
 	c = a / b;

@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Scanner.h"
 
-Scanner::Scanner(std::string source) : m_Source(source) {
+Scanner::Scanner(const std::string* source) : m_Source(*source) {
 	m_Line = 1;
 	m_CurrentChar = m_Source.begin();
 }

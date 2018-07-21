@@ -152,6 +152,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="src\Compiler.h" />
+    <ClInclude Include="src\Parser.h" />
     <ClInclude Include="src\Scanner.h" />
     <ClInclude Include="src\Chunk.h" />
     <ClInclude Include="src\stdafx.h" />

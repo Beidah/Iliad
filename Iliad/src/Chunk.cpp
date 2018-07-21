@@ -1,8 +1,9 @@
 #include "stdafx.h"
 #include "Chunk.h"
 
-void Chunk::writeByte(Byte byte) { 
+void Chunk::writeByte(Byte byte, int line) { 
 	m_Code.push_back(byte);
+	m_Lines.push_back(line);
 
 }
 

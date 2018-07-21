@@ -1,5 +1,7 @@
 #pragma once
 
+#include <memory>
+
 #include "Chunk.h"
 #include "Value.h"
 
@@ -13,7 +15,7 @@ enum class InterpretResults {
 
 class VM {
 private:
-	Chunk* m_Chunk;
+	std::shared_ptr<Chunk> m_Chunk;
 	Byte* m_IP;
 	Value m_Stack[STACK_MAX];
 	Value* m_StackTop;
@@ -21,8 +23,7 @@ private:
 public:
 	VM();
 
-	InterpretResults Interpret(std::string source);
-	InterpretResults Interpret(Chunk* chunk);
+	InterpretResults Interpret(const std::string* source);
 
 private:
 	InterpretResults run();

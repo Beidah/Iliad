@@ -7,14 +7,16 @@ VM::VM() {
 	m_StackTop = m_Stack;
 }
 
-InterpretResults VM::Interpret(std::string source) {
-	Compile(source);
-	return InterpretResults::OK;
-}
+InterpretResults VM::Interpret(const std::string* source) {
+	Compiler compiler;
+	m_Chunk = std::make_shared<Chunk>();
 
-InterpretResults VM::Interpret(Chunk * chunk) {
-	m_Chunk = chunk;
-	m_IP = chunk->getStart();
+	if (!compiler.Compile(source, m_Chunk)) {
+		return InterpretResults::CompileError;
+	}
+
+	m_IP = m_Chunk->getStart();
+
 	return run();
 }
 

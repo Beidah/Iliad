@@ -24,8 +24,8 @@ public:
 
 	Chunk() = default;
 
-	void writeByte(Byte byte);
-	void writeByte(OpCode opCode) { writeByte(static_cast<Byte>(opCode)); }
+	void writeByte(Byte byte, int line);
+	void writeByte(OpCode opCode, int line) { writeByte(static_cast<Byte>(opCode), line); }
 	int addConstant(Value constant);
 
 	Byte* getStart() { return m_Code.data(); };

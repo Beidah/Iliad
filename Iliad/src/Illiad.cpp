@@ -16,7 +16,7 @@ static void repl() {
 
 		std::getline(std::cin, input);
 
-		vm.Interpret(input);
+		vm.Interpret(&input);
 	}
 }
 

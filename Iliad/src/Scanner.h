@@ -36,9 +36,7 @@ struct Token {
 	std::string token;
 	int line;
 
-
 private:
-	Token() = default;
 	friend class Scanner;
 };
 
@@ -48,7 +46,7 @@ class Scanner {
 	std::string::iterator m_CurrentChar;
 	std::stringstream m_CurrentToken;
 public:
-	Scanner(std::string source);
+	Scanner(const std::string* source);
 	
 	Token ScanToken();
 
