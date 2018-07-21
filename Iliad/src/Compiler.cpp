@@ -3,52 +3,49 @@
 
 #define NO_FUNC &Compiler::emptyFunction
 
-
-Compiler::Compiler() {
-	m_Rules = {
-		ParseRule(&Compiler::grouping, NO_FUNC, ParsePrecedence::Call),
-		ParseRule(),       // TOKEN_RIGHT_PAREN
-		ParseRule(),       // TOKEN_LEFT_BRACE
-		ParseRule(),       // TOKEN_RIGHT_BRACE
-		ParseRule(),      // TOKEN_COMMA
-		ParseRule(),       // TOKEN_DOT
-		ParseRule(&Compiler::unary, &Compiler::binary, ParsePrecedence::Term),       // TOKEN_MINUS
-		ParseRule(NO_FUNC, &Compiler::binary, ParsePrecedence::Term),       // TOKEN_PLUS
-		ParseRule(),       // TOKEN_SEMICOLON
-		ParseRule(NO_FUNC, &Compiler::binary,  ParsePrecedence::Factor),     // TOKEN_SLASH
-		ParseRule(NO_FUNC, &Compiler::binary,  ParsePrecedence::Factor),     // TOKEN_STAR
-		ParseRule(),       // TOKEN_BANG
-		ParseRule(ParsePrecedence::Equality),   // TOKEN_BANG_EQUAL
-		ParseRule(),       // TOKEN_EQUAL
-		ParseRule(ParsePrecedence::Equality ),   // TOKEN_EQUAL_EQUAL
-		ParseRule(ParsePrecedence::Comparison ), // TOKEN_GREATER
-		ParseRule(ParsePrecedence::Comparison ), // TOKEN_GREATER_EQUAL
-		ParseRule(ParsePrecedence::Comparison ), // TOKEN_LESS
-		ParseRule(ParsePrecedence::Comparison ), // TOKEN_LESS_EQUAL
-		ParseRule(ParsePrecedence::And ),        // TOKEN_AND
-		ParseRule(ParsePrecedence::Or ),         // TOKEN_OR
-		ParseRule(ParsePrecedence::And),			// Token_BitAnd
-		ParseRule(ParsePrecedence::Or),
-		ParseRule(),       // TOKEN_IDENTIFIER
-		ParseRule(),      // TOKEN_STRING
-		ParseRule(&Compiler::integer, NO_FUNC), // Token Integer
-		ParseRule(&Compiler::_float, NO_FUNC),       // Token Float
-		ParseRule(),       // TOKEN_CLASS
-		ParseRule(),       // TOKEN_ELSE
-		ParseRule(),       // TOKEN_FALSE
-		ParseRule(),       // TOKEN_FUN
-		ParseRule(),       // TOKEN_FOR
-		ParseRule(),       // TOKEN_IF
-		ParseRule(),       // TOKEN_RETURN
-		ParseRule(),       // TOKEN_SUPER
-		ParseRule(),       // TOKEN_THIS
-		ParseRule(),       // TOKEN_TRUE
-		ParseRule(),       // TOKEN_VAR
-		ParseRule(),       // TOKEN_WHILE
-		ParseRule(),       // TOKEN_ERROR
-		ParseRule(),       // TOKEN_EOF
-	};
-}
+const std::array<Compiler::ParseRule, static_cast<size_t>(TokenType::EoF) + 1> Compiler::m_Rules = {
+	ParseRule(&Compiler::grouping, NO_FUNC, ParsePrecedence::Call),
+	ParseRule(),       // TOKEN_RIGHT_PAREN
+	ParseRule(),       // TOKEN_LEFT_BRACE
+	ParseRule(),       // TOKEN_RIGHT_BRACE
+	ParseRule(),      // TOKEN_COMMA
+	ParseRule(),       // TOKEN_DOT
+	ParseRule(&Compiler::unary, &Compiler::binary, ParsePrecedence::Term),       // TOKEN_MINUS
+	ParseRule(NO_FUNC, &Compiler::binary, ParsePrecedence::Term),       // TOKEN_PLUS
+	ParseRule(),       // TOKEN_SEMICOLON
+	ParseRule(NO_FUNC, &Compiler::binary,  ParsePrecedence::Factor),     // TOKEN_SLASH
+	ParseRule(NO_FUNC, &Compiler::binary,  ParsePrecedence::Factor),     // TOKEN_STAR
+	ParseRule(),       // TOKEN_BANG
+	ParseRule(ParsePrecedence::Equality),   // TOKEN_BANG_EQUAL
+	ParseRule(),       // TOKEN_EQUAL
+	ParseRule(ParsePrecedence::Equality),   // TOKEN_EQUAL_EQUAL
+	ParseRule(ParsePrecedence::Comparison), // TOKEN_GREATER
+	ParseRule(ParsePrecedence::Comparison), // TOKEN_GREATER_EQUAL
+	ParseRule(ParsePrecedence::Comparison), // TOKEN_LESS
+	ParseRule(ParsePrecedence::Comparison), // TOKEN_LESS_EQUAL
+	ParseRule(ParsePrecedence::And),        // TOKEN_AND
+	ParseRule(ParsePrecedence::Or),         // TOKEN_OR
+	ParseRule(ParsePrecedence::And),			// Token_BitAnd
+	ParseRule(ParsePrecedence::Or),
+	ParseRule(),       // TOKEN_IDENTIFIER
+	ParseRule(),      // TOKEN_STRING
+	ParseRule(&Compiler::integer, NO_FUNC), // Token Integer
+	ParseRule(&Compiler::_float, NO_FUNC),       // Token Float
+	ParseRule(),       // TOKEN_CLASS
+	ParseRule(),       // TOKEN_ELSE
+	ParseRule(),       // TOKEN_FALSE
+	ParseRule(),       // TOKEN_FUN
+	ParseRule(),       // TOKEN_FOR
+	ParseRule(),       // TOKEN_IF
+	ParseRule(),       // TOKEN_RETURN
+	ParseRule(),       // TOKEN_SUPER
+	ParseRule(),       // TOKEN_THIS
+	ParseRule(),       // TOKEN_TRUE
+	ParseRule(),       // TOKEN_VAR
+	ParseRule(),       // TOKEN_WHILE
+	ParseRule(),       // TOKEN_ERROR
+	ParseRule(),       // TOKEN_EOF
+};
 
 bool Compiler::Compile(const std::string* source, std::shared_ptr<Chunk> chunk) {
 	m_Scanner = std::make_unique<Scanner>(source);

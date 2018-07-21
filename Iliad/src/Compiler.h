@@ -53,10 +53,9 @@ private:
 		ParseRule(ParsePrecedence prec) : precedence(prec) {}
 	};
 
-	std::array<ParseRule, static_cast<size_t>(TokenType::EoF) + 1> m_Rules;
+	static const std::array<ParseRule, static_cast<size_t>(TokenType::EoF) + 1> m_Rules;
 
 public:
-	Compiler();
 	bool Compile(const std::string* source, std::shared_ptr<Chunk> chunk);
 
 private:
