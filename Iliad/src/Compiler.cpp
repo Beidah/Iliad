@@ -1,6 +1,11 @@
 #include "stdafx.h"
 #include "Compiler.h"
 
+#ifdef DEBUG_PRINT_CODE
+#include "Debug.h"
+#endif // DEBUG_PRINT_CODE
+
+
 #define NO_FUNC &Compiler::emptyFunction
 
 const std::array<Compiler::ParseRule, static_cast<size_t>(TokenType::EoF) + 1> Compiler::m_Rules = {
@@ -160,6 +165,16 @@ uint8_t Compiler::makeConstant(Value value) {
 	}
 
 	return static_cast<uint8_t>(constant);
+}
+
+void Compiler::endCompiler() { 
+	emitReturn();
+#ifdef DEBUG_PRINT_CODE
+	if (!m_Parser.hadError) {
+		Debugger::DisassembleChunk(m_CompilingChunk.get(), "Code");
+	}
+#endif // DEBUG_PRINT_CODE
+
 }
 
 void Compiler::errorAt(Token token, const char* message) {

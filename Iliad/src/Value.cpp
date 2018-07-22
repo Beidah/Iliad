@@ -1,6 +1,24 @@
 #include "stdafx.h"
 #include "Value.h"
 
+#include <sstream>
+
+std::string Value::toString() const {
+	std::stringstream valueString;
+
+	if (m_Type == ValueType::Bool) {
+		valueString << as.Bool ? "true" : "false";
+	} else if (m_Type == ValueType::Int) {
+		valueString << as.Int;
+	} else if (m_Type == ValueType::Float) {
+		valueString << as.Float;
+	} else {
+		valueString << "Unknown value type.";
+	}
+
+	return valueString.str();
+}
+
 Value Value::operator-() const {
 	if (m_Type == ValueType::Int) {
 		return Value(-as.Int);

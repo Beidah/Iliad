@@ -19,6 +19,10 @@ private:
 	std::vector<Byte> m_Code;
 	std::vector<int> m_Lines;
 
+#ifdef _DEBUG
+	friend class Debugger;
+#endif // _DEBUG
+
 public:
 	std::vector<Value> m_Constants;
 

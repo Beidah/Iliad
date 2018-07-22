@@ -5,8 +5,16 @@
 
 #pragma once
 
-#include <stdio.h>
-#include <tchar.h>
+#include <string>
+#include <vector>
 #include <iostream>
+
+#ifdef _DEBUG
+
+// Debug defines
+#define DEBUG_TRACE_EXCEPTION
+#define DEBUG_PRINT_CODE
+
+#endif // DEBUG
 
 typedef uint8_t Byte;

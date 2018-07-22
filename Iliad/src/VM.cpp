@@ -2,6 +2,7 @@
 #include "VM.h"
 
 #include "Compiler.h"
+#include "Debug.h"
 
 VM::VM() {
 	m_StackTop = m_Stack;
@@ -30,6 +31,14 @@ InterpretResults VM::run() {
 	} while(false)
 
 	while (true) {
+#ifdef DEBUG_TRACE_EXCEPTION
+		std::cout << "        ";
+		for (Value *slot = m_Stack; slot < m_StackTop; slot++) {
+			std::cout << "[ " << slot->toString() << " ]";
+		}
+		std::cout << std::endl;
+		Debugger::DisassembleInstruction(m_Chunk.get(), (m_IP - m_Chunk->getStart()));
+#endif
 		OpCode instruction;
 		switch (instruction = static_cast<OpCode>(READ_BYTE())) {
 		case OpCode::Constant:

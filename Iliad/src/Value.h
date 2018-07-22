@@ -24,6 +24,9 @@ public:
 	Value(float value) { as.Float = value; m_Type = ValueType::Float; }
 	Value(bool value) { as.Bool = value; m_Type = ValueType::Bool; }
 
+	// For printing
+	std::string toString() const;
+
 	// Unary operators
 	Value operator-() const;
 

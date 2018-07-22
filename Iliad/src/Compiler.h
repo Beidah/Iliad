@@ -84,7 +84,7 @@ private:
 	void emitReturn() { emitByte(static_cast<uint8_t>(OpCode::Return)); }
 	
 	uint8_t makeConstant(Value value);
-	void endCompiler() { emitReturn(); }
+	void endCompiler();
 
 	// Errors
 	void errorAtCurrent(const char* message) { errorAt(m_Parser.currentToken, message); }
