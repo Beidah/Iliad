@@ -1,0 +1,331 @@
+\hypertarget{class_scanner}{}\section{Scanner Class Reference}
+\label{class_scanner}\index{Scanner@{Scanner}}
+
+
+A class to scan through the source code and tokenize it.  
+
+
+
+
+{\ttfamily \#include $<$Scanner.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_scanner_abccccf14f4b755fe2c0d3d6d4e52616a}\label{class_scanner_abccccf14f4b755fe2c0d3d6d4e52616a}} 
+\hyperlink{class_scanner_abccccf14f4b755fe2c0d3d6d4e52616a}{Scanner} (const std\+::string $\ast$source)
+\begin{DoxyCompactList}\small\item\em Initilizes the scanner with the source code provided. \end{DoxyCompactList}\item 
+\hyperlink{struct_token}{Token} \hyperlink{class_scanner_ae576450fd0cbbe93dd00b7a1acfaae8b}{Scan\+Token} ()
+\begin{DoxyCompactList}\small\item\em Retrieve the next token. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+char \hyperlink{class_scanner_a48162dd3db322ae58745bacacd98c463}{advance} ()
+\begin{DoxyCompactList}\small\item\em Move the \hyperlink{class_scanner}{Scanner} forward by one character. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_scanner_add2818e08ee85a6442a31cde8d4e20a8}\label{class_scanner_add2818e08ee85a6442a31cde8d4e20a8}} 
+void \hyperlink{class_scanner_add2818e08ee85a6442a31cde8d4e20a8}{skip\+Whitespace} ()
+\begin{DoxyCompactList}\small\item\em Whitespace has no meaning other than as a seperator of tokens. \end{DoxyCompactList}\item 
+bool \hyperlink{class_scanner_a886d66bcf9d8edd27f46f14f6df3c144}{is\+At\+End} () const
+\begin{DoxyCompactList}\small\item\em Check to see if the \hyperlink{class_scanner}{Scanner} has reached the end of the file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{Indent}\textbf{ Check\+Functions}\par
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{class_scanner_a54cd78a16ceb924d3177f281cddd2fb6}{match} (char expected)
+\begin{DoxyCompactList}\small\item\em Check if the next character is one that is expected. \end{DoxyCompactList}\item 
+char \hyperlink{class_scanner_aa5a6d5cab883f737f1ac799dd3434b4f}{peek} () const
+\begin{DoxyCompactList}\small\item\em Check the next character without consuming it. \end{DoxyCompactList}\item 
+char \hyperlink{class_scanner_a7641b64d926934c5007c3b33191f1422}{peek\+Next} () const
+\begin{DoxyCompactList}\small\item\em Check two characters ahead with consuming it. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Literals}\par
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{struct_token}{Token} \hyperlink{class_scanner_ab32009f01ca94ea6b5537a0283514aaa}{string} ()
+\begin{DoxyCompactList}\small\item\em Matches a set of quotes to a String token. \end{DoxyCompactList}\item 
+\hyperlink{struct_token}{Token} \hyperlink{class_scanner_a57a954e1177976e9179432d2229f8868}{number} ()
+\begin{DoxyCompactList}\small\item\em Matches a set of digits to a Integer or Float \hyperlink{struct_token}{Token}. \end{DoxyCompactList}\item 
+\hyperlink{struct_token}{Token} \hyperlink{class_scanner_ad4ea1c411d7a3952f29072abdf8d1315}{identifier} ()
+\begin{DoxyCompactList}\small\item\em Checks if the token is a keyword, or an Identifier. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Identifiers}\par
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{_scanner_8h_aa520fbf142ba1e7e659590c07da31921}{Token\+Type} \hyperlink{class_scanner_a6648f48e10f8408d7fa427562fb21200}{identifier\+Type} ()
+\begin{DoxyCompactList}\small\item\em Checks if the current token matches with an keyword. \end{DoxyCompactList}\item 
+\hyperlink{_scanner_8h_aa520fbf142ba1e7e659590c07da31921}{Token\+Type} \hyperlink{class_scanner_a078d11dc2b435cd82d4673f34aa531ad}{check\+Keyword} (const std\+::string \&token, const std\+::string \&keyword, \hyperlink{_scanner_8h_aa520fbf142ba1e7e659590c07da31921}{Token\+Type} type) const
+\begin{DoxyCompactList}\small\item\em Checks the current token against a specific keywork. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Utility\+Functions}\par
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{class_scanner_aa57431c2670899fefef67a7a7b307bd5}{is\+Digit} (char c) const
+\begin{DoxyCompactList}\small\item\em Checks if the character is a Digit. \end{DoxyCompactList}\item 
+bool \hyperlink{class_scanner_abc53d5d5a9051982708dc090a8977381}{is\+Alpha} (char c) const
+\begin{DoxyCompactList}\small\item\em Check if the character is a alphabet or underscore character. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Tokens}\par
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{struct_token}{Token} \hyperlink{class_scanner_a67c546b078ac1e6780aa5ded2bfc4754}{make\+Token} (\hyperlink{_scanner_8h_aa520fbf142ba1e7e659590c07da31921}{Token\+Type} type)
+\begin{DoxyCompactList}\small\item\em Creates a token of a given type. \end{DoxyCompactList}\item 
+\hyperlink{struct_token}{Token} \hyperlink{class_scanner_ad397e5672820f6200043a1c885404e9b}{error\+Token} (std\+::string message)
+\begin{DoxyCompactList}\small\item\em Creates an error token with a supplied message. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_scanner_a7bc86a6224b3f5ed70d31ba97e6dde23}\label{class_scanner_a7bc86a6224b3f5ed70d31ba97e6dde23}} 
+std\+::string \hyperlink{class_scanner_a7bc86a6224b3f5ed70d31ba97e6dde23}{m\+\_\+\+Source}
+\begin{DoxyCompactList}\small\item\em A string containing the source code to be tokenized. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_scanner_af1ca96d967cc65e78c471962d1822a62}\label{class_scanner_af1ca96d967cc65e78c471962d1822a62}} 
+int \hyperlink{class_scanner_af1ca96d967cc65e78c471962d1822a62}{m\+\_\+\+Line}
+\begin{DoxyCompactList}\small\item\em The current line of the source code the \hyperlink{class_scanner}{Scanner} is tokenizing. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_scanner_a472f832eb3fe8f7eb790cd515132566c}\label{class_scanner_a472f832eb3fe8f7eb790cd515132566c}} 
+std\+::string\+::iterator \hyperlink{class_scanner_a472f832eb3fe8f7eb790cd515132566c}{m\+\_\+\+Current\+Char}
+\begin{DoxyCompactList}\small\item\em The current character being looked at by the \hyperlink{class_scanner}{Scanner}. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_scanner_aa8166924571e1ababf368a6bde00f406}\label{class_scanner_aa8166924571e1ababf368a6bde00f406}} 
+std\+::stringstream \hyperlink{class_scanner_aa8166924571e1ababf368a6bde00f406}{m\+\_\+\+Current\+Token}
+\begin{DoxyCompactList}\small\item\em A stringstream to store each character of the current token as the \hyperlink{class_scanner}{Scanner} reconizes it. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A class to scan through the source code and tokenize it. 
+
+The scanner class is initilized with a string containing the code to be tokenize. After initilization, Scan\+Token can be called to recieve each token in order of occurance, one at a time. When the scanner reaches the end of the file, Scan\+Token will continue to produce an EoF token each time it\textquotesingle{}s called. 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_scanner_a48162dd3db322ae58745bacacd98c463}\label{class_scanner_a48162dd3db322ae58745bacacd98c463}} 
+\index{Scanner@{Scanner}!advance@{advance}}
+\index{advance@{advance}!Scanner@{Scanner}}
+\subsubsection{\texorpdfstring{advance()}{advance()}}
+{\footnotesize\ttfamily char Scanner\+::advance (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Move the \hyperlink{class_scanner}{Scanner} forward by one character. 
+
+\begin{DoxyReturn}{Returns}
+The next character of the sequence. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_scanner_a078d11dc2b435cd82d4673f34aa531ad}\label{class_scanner_a078d11dc2b435cd82d4673f34aa531ad}} 
+\index{Scanner@{Scanner}!check\+Keyword@{check\+Keyword}}
+\index{check\+Keyword@{check\+Keyword}!Scanner@{Scanner}}
+\subsubsection{\texorpdfstring{check\+Keyword()}{checkKeyword()}}
+{\footnotesize\ttfamily \hyperlink{_scanner_8h_aa520fbf142ba1e7e659590c07da31921}{Token\+Type} Scanner\+::check\+Keyword (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{token,  }\item[{const std\+::string \&}]{keyword,  }\item[{\hyperlink{_scanner_8h_aa520fbf142ba1e7e659590c07da31921}{Token\+Type}}]{type }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Checks the current token against a specific keywork. 
+
+A helper function to \hyperlink{class_scanner_a6648f48e10f8408d7fa427562fb21200}{identifier\+Type()}, this function checks a token against a provided keyword and returns the appropriate Token\+Type 
+\begin{DoxyParams}{Parameters}
+{\em token} & \hyperlink{struct_token}{Token} currently being scanned. \\
+\hline
+{\em keyword} & Keyword to match against the current token \\
+\hline
+{\em type} & The Token\+Type of keyword \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The Token\+Type provided if the token and keyword match, else \hyperlink{_scanner_8h_aa520fbf142ba1e7e659590c07da31921a29ee5d1ebcc033234938a5234f1f2075}{Token\+Type\+::\+Identifier} 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_scanner_ad397e5672820f6200043a1c885404e9b}\label{class_scanner_ad397e5672820f6200043a1c885404e9b}} 
+\index{Scanner@{Scanner}!error\+Token@{error\+Token}}
+\index{error\+Token@{error\+Token}!Scanner@{Scanner}}
+\subsubsection{\texorpdfstring{error\+Token()}{errorToken()}}
+{\footnotesize\ttfamily \hyperlink{struct_token}{Token} Scanner\+::error\+Token (\begin{DoxyParamCaption}\item[{std\+::string}]{message }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Creates an error token with a supplied message. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & Message to attach to the error. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A \hyperlink{struct_token}{Token} with \hyperlink{_scanner_8h_aa520fbf142ba1e7e659590c07da31921a902b0d55fddef6f8d651fe1035b7d4bd}{Token\+Type\+::\+Error}, the current line, and the message in place of a lexeme. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_scanner_ad4ea1c411d7a3952f29072abdf8d1315}\label{class_scanner_ad4ea1c411d7a3952f29072abdf8d1315}} 
+\index{Scanner@{Scanner}!identifier@{identifier}}
+\index{identifier@{identifier}!Scanner@{Scanner}}
+\subsubsection{\texorpdfstring{identifier()}{identifier()}}
+{\footnotesize\ttfamily \hyperlink{struct_token}{Token} Scanner\+::identifier (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Checks if the token is a keyword, or an Identifier. 
+
+\begin{DoxyReturn}{Returns}
+A token with type of a keyword if a keyword is matched, or a Identifier token. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_scanner_a6648f48e10f8408d7fa427562fb21200}\label{class_scanner_a6648f48e10f8408d7fa427562fb21200}} 
+\index{Scanner@{Scanner}!identifier\+Type@{identifier\+Type}}
+\index{identifier\+Type@{identifier\+Type}!Scanner@{Scanner}}
+\subsubsection{\texorpdfstring{identifier\+Type()}{identifierType()}}
+{\footnotesize\ttfamily \hyperlink{_scanner_8h_aa520fbf142ba1e7e659590c07da31921}{Token\+Type} Scanner\+::identifier\+Type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Checks if the current token matches with an keyword. 
+
+\begin{DoxyReturn}{Returns}
+The Token\+Type of a keyword if the current token matches one, or the Identifier Token\+Type 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_scanner_abc53d5d5a9051982708dc090a8977381}\label{class_scanner_abc53d5d5a9051982708dc090a8977381}} 
+\index{Scanner@{Scanner}!is\+Alpha@{is\+Alpha}}
+\index{is\+Alpha@{is\+Alpha}!Scanner@{Scanner}}
+\subsubsection{\texorpdfstring{is\+Alpha()}{isAlpha()}}
+{\footnotesize\ttfamily bool Scanner\+::is\+Alpha (\begin{DoxyParamCaption}\item[{char}]{c }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Check if the character is a alphabet or underscore character. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em c} & Character to check. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns true if c is a alphabet or underscore character, else false. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_scanner_a886d66bcf9d8edd27f46f14f6df3c144}\label{class_scanner_a886d66bcf9d8edd27f46f14f6df3c144}} 
+\index{Scanner@{Scanner}!is\+At\+End@{is\+At\+End}}
+\index{is\+At\+End@{is\+At\+End}!Scanner@{Scanner}}
+\subsubsection{\texorpdfstring{is\+At\+End()}{isAtEnd()}}
+{\footnotesize\ttfamily bool Scanner\+::is\+At\+End (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Check to see if the \hyperlink{class_scanner}{Scanner} has reached the end of the file. 
+
+\begin{DoxyReturn}{Returns}
+Returns true if the \hyperlink{class_scanner}{Scanner} has scanned the entire file, else 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_scanner_aa57431c2670899fefef67a7a7b307bd5}\label{class_scanner_aa57431c2670899fefef67a7a7b307bd5}} 
+\index{Scanner@{Scanner}!is\+Digit@{is\+Digit}}
+\index{is\+Digit@{is\+Digit}!Scanner@{Scanner}}
+\subsubsection{\texorpdfstring{is\+Digit()}{isDigit()}}
+{\footnotesize\ttfamily bool Scanner\+::is\+Digit (\begin{DoxyParamCaption}\item[{char}]{c }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Checks if the character is a Digit. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em c} & Character to check. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns true if c is a digit, else false. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_scanner_a67c546b078ac1e6780aa5ded2bfc4754}\label{class_scanner_a67c546b078ac1e6780aa5ded2bfc4754}} 
+\index{Scanner@{Scanner}!make\+Token@{make\+Token}}
+\index{make\+Token@{make\+Token}!Scanner@{Scanner}}
+\subsubsection{\texorpdfstring{make\+Token()}{makeToken()}}
+{\footnotesize\ttfamily \hyperlink{struct_token}{Token} Scanner\+::make\+Token (\begin{DoxyParamCaption}\item[{\hyperlink{_scanner_8h_aa520fbf142ba1e7e659590c07da31921}{Token\+Type}}]{type }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Creates a token of a given type. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em type} & The Token\+Type of the return \hyperlink{struct_token}{Token}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A \hyperlink{struct_token}{Token} with the type provided, the lexeme taken from m\+\_\+\+Current\+Token, and line number taken from m\+\_\+\+Line. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_scanner_a54cd78a16ceb924d3177f281cddd2fb6}\label{class_scanner_a54cd78a16ceb924d3177f281cddd2fb6}} 
+\index{Scanner@{Scanner}!match@{match}}
+\index{match@{match}!Scanner@{Scanner}}
+\subsubsection{\texorpdfstring{match()}{match()}}
+{\footnotesize\ttfamily bool Scanner\+::match (\begin{DoxyParamCaption}\item[{char}]{expected }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Check if the next character is one that is expected. 
+
+Checks one character ahead of the current one, and consumes it if it is the predicted char. If the char is not the predicted one, the scanner goes back to it\textquotesingle{}s original place. 
+\begin{DoxyParams}{Parameters}
+{\em expected} & The char that is predicted to come next in the sequence. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns true if the next char in the source is expected, else false 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_scanner_a57a954e1177976e9179432d2229f8868}\label{class_scanner_a57a954e1177976e9179432d2229f8868}} 
+\index{Scanner@{Scanner}!number@{number}}
+\index{number@{number}!Scanner@{Scanner}}
+\subsubsection{\texorpdfstring{number()}{number()}}
+{\footnotesize\ttfamily \hyperlink{struct_token}{Token} Scanner\+::number (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Matches a set of digits to a Integer or Float \hyperlink{struct_token}{Token}. 
+
+\begin{DoxyReturn}{Returns}
+A token of type Integer if the token does not have a decimal point, or a token of type Float if the token does have a decimal 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_scanner_aa5a6d5cab883f737f1ac799dd3434b4f}\label{class_scanner_aa5a6d5cab883f737f1ac799dd3434b4f}} 
+\index{Scanner@{Scanner}!peek@{peek}}
+\index{peek@{peek}!Scanner@{Scanner}}
+\subsubsection{\texorpdfstring{peek()}{peek()}}
+{\footnotesize\ttfamily char Scanner\+::peek (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Check the next character without consuming it. 
+
+\begin{DoxyReturn}{Returns}
+The next char from the source code, without it being added into the current token. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_scanner_a7641b64d926934c5007c3b33191f1422}\label{class_scanner_a7641b64d926934c5007c3b33191f1422}} 
+\index{Scanner@{Scanner}!peek\+Next@{peek\+Next}}
+\index{peek\+Next@{peek\+Next}!Scanner@{Scanner}}
+\subsubsection{\texorpdfstring{peek\+Next()}{peekNext()}}
+{\footnotesize\ttfamily char Scanner\+::peek\+Next (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Check two characters ahead with consuming it. 
+
+\begin{DoxyReturn}{Returns}
+The char two ahead of the \hyperlink{class_scanner}{Scanner} from the source code, without it being added into the current token. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_scanner_ae576450fd0cbbe93dd00b7a1acfaae8b}\label{class_scanner_ae576450fd0cbbe93dd00b7a1acfaae8b}} 
+\index{Scanner@{Scanner}!Scan\+Token@{Scan\+Token}}
+\index{Scan\+Token@{Scan\+Token}!Scanner@{Scanner}}
+\subsubsection{\texorpdfstring{Scan\+Token()}{ScanToken()}}
+{\footnotesize\ttfamily \hyperlink{struct_token}{Token} Scanner\+::\+Scan\+Token (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Retrieve the next token. 
+
+Retrieve each token from the source code, one at a time, in the order they occur in. \begin{DoxyReturn}{Returns}
+The next \hyperlink{struct_token}{Token} from the sequence. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_scanner_ab32009f01ca94ea6b5537a0283514aaa}\label{class_scanner_ab32009f01ca94ea6b5537a0283514aaa}} 
+\index{Scanner@{Scanner}!string@{string}}
+\index{string@{string}!Scanner@{Scanner}}
+\subsubsection{\texorpdfstring{string()}{string()}}
+{\footnotesize\ttfamily \hyperlink{struct_token}{Token} Scanner\+::string (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Matches a set of quotes to a String token. 
+
+\begin{DoxyReturn}{Returns}
+A token of type String with the lexeme encompassing the quotemarkss, if both a begining and end quotemark are found A error token is returned instead if the ending quotemarks are not found. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{_scanner_8h}{Scanner.\+h}\item 
+Scanner.\+cpp\end{DoxyCompactItemize}

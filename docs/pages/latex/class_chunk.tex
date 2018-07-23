@@ -1,0 +1,112 @@
+\hypertarget{class_chunk}{}\section{Chunk Class Reference}
+\label{class_chunk}\index{Chunk@{Chunk}}
+
+
+A chunk of byte code.  
+
+
+
+
+{\ttfamily \#include $<$Chunk.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_chunk_a825c5802ac179ab0aa45a2153b968f31}{write\+Byte} (Byte byte, int line)
+\begin{DoxyCompactList}\small\item\em Write byte of code to m\+\_\+\+Code. \end{DoxyCompactList}\item 
+void \hyperlink{class_chunk_ae829323f6890ae5eddd48dc39d46455d}{write\+Byte} (\hyperlink{_chunk_8h_a3d7c5cec8d9c1afc2c92ad39b9d64996}{Op\+Code} op\+Code, int line)
+\begin{DoxyCompactList}\small\item\em Write byte of code to m\+\_\+\+Code. \end{DoxyCompactList}\item 
+int \hyperlink{class_chunk_a138fc2e29b0a19f87d6c3fd7560815f8}{add\+Constant} (\hyperlink{class_value}{Value} constant)
+\begin{DoxyCompactList}\small\item\em Add a constant \hyperlink{class_value}{Value} to m\+\_\+\+Constants. \end{DoxyCompactList}\item 
+Byte $\ast$ \hyperlink{class_chunk_a95d10e1f1a3d246fb045e81b20c9487d}{get\+Start} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_chunk_ad22276b5bb6ac793fc3185e6fa5a6064}\label{class_chunk_ad22276b5bb6ac793fc3185e6fa5a6064}} 
+\hyperlink{_value_8h_ad5c36ad5821e2aca06138efab8f0fc8d}{Value\+Array} \hyperlink{class_chunk_ad22276b5bb6ac793fc3185e6fa5a6064}{m\+\_\+\+Constants}
+\begin{DoxyCompactList}\small\item\em An array of constants. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_chunk_a71817b16f0230f80d1dd9a0fc2338b59}\label{class_chunk_a71817b16f0230f80d1dd9a0fc2338b59}} 
+std\+::vector$<$ Byte $>$ \hyperlink{class_chunk_a71817b16f0230f80d1dd9a0fc2338b59}{m\+\_\+\+Code}
+\begin{DoxyCompactList}\small\item\em Byte representation of code to be interpreted. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_chunk_a2227be48de0ad220a5547b592114ad04}\label{class_chunk_a2227be48de0ad220a5547b592114ad04}} 
+std\+::vector$<$ int $>$ \hyperlink{class_chunk_a2227be48de0ad220a5547b592114ad04}{m\+\_\+\+Lines}
+\begin{DoxyCompactList}\small\item\em Line at which each byte of code occured on. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A chunk of byte code. 
+
+A \hyperlink{class_chunk}{Chunk} is a class with a resizable array of unsigned 8-\/bit values that represent bytecode. A \hyperlink{class_compiler}{Compiler} writes each opcode, with the needed operands, to the chunk in sequential order, then passes it to a \hyperlink{class_v_m}{VM} to be interpreted. 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_chunk_a138fc2e29b0a19f87d6c3fd7560815f8}\label{class_chunk_a138fc2e29b0a19f87d6c3fd7560815f8}} 
+\index{Chunk@{Chunk}!add\+Constant@{add\+Constant}}
+\index{add\+Constant@{add\+Constant}!Chunk@{Chunk}}
+\subsubsection{\texorpdfstring{add\+Constant()}{addConstant()}}
+{\footnotesize\ttfamily int Chunk\+::add\+Constant (\begin{DoxyParamCaption}\item[{\hyperlink{class_value}{Value}}]{constant }\end{DoxyParamCaption})}
+
+
+
+Add a constant \hyperlink{class_value}{Value} to m\+\_\+\+Constants. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & \hyperlink{class_value}{Value} to add to m\+\_\+\+Constants \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Index of m\+\_\+\+Constants where value was added. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_chunk_a95d10e1f1a3d246fb045e81b20c9487d}\label{class_chunk_a95d10e1f1a3d246fb045e81b20c9487d}} 
+\index{Chunk@{Chunk}!get\+Start@{get\+Start}}
+\index{get\+Start@{get\+Start}!Chunk@{Chunk}}
+\subsubsection{\texorpdfstring{get\+Start()}{getStart()}}
+{\footnotesize\ttfamily Byte$\ast$ Chunk\+::get\+Start (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\begin{DoxyReturn}{Returns}
+Pointer to the beginning of the bytecode 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_chunk_a825c5802ac179ab0aa45a2153b968f31}\label{class_chunk_a825c5802ac179ab0aa45a2153b968f31}} 
+\index{Chunk@{Chunk}!write\+Byte@{write\+Byte}}
+\index{write\+Byte@{write\+Byte}!Chunk@{Chunk}}
+\subsubsection{\texorpdfstring{write\+Byte()}{writeByte()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void Chunk\+::write\+Byte (\begin{DoxyParamCaption}\item[{Byte}]{byte,  }\item[{int}]{line }\end{DoxyParamCaption})}
+
+
+
+Write byte of code to m\+\_\+\+Code. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em byte} & Either the opcode or operand to write to m\+\_\+\+Code. \\
+\hline
+{\em line} & Line on which the code occurred on. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_chunk_ae829323f6890ae5eddd48dc39d46455d}\label{class_chunk_ae829323f6890ae5eddd48dc39d46455d}} 
+\index{Chunk@{Chunk}!write\+Byte@{write\+Byte}}
+\index{write\+Byte@{write\+Byte}!Chunk@{Chunk}}
+\subsubsection{\texorpdfstring{write\+Byte()}{writeByte()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void Chunk\+::write\+Byte (\begin{DoxyParamCaption}\item[{\hyperlink{_chunk_8h_a3d7c5cec8d9c1afc2c92ad39b9d64996}{Op\+Code}}]{op\+Code,  }\item[{int}]{line }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Write byte of code to m\+\_\+\+Code. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em opcode} & Op\+Code representation of byte to write to m\+\_\+\+Code. \\
+\hline
+{\em line} & Line on which the code occurred on. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{_chunk_8h}{Chunk.\+h}\item 
+Chunk.\+cpp\end{DoxyCompactItemize}

@@ -1,0 +1,104 @@
+This document defines the rules of grammar for Iliad. Terms in {\itshape italics} are non-\/terminal, while terms in A\+L\+L\+\_\+\+C\+A\+PS are terminals. Literals are enclosed in either single (\textquotesingle{}\textquotesingle{}) or double (\char`\"{}\char`\"{}) quotes. 
+
+
+
+\subsubsection*{Declarations}
+
+\tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{2}{|X[-1]}|}
+\hline
+\rowcolor{\tableheadbgcolor}\textbf{ Term }&\PBS\raggedleft \textbf{ Rule  }\\\cline{1-2}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\rowcolor{\tableheadbgcolor}\textbf{ Term }&\PBS\raggedleft \textbf{ Rule  }\\\cline{1-2}
+\endhead
+program &\PBS\raggedleft {\itshape declaration}$\ast$ E\+OF \\\cline{1-2}
+declaration &\PBS\raggedleft {\itshape class\+Dec} $|$ {\itshape function\+Dec} $|$ {\itshape var\+Dec} $|$ {\itshape statement} \\\cline{1-2}
+class\+Dec &\PBS\raggedleft \char`\"{}class\char`\"{} I\+D\+E\+N\+T\+I\+F\+I\+ER \char`\"{}\{\char`\"{} {\itshape member\+Dec}$\ast$ \char`\"{}\}\char`\"{} \\\cline{1-2}
+function\+Dec &\PBS\raggedleft {\itshape type} I\+D\+E\+N\+T\+I\+F\+I\+ER \char`\"{}(\char`\"{} {\itshape parameters}? \char`\"{})\char`\"{} {\itshape block} \\\cline{1-2}
+var\+Dec &\PBS\raggedleft {\itshape type} I\+D\+E\+N\+T\+I\+F\+I\+ER ( \char`\"{}=\char`\"{} {\itshape expression} )? \char`\"{};\char`\"{} \\\cline{1-2}
+member\+Dec &\PBS\raggedleft A\+C\+C\+E\+S\+S\+\_\+\+S\+P\+E\+C\+I\+F\+I\+ER? ( {\itshape function\+Dec} $|$ {\itshape var\+Dec} ) \\\cline{1-2}
+\end{longtabu}
+\subsubsection*{Statements}
+
+\tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{2}{|X[-1]}|}
+\hline
+\rowcolor{\tableheadbgcolor}\textbf{ Term }&\PBS\raggedleft \textbf{ Rule  }\\\cline{1-2}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\rowcolor{\tableheadbgcolor}\textbf{ Term }&\PBS\raggedleft \textbf{ Rule  }\\\cline{1-2}
+\endhead
+statement &\PBS\raggedleft {\itshape expression\+Stmt} $|$ {\itshape for\+Stmt} $|$ {\itshape if\+Stmt} $|$ {\itshape while\+Stmt} $|$ {\itshape return\+Stmt} $|$ {\itshape block} \\\cline{1-2}
+expression\+Stmt &\PBS\raggedleft {\itshape expression} \char`\"{};\char`\"{} \\\cline{1-2}
+for\+Stmt &\PBS\raggedleft \char`\"{}for\char`\"{} \char`\"{}(\char`\"{} ( {\itshape var\+Dec} $|$ {\itshape expression\+Stmt} $|$ \char`\"{};\char`\"{} ) {\itshape expression}? \char`\"{};\char`\"{} {\itshape expression}? \char`\"{})\char`\"{} {\itshape block} \\\cline{1-2}
+if\+Stmt &\PBS\raggedleft \char`\"{}if\char`\"{} \char`\"{}(\char`\"{} {\itshape expression} \char`\"{})\char`\"{} ( {\itshape block} $|$ {\itshape return\+Stmt} \char`\"{};\char`\"{} ) \\\cline{1-2}
+while\+Stmt &\PBS\raggedleft \char`\"{}while\char`\"{} \char`\"{}(\char`\"{} {\itshape expression} \char`\"{})\char`\"{} {\itshape block} \\\cline{1-2}
+return\+Stmt &\PBS\raggedleft \char`\"{}return\char`\"{} {\itshape expression}? \char`\"{};\char`\"{} \\\cline{1-2}
+block &\PBS\raggedleft \char`\"{}\{\char`\"{} {\itshape declaration}$\ast$ \char`\"{}\}\char`\"{} \\\cline{1-2}
+\end{longtabu}
+\subsubsection*{Expressions}
+
+\tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{2}{|X[-1]}|}
+\hline
+\rowcolor{\tableheadbgcolor}\textbf{ Term }&\PBS\raggedleft \textbf{ Rule  }\\\cline{1-2}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\rowcolor{\tableheadbgcolor}\textbf{ Term }&\PBS\raggedleft \textbf{ Rule  }\\\cline{1-2}
+\endhead
+expression &\PBS\raggedleft {\itshape assignment} \\\cline{1-2}
+assignment &\PBS\raggedleft ( {\itshape call} \char`\"{}.\char`\"{} )? I\+D\+E\+N\+T\+I\+F\+I\+ER \char`\"{}=\char`\"{} {\itshape expression} $|$ {\itshape logic\+Or} \\\cline{1-2}
+logic\+Or &\PBS\raggedleft {\itshape logic\+And} ( \char`\"{}\textbackslash{}$\vert$\textbackslash{}$\vert$\char`\"{} {\itshape logic\+And} )$\ast$ \\\cline{1-2}
+logic\+And &\PBS\raggedleft {\itshape equality} ( \char`\"{}\&\&\char`\"{} {\itshape logic\+And} )$\ast$ \\\cline{1-2}
+equality &\PBS\raggedleft {\itshape comparison} ( ( \char`\"{}==\char`\"{} $|$ \char`\"{}!=\char`\"{} ) {\itshape comparison} )$\ast$ \\\cline{1-2}
+comparison &\PBS\raggedleft {\itshape addition} ( ( \char`\"{}$<$\char`\"{} $|$ \char`\"{}$>$\char`\"{} $|$ \char`\"{}$<$=\char`\"{} $|$ \char`\"{}$>$=\char`\"{} ) {\itshape addition} )$\ast$ \\\cline{1-2}
+addition &\PBS\raggedleft {\itshape multiplication} ( ( \char`\"{}+\char`\"{} $|$ \char`\"{}-\/\char`\"{} ) {\itshape multiplication} )$\ast$ \\\cline{1-2}
+multiplication &\PBS\raggedleft {\itshape unary} ( ( \char`\"{}/\char`\"{} $|$ \char`\"{}$\ast$\char`\"{} ) {\itshape unary} )$\ast$ \\\cline{1-2}
+unary &\PBS\raggedleft ( \char`\"{}-\/\char`\"{} $|$ \char`\"{}!\char`\"{} ) {\itshape unary} $|$ {\itshape call} \\\cline{1-2}
+call &\PBS\raggedleft {\itshape primary} ( \char`\"{}(\char`\"{} {\itshape arguments}? \char`\"{})\char`\"{} $|$ \char`\"{}.\char`\"{} I\+D\+E\+N\+T\+I\+F\+I\+ER )$\ast$ \\\cline{1-2}
+primary &\PBS\raggedleft \char`\"{}true\char`\"{} $|$ \char`\"{}false\char`\"{} $|$ \char`\"{}this\char`\"{} $|$ N\+U\+M\+B\+ER $|$ S\+T\+R\+I\+NG $|$ I\+D\+E\+N\+T\+I\+F\+I\+ER $|$ \char`\"{}(\char`\"{} expression \char`\"{})\char`\"{} $|$ \char`\"{}super\char`\"{} \char`\"{}.\char`\"{} I\+D\+E\+N\+T\+I\+F\+I\+ER \\\cline{1-2}
+\end{longtabu}
+\subsubsection*{Others}
+
+\tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{2}{|X[-1]}|}
+\hline
+\rowcolor{\tableheadbgcolor}\textbf{ Term }&\PBS\raggedleft \textbf{ Rule  }\\\cline{1-2}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\rowcolor{\tableheadbgcolor}\textbf{ Term }&\PBS\raggedleft \textbf{ Rule  }\\\cline{1-2}
+\endhead
+type &\PBS\raggedleft \char`\"{}int\char`\"{} $|$ \char`\"{}float\char`\"{} $|$ \char`\"{}bool\char`\"{} $|$ \char`\"{}var\char`\"{} $|$ I\+D\+E\+N\+T\+I\+F\+I\+ER \\\cline{1-2}
+parameters &\PBS\raggedleft {\itshape type} I\+D\+E\+N\+T\+I\+F\+I\+ER ( \char`\"{},\char`\"{} {\itshape type} I\+D\+E\+N\+T\+I\+F\+I\+ER )$\ast$ \\\cline{1-2}
+arguments &\PBS\raggedleft {\itshape expression} ( \char`\"{},\char`\"{} {\itshape expression} )$\ast$ \\\cline{1-2}
+\end{longtabu}
+\subsubsection*{Terminals}
+
+\tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{2}{|X[-1]}|}
+\hline
+\rowcolor{\tableheadbgcolor}\textbf{ Term }&\PBS\raggedleft \textbf{ Rule  }\\\cline{1-2}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\rowcolor{\tableheadbgcolor}\textbf{ Term }&\PBS\raggedleft \textbf{ Rule  }\\\cline{1-2}
+\endhead
+N\+U\+M\+B\+ER &\PBS\raggedleft I\+N\+T\+E\+G\+ER $|$ F\+L\+O\+AT \\\cline{1-2}
+I\+N\+T\+E\+G\+ER &\PBS\raggedleft D\+I\+G\+I\+T+ \\\cline{1-2}
+F\+L\+O\+AT &\PBS\raggedleft D\+I\+G\+I\+T+ \char`\"{}.\char`\"{} D\+I\+G\+I\+T+ \\\cline{1-2}
+S\+T\+R\+I\+NG &\PBS\raggedleft \textquotesingle{}\char`\"{}\textquotesingle{} .\textbackslash{}$\ast$ \textquotesingle{}\char`\"{}\textquotesingle{} \\\cline{1-2}
+I\+D\+E\+N\+T\+I\+F\+I\+ER &\PBS\raggedleft A\+L\+P\+HA ( A\+L\+P\+H\+A\+D\+I\+G\+IT )$\ast$ \\\cline{1-2}
+A\+L\+P\+HA &\PBS\raggedleft \mbox{[}a-\/z\+A-\/Z\mbox{]} \\\cline{1-2}
+D\+I\+G\+IT &\PBS\raggedleft \mbox{[}0-\/9\mbox{]} \\\cline{1-2}
+A\+L\+P\+H\+A\+D\+I\+G\+IT &\PBS\raggedleft A\+L\+P\+HA $|$ D\+I\+G\+IT $|$ \char`\"{}\+\_\+\char`\"{} \\\cline{1-2}
+\end{longtabu}
