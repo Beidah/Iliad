@@ -144,7 +144,6 @@ TokenType Scanner::identifierType() {
 			switch (token[1]) {
 			case 'a': return checkKeyword(token, "false", TokenType::False);
 			case 'o': return checkKeyword(token, "for", TokenType::For);
-			case 'u': return checkKeyword(token, "fun", TokenType::Fun);
 			}
 		}
 		break;

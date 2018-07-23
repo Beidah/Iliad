@@ -67,7 +67,7 @@ private:
 		ParseRule(ParsePrecedence prec) : precedence(prec) {}
 	};
 
-	static const std::array<ParseRule, NUMBER_OF_TOKENS> m_Rules; //!< Rules for parsing each individual token.
+	static const std::array<ParseRule, Token::NUMBER_OF_TOKENS> m_Rules; //!< Rules for parsing each individual token.
 
 public:
 

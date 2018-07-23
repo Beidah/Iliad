@@ -58,9 +58,6 @@ enum class TokenType {
 	EoF //!< The end of file.
 };
 
-//! The total amount of token types that can be scanned.
-extern const int NUMBER_OF_TOKENS = static_cast<int>(TokenType::EoF) + 1;
-
 
 //! A struct representing a token giving by the compiler
 
@@ -68,6 +65,9 @@ struct Token {
 	TokenType type; //!< The type of token found
 	std::string lexeme; //!< The string that produced the token.
 	int line; //!< The line the token was found on.
+
+	//! The total amount of token types that can be scanned.
+	static const int NUMBER_OF_TOKENS = static_cast<int>(TokenType::EoF) + 1;
 };
 
 //! A class to scan through the source code and tokenize it.
