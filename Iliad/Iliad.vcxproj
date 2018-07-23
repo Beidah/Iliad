@@ -164,7 +164,7 @@
     <ClCompile Include="src\Debug.cpp" />
     <ClCompile Include="src\Scanner.cpp" />
     <ClCompile Include="src\Chunk.cpp" />
-    <ClCompile Include="src\Illiad.cpp" />
+    <ClCompile Include="src\Iliad.cpp" />
     <ClCompile Include="src\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -175,8 +175,11 @@
     <ClCompile Include="src\VM.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="docs\grammars.md" />
-    <None Include="ReadMe.md" />
+    <None Include="..\.gitattributes" />
+    <None Include="..\.gitignore" />
+    <None Include="..\docs\Grammar Rules.md" />
+    <None Include="..\Doxyfile" />
+    <None Include="..\ReadMe.md" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

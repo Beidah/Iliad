@@ -1,13 +1,15 @@
-// Iliad.cpp : Defines the entry point for the console application.
-//
+//! \file Iliad.cpp 
+//! \brief Defines the entry point for the console application.
 
 #include "stdafx.h"
 #include "VM.h"
 
 #include <string>
 
+//! Interpreter virtual machine for the repl
 VM vm;
 
+//! Creates a repl enviroment with vm interpreter.
 static void repl() {
 	std::string input;
 
@@ -20,13 +22,14 @@ static void repl() {
 	}
 }
 
+//! Entry point of the program.
 int main(int argc, char** argv) {
 	std::cout << "Illiad programming language 0.1" << std::endl;
 
 	if (argc == 1) {
 		repl();
 	} else if (argc == 2) {
-		// Run file
+		// TODO: Run file
 	} else {
 		std::cerr << "Usage: Illiad [path]" << std::endl;
 		exit(1);

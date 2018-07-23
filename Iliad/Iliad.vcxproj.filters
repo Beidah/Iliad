@@ -18,9 +18,6 @@
     <ClCompile Include="src\stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Illiad.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\Chunk.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -39,10 +36,26 @@
     <ClCompile Include="src\Debug.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Iliad.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="ReadMe.md" />
-    <None Include="docs\grammars.md" />
+    <None Include="..\ReadMe.md">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\Doxyfile">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\.gitattributes">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\.gitignore">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\docs\Grammar Rules.md">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\stdafx.h">

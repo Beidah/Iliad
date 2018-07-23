@@ -39,7 +39,6 @@ const std::array<Compiler::ParseRule, static_cast<size_t>(TokenType::EoF) + 1> C
 	ParseRule(),       // TOKEN_CLASS
 	ParseRule(),       // TOKEN_ELSE
 	ParseRule(),       // TOKEN_FALSE
-	ParseRule(),       // TOKEN_FUN
 	ParseRule(),       // TOKEN_FOR
 	ParseRule(),       // TOKEN_IF
 	ParseRule(),       // TOKEN_RETURN
@@ -71,7 +70,7 @@ void Compiler::advance() {
 
 		if (m_Parser.currentToken.type != TokenType::Error) break;
 
-		errorAtCurrent(m_Parser.currentToken.token.c_str());
+		errorAtCurrent(m_Parser.currentToken.lexeme.c_str());
 	}
 }
 
@@ -127,19 +126,19 @@ void Compiler::expression() {
 }
 
 void Compiler::integer() {
-	int value = std::stoi(m_Parser.previousToken.token, nullptr);
+	int value = std::stoi(m_Parser.previousToken.lexeme, nullptr);
 	emitConstant(Value(value));
 }
 
 void Compiler::_float() {
-	float value = std::stof(m_Parser.previousToken.token);
+	float value = std::stof(m_Parser.previousToken.lexeme);
 	emitConstant(Value(value));
 }
 
 void Compiler::parsePrecedence(ParsePrecedence precedence) {
 	advance();
 	ParseFun prefix = getRule(m_Parser.previousToken.type)->prefixRule;
-	if (prefix == NO_FUNC) {
+	if (prefix == NO_FUNC || prefix == nullptr) {
 		error("Expected expression.");
 		return;
 	}
@@ -188,7 +187,7 @@ void Compiler::errorAt(Token token, const char* message) {
 	} else if (token.type == TokenType::Error) {
 		// Nothing
 	} else {
-		std::cerr << " at " << token.token;
+		std::cerr << " at " << token.lexeme;
 	}
 
 	std::cerr << ": " << message << std::endl;

@@ -7,19 +7,25 @@ Scanner::Scanner(const std::string* source) : m_Source(*source) {
 }
 
 Token Scanner::ScanToken() {
+	// Whitespace is ignored by the compiler
 	skipWhitespace();
 
+	// Reset the current token
 	m_CurrentToken.str(std::string());
 	
+	// Check if at the end of the file.
 	if (isAtEnd()) {
 		m_CurrentToken << "\0";
 		return makeToken(TokenType::EoF);
 	}
 
+	// Feed the next character into the scanner
 	char c = advance();
 	m_CurrentToken << c;
 
+	// If the character is a number, return either a float or int
 	if (isdigit(c)) return number();
+	// If the character is a letter, find out if the token is a keyword or return an "Identifier"
 	if (isalpha(c)) return identifier();
 
 	switch (c) {
@@ -62,6 +68,8 @@ void Scanner::skipWhitespace() {
 			break;
 
 		case '/':
+			// Comments begin with a "//" and end with a linebreak.
+			// Comments aren't technically whitespace, but the scanner should treat them the same way.
 			if (peekNext() == '/') {
 				while (peek() != '\n' && !isAtEnd()) advance();
 			} else {
@@ -100,6 +108,7 @@ Token Scanner::string() {
 Token Scanner::number() {
 	TokenType type = TokenType::Integer;
 
+	// While the next character is a number, add it to the token.
 	while (isDigit(peek())) {
 		m_CurrentToken << advance();
 	}
@@ -117,6 +126,7 @@ Token Scanner::number() {
 }
 
 Token Scanner::identifier() {
+	// Identifiers are to be made with Alphanumerical values or a "_"
 	while (isAlpha(peek()) || isDigit(peek()))
 		m_CurrentToken << advance();
 
@@ -127,7 +137,6 @@ TokenType Scanner::identifierType() {
 	const std::string token = m_CurrentToken.str();
 	
 	switch (token[0]) {
-	case 'a': return checkKeyword(token, "and", TokenType::And);
 	case 'c': return checkKeyword(token, "class", TokenType::Class);
 	case 'e': return checkKeyword(token, "else", TokenType::Else);
 	case 'f':
@@ -140,7 +149,6 @@ TokenType Scanner::identifierType() {
 		}
 		break;
 	case 'i': return checkKeyword(token, "if", TokenType::If);
-	case 'o': return checkKeyword(token, "or", TokenType::Or);
 	case 'r': return checkKeyword(token, "return", TokenType::Return);
 	case 's': return checkKeyword(token, "super", TokenType::Super);
 	case 't':
@@ -155,6 +163,7 @@ TokenType Scanner::identifierType() {
 	case 'w': return checkKeyword(token, "while", TokenType::While);
 	}
 
+	// If none of the keywords match, return Identifier
 	return TokenType::Identifier;
 }
 
@@ -162,14 +171,14 @@ Token Scanner::makeToken(TokenType type) {
 	Token token;
 	token.type = type;
 	token.line = m_Line;
-	token.token = m_CurrentToken.str();
+	token.lexeme = m_CurrentToken.str();
 	return token;
 }
 
 Token Scanner::errorToken(std::string message) {
 	Token token;
 	token.type = TokenType::Error;
-	token.token = message;
+	token.lexeme = message;
 	token.line = m_Line;
 	return token;
 }
