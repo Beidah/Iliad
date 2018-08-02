@@ -41,7 +41,7 @@ int Debugger::DisassembleInstruction(Chunk* chunk, int offset) {
 int Debugger::ConstantInstruction(const char* name, Chunk* chunk, int offset) {
 	Byte constant = chunk->m_Code[offset + 1];
 	std::cout << std::left << std::setw(16) << name << std::right << (int)constant;
-	std::cout << "'" << chunk->m_Constants[constant].toString() << "'" << std::endl;
+	std::cout << "'" << chunk->m_Constants[constant].ToString() << "'" << std::endl;
 	return offset + 2;
 }
 

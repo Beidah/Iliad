@@ -2,6 +2,13 @@
 
 #include "Chunk.h"
 
+// TODO: write assert macros.
+#if _DEBUG
+#define ASSERT(x)
+#else
+#define ASSERT(x)
+#endif
+
 class Debugger {
 public:
 

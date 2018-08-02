@@ -126,7 +126,7 @@ void Compiler::expression() {
 }
 
 void Compiler::integer() {
-	int value = std::stoi(m_Parser.previousToken.lexeme, nullptr);
+	int32_t value = std::stoi(m_Parser.previousToken.lexeme, nullptr);
 	emitConstant(Value(value));
 }
 

@@ -9,5 +9,5 @@ void Chunk::writeByte(Byte byte, int line) {
 
 int Chunk::addConstant(Value constant) { 
 	m_Constants.push_back(constant);
-	return m_Constants.size() - 1;
+	return static_cast<int>(m_Constants.size()) - 1;
 }

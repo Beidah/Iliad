@@ -78,9 +78,9 @@ struct Token {
 */
 
 class Scanner {
-	std::string m_Source; //!< A string containing the source code to be tokenized.
+	const std::string m_Source; //!< A string containing the source code to be tokenized.
 	int m_Line; //!< The current line of the source code the Scanner is tokenizing.
-	std::string::iterator m_CurrentChar; //!< The current character being looked at by the Scanner.
+	std::string::const_iterator m_CurrentChar; //!< The current character being looked at by the Scanner.
 	std::stringstream m_CurrentToken; //!< A stringstream to store each character of the current token as the Scanner reconizes it.
 
 public:

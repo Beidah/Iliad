@@ -5,6 +5,9 @@
 #include "stdafx.h"
 #include "Value.h"
 
+//! A resizable array of Values
+//typedef std::vector<Value> ValueArray;
+
 
 //! Representation of opcodes to write into a Chunk.
 /*!
@@ -44,7 +47,7 @@ private:
 #endif // _DEBUG
 
 public:
-	ValueArray m_Constants; //!< An array of constants.
+	std::vector<Value> m_Constants; //!< An array of constants.
 
 	//! Write byte of code to m_Code.
 	/*!
@@ -68,5 +71,5 @@ public:
 	/*!
 	  \return Pointer to the beginning of the bytecode
 	*/
-	Byte* getStart() { return m_Code.data(); };
+	const Byte* getStart() { return m_Code.data(); };
 };
