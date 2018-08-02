@@ -5,7 +5,7 @@
 #include "Debug.h"
 
 VM::VM() {
-	m_StackTop = m_Stack;
+	m_Stack.reserve(STACK_MAX);
 }
 
 InterpretResults VM::Interpret(const std::string* source) {
@@ -22,8 +22,7 @@ InterpretResults VM::Interpret(const std::string* source) {
 }
 
 InterpretResults VM::run() {
-#define READ_BYTE() (*m_IP++)
-#define READ_CONSTANT() (m_Chunk->m_Constants[READ_BYTE()])
+#define READ_CONSTANT() (m_Chunk->m_Constants[ReadByte()])
 #define BINARY_OP(op) do { \
 		Value a = pop(); \
 		Value b = pop(); \
@@ -33,18 +32,20 @@ InterpretResults VM::run() {
 	while (true) {
 #ifdef DEBUG_TRACE_EXCEPTION
 		std::cout << "        ";
-		for (Value *slot = m_Stack; slot < m_StackTop; slot++) {
-			std::cout << "[ " << slot->toString() << " ]";
+		for (size_t slot = 0; slot < m_StackTop; slot++) {
+			std::cout << "[ " << m_Stack[slot].ToString() << " ]";
 		}
 		std::cout << std::endl;
-		Debugger::DisassembleInstruction(m_Chunk.get(), (m_IP - m_Chunk->getStart()));
+		Debugger::DisassembleInstruction(m_Chunk.get(), static_cast<int>(m_IP - m_Chunk->getStart()));
 #endif
 		OpCode instruction;
-		switch (instruction = static_cast<OpCode>(READ_BYTE())) {
+		switch (instruction = static_cast<OpCode>(ReadByte())) {
 		case OpCode::Constant:
+		{
 			Value constant = READ_CONSTANT();
 			push(constant);
 			break;
+		}
 		case OpCode::Add:
 			BINARY_OP(+); break;
 		case OpCode::Subtract:
@@ -54,7 +55,7 @@ InterpretResults VM::run() {
 		case OpCode::Divide:
 			BINARY_OP(/ ); break;
 		case OpCode::Negate:
-			if (!IS_NUMBER(peek(0))) {
+			if (peek(0).IsNumber()) {
 				return InterpretResults::RuntimeError;
 			}
 			push(-pop());
@@ -67,15 +68,16 @@ InterpretResults VM::run() {
 
 #undef BINARY_OP
 #undef READ_CONSTANT
-#undef READ_BYTE
 }
 
-void VM::push(Value value) {
-	*m_StackTop = value;
+void VM::push(Value& value) {
+	m_Stack.push_back(value);
 	m_StackTop++;
 }
 
 Value VM::pop() {
 	m_StackTop--;
-	return *m_StackTop;
+	Value value = m_Stack.back();
+	m_Stack.pop_back();
+	return value;
 }

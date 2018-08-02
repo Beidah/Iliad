@@ -3,48 +3,133 @@
 #pragma once
 
 #include <vector>
+#include <type_traits>
+
+#define FWD(value) std::forward<decltype(value)>(value)
+
+typedef uint8_t byte;
+typedef std::vector<byte> ByteArray;
 
 
 //! The type of data the value is meant to represent.
 /*!
   Currently supported types of values are:
-  - int
-  - float
+  - Integrals
+	- char (8-bits) note: might rename to byte?
+	- shorts (16-bits)
+	- int (32-bits)
+	- longs (64-bits)
+  - Decimals
+	- float (32-bit single precision)
+	- double (64-bit double precision)
   - bool
   
   TODO:: Add other value types.
 */
+
 enum class ValueType {
-	Int, Float,
-	Bool,
-};
+	Invalid = -1,
 
-//! Represents data in the code.
-class Value {
-public:
-	ValueType m_Type; //!< The type the value represents
-
-public:
-	//! Union to store the actual value data in whichever type is needed.
-	union {
-		bool Bool;
-		float Float;
-		int Int;
-	} as;
-
-	//!@{ \name Constructors
-	//! Default constructor, value and type not specified.
-	Value() = default;
-	//! Constructs the Value as an int with given value.
-	Value(int value) { as.Int = value; m_Type = ValueType::Int; }
-	//! Constructs the Value as a float with given value
-	Value(float value) { as.Float = value; m_Type = ValueType::Float; }
-	//! Constructs the Value as a bool with given value.
-	Value(bool value) { as.Bool = value; m_Type = ValueType::Bool; }
+	//!@{ 
+	//! Integral Numbers
+	Char, Short,
+	Int, Long,
 	//!@}
 
+	//!@{
+	//! Floating Point numbers
+	Float, Double,
+	//!@}
+
+	Bool, //!< Boolean
+};
+
+//! Converts type into appropriate ValueType enum
+/*!
+  Will take a value and convert it's type into the appropriate ValueType. If
+  passed a Value, it'll return it's own type.
+  \param T Any supported ValueType, or Value
+  \return Corresponding ValueType to type T, or type of Value.
+*/
+template <typename T>
+ValueType getType(T);
+
+//! Serializes a value into a vector of unsigned chars.
+/*!
+  Takes a value of supported types and converts it to binary. If called on an
+  instance of Value class, returns it's AsBytes method.
+  \param value Any supported ValueType, or Value
+  \return A binary representation of value, stored in vector<uint8_t>
+*/
+template <typename T>
+ByteArray toBytes(T value);
+
+
+//! Basical value representation
+/*!
+  Values are stored in an std::vector of unsigned chars of the binary of the value.
+  This class stores the bytes, size and an enum of the type of data that is represented.
+  Basic arithmetic operators are overloaded to make using values in the compiler code as easy
+  as using normal data-types. Values are stored in little endian.
+*/
+class Value {
+public:
+	const ValueType m_Type; //!< The type the value represents.
+	const size_t m_Size; //!< Size of the data in bytes.
+	ByteArray m_Data; //!< Bytes of data. Stored in little endian.
+
+
+public:
+
+	//!@{ \name Constructors
+	//! Default constructor, returns an "Invalid" value
+	Value() : m_Type(ValueType::Invalid), m_Size(0) {}
+
+
+	//! Copy constructor
+	Value(const Value& value);
+	//! Copy constructor
+	Value(const Value* value);
+
+	
+	//! Main constructor
+	/*!
+	  This constructor is the one called by the templated one, and initilizes a valid value.
+	  \param bytes A vector<uint8_t> of the binary to be stored, in little endian.
+	  \param type ValueType of value.
+	*/
+	Value(ByteArray bytes, ValueType type);
+
+	//! Template constructor, takes in a value and serializes it.
+	/*!
+	  Calls main constructor after passing input through both toBytes and getType
+	  \param value value of any supported ValueType.
+	*/
+	template<typename T>
+	Value(T value) : Value(toBytes<T>(FWD(value)), getType(value)) {}
+
+	//template<>
+	//Value(Value&& value) : Value(value.AsBytes(), value.type()) {}
+
+	//!@}
+
+	//!@{ Getters
+
+	//! Converts byte array into type T
+	template<typename T>
+	T AsValue() const;
+
+	//! returns a byte array of the value.
+	const ByteArray& AsBytes() const;
+
 	//! A string representation of the value for printing.
-	std::string toString() const;
+	const std::string ToString() const;
+
+	//! \return Size of Value in bytes.
+	const size_t Size() const { return m_Size; }
+	//! \return ValueType of Value.
+	const ValueType& Type() const { return m_Type; }
+	//!@}
 
 
 	//!@{ \name Operators
@@ -53,23 +138,33 @@ public:
 	Value operator-() const;
 	//!@}
 
+
 	//!@{ \name Binary
 	Value operator+(Value value) const;
 	Value operator-(Value value) const;
 	Value operator*(Value value) const;
 	Value operator/(Value value) const;
 	//!@}
+
+	//!@{ \name Assignment
+	Value &operator = (const Value& value);
 	//!@}
 
-	// TODO: Logical operators
-	// operator bool() const;
+	//!@{ \name Logical
+	explicit operator bool() const;
+	//!@}
+	//!@}
+
+	//!@{ Utilities
+	//! Functions to help determine the type of Value
+	inline bool IsNumber() const { return m_Type >= ValueType::Char && m_Type <= ValueType::Double; }
+	inline bool IsIntegral() const { return m_Type >= ValueType::Char && m_Type <= ValueType::Long; }
+	inline bool IsDecimal() const { return m_Type >= ValueType::Float && m_Type <= ValueType::Double; }
+	inline bool IsValid() const { return m_Type != ValueType::Invalid; }
+	//!@}
+
+private:
+	ValueType smallestTypeNeeded(ValueType a, ValueType b) const;
 };
 
-//! A resizable array of Values
-typedef std::vector<Value> ValueArray;
-
-//! Checks if the value is of ValueType Float or Int
-#define IS_NUMBER(value) ((value).m_Type == ValueType::Int || (value).m_Type == ValueType::Float)
-//! Checks if the value is of ValueType Bool
-#define IS_BOOL(value) ((value).m_Type == ValueType::Bool)
 

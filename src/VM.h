@@ -30,9 +30,9 @@ enum class InterpretResults {
 class VM {
 private:
 	std::shared_ptr<Chunk> m_Chunk; //!< Current Chunk of bytecode being interpreted. Shared with Compiler to generate bytecode.
-	Byte* m_IP; //!< Instruction Pointer. Pointer to current instruction the VM is running from the Chunk.
-	Value m_Stack[STACK_MAX]; //!< A statck of Values.
-	Value* m_StackTop; //!< A pointer to where in m_Stack the next Value will be written to.
+	const Byte* m_IP; //!< Instruction Pointer. Pointer to current instruction the VM is running from the Chunk.
+	std::vector<Value> m_Stack; //!< A statck of Values.
+	size_t m_StackTop = 0; //!< A pointer to where in m_Stack the next Value will be written to.
 
 public:
 	//! Default compiler
@@ -63,16 +63,21 @@ private:
 	/*!
 	  \param value Value to be written to m_Stack
 	*/
-	void push(Value value);
+	void push(Value& value);
+
 	//! Pops the Value off the top of m_Stack and sets it to be overwritten on the next push.
 	/*!
 	  \return Value from the top of the stack.
 	*/
 	Value pop();
+
 	//! Checks a Value in the stack without removing it.
 	/*!
 	  \param distance Distance from the top of the stack. 0 is the current stack top.
 	  \return The value located at (m_Stacktop - distance) index in m_Stack.
 	*/
-	Value peek(int distance) const { return m_StackTop[-1 - distance]; }
+	Value peek(int distance) const { return m_Stack[m_StackTop - 1 - distance]; }
+
+	//! Returns the byte at m_IP and increments the pointer.
+	Byte ReadByte() { return *m_IP++; }
 };
