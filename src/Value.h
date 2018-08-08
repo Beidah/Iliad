@@ -44,26 +44,6 @@ enum class ValueType {
 	Bool, //!< Boolean
 };
 
-//! Converts type into appropriate ValueType enum
-/*!
-  Will take a value and convert it's type into the appropriate ValueType. If
-  passed a Value, it'll return it's own type.
-  \param T Any supported ValueType, or Value
-  \return Corresponding ValueType to type T, or type of Value.
-*/
-template <typename T>
-ValueType getType(T);
-
-//! Serializes a value into a vector of unsigned chars.
-/*!
-  Takes a value of supported types and converts it to binary. If called on an
-  instance of Value class, returns it's AsBytes method.
-  \param value Any supported ValueType, or Value
-  \return A binary representation of value, stored in vector<uint8_t>
-*/
-template <typename T>
-ByteArray toBytes(T value);
-
 
 //! Basical value representation
 /*!
@@ -72,6 +52,7 @@ ByteArray toBytes(T value);
   Basic arithmetic operators are overloaded to make using values in the compiler code as easy
   as using normal data-types. Values are stored in little endian.
 */
+
 class Value {
 public:
 	const ValueType m_Type; //!< The type the value represents.
@@ -82,6 +63,8 @@ public:
 public:
 
 	//!@{ \name Constructors
+	//! Initilizes values
+
 	//! Default constructor, returns an "Invalid" value
 	Value() : m_Type(ValueType::Invalid), m_Size(0) {}
 
@@ -106,14 +89,12 @@ public:
 	  \param value value of any supported ValueType.
 	*/
 	template<typename T>
-	Value(T value) : Value(toBytes<T>(FWD(value)), getType(value)) {}
-
-	//template<>
-	//Value(Value&& value) : Value(value.AsBytes(), value.type()) {}
+	Value(T&& value);
 
 	//!@}
 
-	//!@{ Getters
+	//!@{ \name Getters
+	//! Gets const data from private members.
 
 	//! Converts byte array into type T
 	template<typename T>
@@ -133,8 +114,10 @@ public:
 
 
 	//!@{ \name Operators
+
 	//!@{ \name Unary
-	//! Multiplies the value by -1 to get its negative
+
+	//! \brief Multiplies the value by -1 to get its negative
 	Value operator-() const;
 	//!@}
 
@@ -155,8 +138,8 @@ public:
 	//!@}
 	//!@}
 
-	//!@{ Utilities
-	//! Functions to help determine the type of Value
+	//!@{ \name Utilities
+	//! \brief Functions to help determine the type of Value
 	inline bool IsNumber() const { return m_Type >= ValueType::Char && m_Type <= ValueType::Double; }
 	inline bool IsIntegral() const { return m_Type >= ValueType::Char && m_Type <= ValueType::Long; }
 	inline bool IsDecimal() const { return m_Type >= ValueType::Float && m_Type <= ValueType::Double; }

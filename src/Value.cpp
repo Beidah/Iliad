@@ -17,6 +17,15 @@ constexpr size_t getTypeSize(ValueType type) {
 	}
 }
 
+
+//! Converts type into appropriate ValueType enum
+/*!
+Will take a value and convert it's type into the appropriate ValueType. If
+passed a Value, it's the same as calling Value.Type().
+\param T Any supported ValueType, or Value
+\return Corresponding ValueType to type T, or type of Value.
+*/
+
 template <typename T>
 ValueType getType(T) {
 	static_assert(!std::is_same<T, T>::value, "This is not a supported type.");
@@ -63,6 +72,13 @@ ValueType getType<Value>(Value value) {
 	return value.Type();
 }
 
+//! Serializes a value into a vector of unsigned chars.
+/*!
+Takes a value of supported types and converts it to binary. If called on an
+instance of Value class, returns it's AsBytes method.
+\param value Any supported ValueType, or Value
+\return A binary representation of value, stored in vector<uint8_t>
+*/
 template <typename T>
 ByteArray toBytes(T value) {
 	static_assert(!std::is_same<T, T>::value, "This is not a supported type.");
@@ -143,6 +159,12 @@ ByteArray toBytes<Value>(Value value) {
 	return data;
 }
 
+template<>
+ByteArray toBytes<Value&>(Value& value) {
+	ByteArray data = value.AsBytes();
+	return data;
+}
+
 
 Value::Value(const Value & value) : m_Type(value.Type()), m_Size(value.Size()) {
 	m_Data = value.AsBytes();
@@ -150,13 +172,12 @@ Value::Value(const Value & value) : m_Type(value.Type()), m_Size(value.Size()) {
 
 Value::Value(const Value* value) : Value(value->AsBytes(), value->Type()) {}
 
-/*Value::Value(const Value && value) : m_Type(value.type()), m_Size(value.size()) {
-	std::copy(value.AsBytes().begin(), value.AsBytes().end(), m_Data.begin());
-}*/
-
 Value::Value(ByteArray bytes, ValueType type) : m_Type(type), m_Size(getTypeSize(type)) {
 	m_Data = bytes;
 }
+
+template<typename T>
+Value::Value(T && value) : Value(toBytes<T>(value), getType(value)) {}
 
 template<typename T>
 T Value::AsValue() const {
