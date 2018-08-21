@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "VM.h"
 
+#include <cstdarg>
+
 #include "Compiler.h"
 #include "Debug.h"
 
@@ -24,9 +26,13 @@ InterpretResults VM::Interpret(const std::string* source) {
 InterpretResults VM::run() {
 #define READ_CONSTANT() (m_Chunk->m_Constants[ReadByte()])
 #define BINARY_OP(op) do { \
-		Value a = pop(); \
 		Value b = pop(); \
-		push ((a op b)); \
+		Value a = pop(); \
+		if (!a.IsNumber() || !b.IsNumber()) { \
+			runtimeError("Operands must be numbers."); \
+			return InterpretResults::RuntimeError;\
+		} \
+		push(Value(a op b)); \
 	} while(false)
 
 	while (true) {
@@ -40,12 +46,29 @@ InterpretResults VM::run() {
 #endif
 		OpCode instruction;
 		switch (instruction = static_cast<OpCode>(ReadByte())) {
-		case OpCode::Constant:
+		case OpCode::IntLiteral:
 		{
 			Value constant = READ_CONSTANT();
 			push(constant);
 			break;
 		}
+		case OpCode::FloatLiteral:
+		{
+			push(READ_CONSTANT());
+			break;
+		}
+		case OpCode::TrueLiteral:
+			push(Value(true));
+			break;
+		case OpCode::FalseLiteral:
+			push(Value(false));
+			break;
+		case OpCode::Equal: BINARY_OP(== ); break;
+		case OpCode::NotEqual: BINARY_OP(!= ); break;
+		case OpCode::Greater: BINARY_OP(> ); break;
+		case OpCode::GreaterEqual: BINARY_OP(>= ); break;
+		case OpCode::Less: BINARY_OP(< ); break;
+		case OpCode::LessEqual: BINARY_OP(<= ); break;
 		case OpCode::Add:
 			BINARY_OP(+); break;
 		case OpCode::Subtract:
@@ -54,8 +77,11 @@ InterpretResults VM::run() {
 			BINARY_OP(*); break;
 		case OpCode::Divide:
 			BINARY_OP(/ ); break;
+		case OpCode::Not:
+			push(Value(!static_cast<bool>(pop()))); break;
 		case OpCode::Negate:
 			if (peek(0).IsNumber()) {
+				runtimeError("Operand must take a number.");
 				return InterpretResults::RuntimeError;
 			}
 			push(-pop());
@@ -80,4 +106,18 @@ Value VM::pop() {
 	Value value = m_Stack.back();
 	m_Stack.pop_back();
 	return value;
+}
+
+void VM::runtimeError(const char * format, ...) {
+	va_list args;
+	va_start(args, format);
+	vfprintf(stderr, format, args);
+	va_end(args);
+	fputs("\n", stderr);
+
+	size_t instruction = m_IP - m_Chunk->getStart();
+	std::cerr << "[line " << instruction << "] in script\n";
+
+	// reset stack
+	m_StackTop = 0;
 }

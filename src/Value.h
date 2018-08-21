@@ -2,48 +2,10 @@
 //! \brief Details the data representation used by the program.
 #pragma once
 
-#include <vector>
-#include <type_traits>
+#include "ValueType.h"
 
-#define FWD(value) std::forward<decltype(value)>(value)
-
-typedef uint8_t byte;
-typedef std::vector<byte> ByteArray;
-
-
-//! The type of data the value is meant to represent.
-/*!
-  Currently supported types of values are:
-  - Integrals
-	- char (8-bits) note: might rename to byte?
-	- shorts (16-bits)
-	- int (32-bits)
-	- longs (64-bits)
-  - Decimals
-	- float (32-bit single precision)
-	- double (64-bit double precision)
-  - bool
-  
-  TODO:: Add other value types.
-*/
-
-enum class ValueType {
-	Invalid = -1,
-
-	//!@{ 
-	//! Integral Numbers
-	Char, Short,
-	Int, Long,
-	//!@}
-
-	//!@{
-	//! Floating Point numbers
-	Float, Double,
-	//!@}
-
-	Bool, //!< Boolean
-};
-
+//! Helper function to find the "smallest" value given.
+ValueType smallestTypeNeeded(ValueType a, ValueType b);
 
 //! Basical value representation
 /*!
@@ -52,9 +14,8 @@ enum class ValueType {
   Basic arithmetic operators are overloaded to make using values in the compiler code as easy
   as using normal data-types. Values are stored in little endian.
 */
-
 class Value {
-public:
+private:
 	const ValueType m_Type; //!< The type the value represents.
 	const size_t m_Size; //!< Size of the data in bytes.
 	ByteArray m_Data; //!< Bytes of data. Stored in little endian.
@@ -71,10 +32,9 @@ public:
 
 	//! Copy constructor
 	Value(const Value& value);
-	//! Copy constructor
-	Value(const Value* value);
 
 	
+private:
 	//! Main constructor
 	/*!
 	  This constructor is the one called by the templated one, and initilizes a valid value.
@@ -83,13 +43,14 @@ public:
 	*/
 	Value(ByteArray bytes, ValueType type);
 
+public:
 	//! Template constructor, takes in a value and serializes it.
 	/*!
 	  Calls main constructor after passing input through both toBytes and getType
 	  \param value value of any supported ValueType.
 	*/
-	template<typename T>
-	Value(T&& value);
+	template<typename T, typename = std::enable_if_t<!std::is_same_v<T, Value&>&& !std::is_same_v<T, Value>>>
+	Value(T&& value) : Value(toBytes<T>(value), getType(value)) {}
 
 	//!@}
 
@@ -97,17 +58,74 @@ public:
 	//! Gets const data from private members.
 
 	//! Converts byte array into type T
+	/*! Converts the data into a usable value type. Is able to cast to appropiate types. 
+		May result in data lost if used to convert a float to an integral or a larger value
+		to a smaller one.
+	  \return Value called for.
+	*/
 	template<typename T>
 	T AsValue() const;
+
+	//! Specialized AsValue for float values.
+	template <>
+	float AsValue<float>() const {
+		// If value is not a number, it's not convertable to a float.
+		if (!IsNumber()) return 0;
+
+		if (m_Type == ValueType::Float) {
+			int32_t intermediate = 0;
+
+			for (size_t i = 0; i < m_Size; i++) {
+				intermediate |= (m_Data[i] << (8 * (m_Size - i - 1)));
+			}
+
+			return reinterpret_cast<float&>(intermediate);
+		} else {
+			switch (m_Type) {
+			case ValueType::Byte: return static_cast<float>(AsValue<int8_t>());
+			case ValueType::Short: return static_cast<float>(AsValue<int16_t>());
+			case ValueType::Int: return static_cast<float>(AsValue<int32_t>());
+			case ValueType::Long: return static_cast<float>(AsValue<int64_t>());
+			case ValueType::Double: return static_cast<float>(AsValue<double>());	//! \todo compiler warning about loss of percision
+			default: return 0; // Unreachable
+			}
+		}
+	}
+
+	//! Specialized AsValue for double Values.
+	template <>
+	double Value::AsValue<double>() const {
+		// If value is not a number, it's not convertable to a float.
+		if (!IsNumber()) return 0;
+
+		if (m_Type == ValueType::Double) {
+			int64_t intermediate = 0;
+
+			for (size_t i = 0; i < m_Size; i++) {
+				intermediate |= (m_Data[i] << (8 * (m_Size - i - 1)));
+			}
+
+			return reinterpret_cast<double&>(intermediate);
+		} else {
+			switch (m_Type) {
+			case ValueType::Byte: return static_cast<double>(AsValue<int8_t>());
+			case ValueType::Short: return static_cast<double>(AsValue<int16_t>());
+			case ValueType::Int: return static_cast<double>(AsValue<int32_t>());
+			case ValueType::Long: return static_cast<double>(AsValue<int64_t>());
+			case ValueType::Float: return static_cast<double>(AsValue<float>());
+			default: return 0; // Unreachable
+			}
+		}
+	}
 
 	//! returns a byte array of the value.
 	const ByteArray& AsBytes() const;
 
 	//! A string representation of the value for printing.
-	const std::string ToString() const;
+	std::string ToString() const;
 
 	//! \return Size of Value in bytes.
-	const size_t Size() const { return m_Size; }
+	size_t Size() const { return m_Size; }
 	//! \return ValueType of Value.
 	const ValueType& Type() const { return m_Type; }
 	//!@}
@@ -115,39 +133,108 @@ public:
 
 	//!@{ \name Operators
 
-	//!@{ \name Unary
-
+	//!@{ Unary operator.
 	//! \brief Multiplies the value by -1 to get its negative
+	/*!
+	  \return If Value is a number, a new Value of opposite value, otherwise, returns self.
+	*/
 	Value operator-() const;
 	//!@}
 
 
-	//!@{ \name Binary
+	//!@{ Binary operator, should only be used for number values.
 	Value operator+(Value value) const;
 	Value operator-(Value value) const;
 	Value operator*(Value value) const;
 	Value operator/(Value value) const;
 	//!@}
 
-	//!@{ \name Assignment
+	//!@{ Assignment
 	Value &operator = (const Value& value);
 	//!@}
 
-	//!@{ \name Logical
+	//!@{ Comparison
+	//! \todo When available, replace with C++20 "spaceship" operator using partial_ordering for unorderable comparisons.
+	bool operator==(const Value& value) const;
+
+	bool operator!=(const Value& value) const { return !(*this == value); }
+	bool operator<(const Value& value) const;
+	bool operator>(const Value& value) const { return value < *this; }
+	bool operator<=(const Value& value) const { return (*this < value) || (*this == value); }
+	bool operator>=(const Value& value) const { return (*this > value) || (*this == value); }
+	//!@}
+
+	//!@{ Boolean value
 	explicit operator bool() const;
 	//!@}
 	//!@}
 
 	//!@{ \name Utilities
-	//! \brief Functions to help determine the type of Value
-	inline bool IsNumber() const { return m_Type >= ValueType::Char && m_Type <= ValueType::Double; }
-	inline bool IsIntegral() const { return m_Type >= ValueType::Char && m_Type <= ValueType::Long; }
+	//! Functions to help determine the type of Value
+	inline bool IsNumber() const { return m_Type >= ValueType::Byte && m_Type <= ValueType::Double; }
+	inline bool IsIntegral() const { return m_Type >= ValueType::Byte && m_Type <= ValueType::Long; }
 	inline bool IsDecimal() const { return m_Type >= ValueType::Float && m_Type <= ValueType::Double; }
 	inline bool IsValid() const { return m_Type != ValueType::Invalid; }
 	//!@}
-
-private:
-	ValueType smallestTypeNeeded(ValueType a, ValueType b) const;
 };
 
 
+template<typename T>
+T Value::AsValue() const {
+	static_assert(std::is_arithmetic<T>::value, "Type mismatch.");
+
+	// If finding the boolean, use bool operator.
+	if (std::is_same<T, bool>()) {
+		return static_cast<bool>(*this);
+	}
+
+	// If the types matchup, just convert byte array to type.
+	if (m_Type == getType(T())) {
+		T value = 0;
+		for (size_t i = 0; i < m_Size; i++) {
+			value |= (m_Data[i] << (8 * (m_Size - i - 1)));
+		}
+
+		return value;
+	}
+
+	if (IsDecimal()) {
+		// TODO: Compiler Warning about potential loss of data
+		if (m_Type == ValueType::Float) {
+			int32_t intermediate = 0;
+
+			for (size_t i = 0; i < m_Size; i++) {
+				intermediate |= (m_Data[i] << (8 * (m_Size - i - 1)));
+			}
+
+			float floatVal = reinterpret_cast<float&>(intermediate);
+			return static_cast<T>(floatVal);
+		} else if (m_Type == ValueType::Double) {
+			int64_t intermediate = 0;
+
+			for (size_t i = 0; i < m_Size; i++) {
+				intermediate |= (m_Data[i] << (8 * (m_Size - i - 1)));
+			}
+
+			double doubleVal = reinterpret_cast<double&>(intermediate);
+			return static_cast<T>(doubleVal);
+		}
+	}
+
+	
+	// TODO: Compiler Warning about potential loss of data
+	//if (sizeof(T) < m_Size) {
+
+	//}
+
+	// If types do not match up, get origianl type and convert.
+	switch (m_Type) {
+	case ValueType::Byte: return static_cast<T>(AsValue<int8_t>());
+	case ValueType::Short: return static_cast<T>(AsValue<int16_t>());
+	case ValueType::Int: return static_cast<T>(AsValue<int32_t>());
+	case ValueType::Long: return static_cast<T>(AsValue<int64_t>());
+	default: static_assert(true, "Type not supported.");
+	}
+
+	return T();
+}

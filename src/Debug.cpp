@@ -24,11 +24,20 @@ int Debugger::DisassembleInstruction(Chunk* chunk, int offset) {
 
 	Byte instruction = chunk->m_Code[offset];
 	switch (static_cast<OpCode>(instruction)) {
-	case OpCode::Constant:
-		return ConstantInstruction("OP Constant", chunk, offset);
+	case OpCode::IntLiteral: return ConstantInstruction("OP Int", chunk, offset);
+	case OpCode::FloatLiteral: return ConstantInstruction("Op Float", chunk, offset);
+	case OpCode::TrueLiteral: return SimpleInstruction("OP True", offset);
+	case OpCode::FalseLiteral: return SimpleInstruction("OP False", offset);
+	case OpCode::Equal: return SimpleInstruction("OP Equal", offset);
+	case OpCode::NotEqual: return SimpleInstruction("OP Not Equal", offset);
+	case OpCode::Greater: return SimpleInstruction("OP Greater", offset);
+	case OpCode::GreaterEqual: return SimpleInstruction("OP Greater Equal", offset);
+	case OpCode::Less: return SimpleInstruction("OP Less", offset);
+	case OpCode::LessEqual: return SimpleInstruction("OP Less Equal", offset);
 	case OpCode::Add: return SimpleInstruction("OP Add", offset);
 	case OpCode::Subtract: return SimpleInstruction("OP Subtract", offset);
 	case OpCode::Multiply: return SimpleInstruction("OP Multiply", offset);
+	case OpCode::Not: return SimpleInstruction("OP Not", offset);
 	case OpCode::Negate: return SimpleInstruction("OP Negate", offset);
 	case OpCode::Divide: return SimpleInstruction("OP Divide", offset);
 	case OpCode::Return: return SimpleInstruction("OP Return", offset);

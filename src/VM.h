@@ -80,4 +80,7 @@ private:
 
 	//! Returns the byte at m_IP and increments the pointer.
 	Byte ReadByte() { return *m_IP++; }
+
+	//! Prints a provided error message to stderr. Supports string formating.
+	void runtimeError(const char* format, ...);
 };

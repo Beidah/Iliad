@@ -9,46 +9,46 @@
 #define NO_FUNC &Compiler::emptyFunction
 
 const std::array<Compiler::ParseRule, static_cast<size_t>(TokenType::EoF) + 1> Compiler::m_Rules = {
-	ParseRule(&Compiler::grouping, NO_FUNC, ParsePrecedence::Call),
-	ParseRule(),       // TOKEN_RIGHT_PAREN
-	ParseRule(),       // TOKEN_LEFT_BRACE
-	ParseRule(),       // TOKEN_RIGHT_BRACE
-	ParseRule(),      // TOKEN_COMMA
-	ParseRule(),       // TOKEN_DOT
-	ParseRule(&Compiler::unary, &Compiler::binary, ParsePrecedence::Term),       // TOKEN_MINUS
-	ParseRule(NO_FUNC, &Compiler::binary, ParsePrecedence::Term),       // TOKEN_PLUS
-	ParseRule(),       // TOKEN_SEMICOLON
-	ParseRule(NO_FUNC, &Compiler::binary,  ParsePrecedence::Factor),     // TOKEN_SLASH
-	ParseRule(NO_FUNC, &Compiler::binary,  ParsePrecedence::Factor),     // TOKEN_STAR
-	ParseRule(),       // TOKEN_BANG
-	ParseRule(ParsePrecedence::Equality),   // TOKEN_BANG_EQUAL
-	ParseRule(),       // TOKEN_EQUAL
-	ParseRule(ParsePrecedence::Equality),   // TOKEN_EQUAL_EQUAL
-	ParseRule(ParsePrecedence::Comparison), // TOKEN_GREATER
-	ParseRule(ParsePrecedence::Comparison), // TOKEN_GREATER_EQUAL
-	ParseRule(ParsePrecedence::Comparison), // TOKEN_LESS
-	ParseRule(ParsePrecedence::Comparison), // TOKEN_LESS_EQUAL
-	ParseRule(ParsePrecedence::And),        // TOKEN_AND
-	ParseRule(ParsePrecedence::Or),         // TOKEN_OR
-	ParseRule(ParsePrecedence::And),			// Token_BitAnd
-	ParseRule(ParsePrecedence::Or),
-	ParseRule(),       // TOKEN_IDENTIFIER
-	ParseRule(),      // TOKEN_STRING
-	ParseRule(&Compiler::integer, NO_FUNC), // Token Integer
-	ParseRule(&Compiler::_float, NO_FUNC),       // Token Float
-	ParseRule(),       // TOKEN_CLASS
-	ParseRule(),       // TOKEN_ELSE
-	ParseRule(),       // TOKEN_FALSE
-	ParseRule(),       // TOKEN_FOR
-	ParseRule(),       // TOKEN_IF
-	ParseRule(),       // TOKEN_RETURN
-	ParseRule(),       // TOKEN_SUPER
-	ParseRule(),       // TOKEN_THIS
-	ParseRule(),       // TOKEN_TRUE
-	ParseRule(),       // TOKEN_VAR
-	ParseRule(),       // TOKEN_WHILE
-	ParseRule(),       // TOKEN_ERROR
-	ParseRule(),       // TOKEN_EOF
+	ParseRule(&Compiler::grouping, NO_FUNC, ParsePrecedence::Call),			// Token LeftParen
+	ParseRule(),															// Token RightParen
+	ParseRule(),															// TOKEN_LEFT_BRACE
+	ParseRule(),															// TOKEN_RIGHT_BRACE
+	ParseRule(),															// TOKEN_COMMA
+	ParseRule(),															// TOKEN_DOT
+	ParseRule(&Compiler::unary, &Compiler::binary, ParsePrecedence::Term),	// TOKEN_MINUS
+	ParseRule(NO_FUNC, &Compiler::binary, ParsePrecedence::Term),			// TOKEN_PLUS
+	ParseRule(),															// TOKEN_SEMICOLON
+	ParseRule(NO_FUNC, &Compiler::binary, ParsePrecedence::Factor),			// TOKEN_SLASH
+	ParseRule(NO_FUNC, &Compiler::binary, ParsePrecedence::Factor),			// TOKEN_STAR
+	ParseRule(&Compiler::unary, NO_FUNC),									// TOKEN_BANG
+	ParseRule(NO_FUNC, &Compiler::binary, ParsePrecedence::Equality),		// TOKEN_BANG_EQUAL
+	ParseRule(),															// TOKEN_EQUAL
+	ParseRule(NO_FUNC, &Compiler::binary, ParsePrecedence::Equality),		// TOKEN_EQUAL_EQUAL
+	ParseRule(NO_FUNC, &Compiler::binary, ParsePrecedence::Comparison),		// TOKEN_GREATER
+	ParseRule(NO_FUNC, &Compiler::binary, ParsePrecedence::Comparison),		// TOKEN_GREATER_EQUAL
+	ParseRule(NO_FUNC, &Compiler::binary, ParsePrecedence::Comparison),		// TOKEN_LESS
+	ParseRule(NO_FUNC, &Compiler::binary, ParsePrecedence::Comparison),		// TOKEN_LESS_EQUAL
+	ParseRule(&Compiler::binary, NO_FUNC, ParsePrecedence::And),			// TOKEN_AND
+	ParseRule(&Compiler::binary, NO_FUNC, ParsePrecedence::Or),				// TOKEN_OR
+	ParseRule(ParsePrecedence::And),										// Token_BitAnd
+	ParseRule(ParsePrecedence::Or),											// Token BitOr
+	ParseRule(),															// TOKEN_IDENTIFIER
+	ParseRule(),															// TOKEN_STRING
+	ParseRule(&Compiler::integer, NO_FUNC),									// Token Integer
+	ParseRule(&Compiler::_float, NO_FUNC),									// Token Float
+	ParseRule(),															// TOKEN_CLASS
+	ParseRule(),															// TOKEN_ELSE
+	ParseRule(&Compiler::literals, NO_FUNC),								// TOKEN_FALSE
+	ParseRule(),															// TOKEN_FOR
+	ParseRule(),															// TOKEN_IF
+	ParseRule(),															// TOKEN_RETURN
+	ParseRule(),															// TOKEN_SUPER
+	ParseRule(),															// TOKEN_THIS
+	ParseRule(&Compiler::literals, NO_FUNC),								// TOKEN_TRUE
+	ParseRule(),															// TOKEN_VAR
+	ParseRule(),															// TOKEN_WHILE
+	ParseRule(),															// TOKEN_ERROR
+	ParseRule(),															// TOKEN_EOF
 };
 
 bool Compiler::Compile(const std::string* source, std::shared_ptr<Chunk> chunk) {
@@ -91,10 +91,10 @@ void Compiler::unary() {
 	parsePrecedence(ParsePrecedence::Unary);
 
 	switch (op) {
+	case TokenType::Bang: emitByte(OpCode::Not); break;
 	case TokenType::Minus: emitByte(OpCode::Negate); break;
 	default:
-		// Unreachable
-		return;
+		return;	// Unreachable
 	}
 }
 
@@ -107,6 +107,12 @@ void Compiler::binary() {
 	parsePrecedence(static_cast<ParsePrecedence>(static_cast<int>(rule->precedence) + 1));
 
 	switch (op) {
+	case TokenType::EqualEqual: emitByte(OpCode::Equal); break;
+	case TokenType::BangEqual: emitByte(OpCode::NotEqual); break;
+	case TokenType::Greater: emitByte(OpCode::Greater); break;
+	case TokenType::GreaterEqual: emitByte(OpCode::GreaterEqual); break;
+	case TokenType::Less: emitByte(OpCode::Less); break;
+	case TokenType::LessEqual: emitByte(OpCode::LessEqual); break;
 	case TokenType::Minus: emitByte(OpCode::Subtract); break;
 	case TokenType::Plus: emitByte(OpCode::Add); break;
 	case TokenType::Star: emitByte(OpCode::Multiply); break;
@@ -127,12 +133,23 @@ void Compiler::expression() {
 
 void Compiler::integer() {
 	int32_t value = std::stoi(m_Parser.previousToken.lexeme, nullptr);
-	emitConstant(Value(value));
+	emitConstant(Value(FWD(value)));
 }
 
 void Compiler::_float() {
 	float value = std::stof(m_Parser.previousToken.lexeme);
-	emitConstant(Value(value));
+	emitByte(OpCode::FloatLiteral);
+	emitByte(makeConstant(Value(FWD(value))));
+	//emitConstant(Value(FWD(value)));
+}
+
+void Compiler::literals() {
+	switch (m_Parser.previousToken.type) {
+	case TokenType::True: emitByte(OpCode::TrueLiteral); break;
+	case TokenType::False: emitByte(OpCode::FalseLiteral); break;
+	default:
+		return; // unreachable.
+	}
 }
 
 void Compiler::parsePrecedence(ParsePrecedence precedence) {

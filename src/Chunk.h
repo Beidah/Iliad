@@ -5,9 +5,6 @@
 #include "stdafx.h"
 #include "Value.h"
 
-//! A resizable array of Values
-//typedef std::vector<Value> ValueArray;
-
 
 //! Representation of opcodes to write into a Chunk.
 /*!
@@ -16,19 +13,30 @@
   the values to be operated on.
 */
 enum class OpCode : Byte {
-	Constant, //!< Stores a constant. Takes 1 byte operand of the index of the Constants array in Chunk the consant is stored in.
+	//!@{
+	//! Literal values
+	IntLiteral, FloatLiteral,
+	TrueLiteral, FalseLiteral,
+	CharLiteral, StringLiteral,
+	//!@}
 
 	//!@{
-	//! Operators corresponding to a binary operation. Takes two operands: indexes of the values to be operated on.
-	Add, 
-	Subtract,
+	//! Binary Operators
+	Equal, NotEqual,
+	Greater, GreaterEqual,
+	Less, LessEqual,
+	Add, Subtract,
 	Multiply, Divide,
 	//!@}
 
-	//! A unary operator. Takes a single operand: the index of the value to be operated on.
+	//!@{
+	//! Unary Operators
+	Not,
 	Negate,
+	//!@}
 
-	Return //!< Return from the current function.
+	//! Return
+	Return
 };
 
 //! A chunk of byte code.
@@ -57,13 +65,13 @@ public:
 	void writeByte(Byte byte, int line);
 	//! \copybrief writeByte(Byte byte, int line)
 	/*!
-	 \param opcode OpCode representation of byte to write to m_Code.
+	 \param opCode OpCode representation of byte to write to m_Code.
 	 \param line Line on which the code occurred on.
 	*/
 	void writeByte(OpCode opCode, int line) { writeByte(static_cast<Byte>(opCode), line); }
 	//! Add a constant Value to m_Constants.
 	/*!
-	  \param value Value to add to m_Constants
+	  \param constant Value to add to m_Constants
 	  \return Index of m_Constants where value was added.
 	*/
 	int addConstant(Value constant);
