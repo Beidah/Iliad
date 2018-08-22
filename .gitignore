@@ -267,3 +267,10 @@ __pycache__/
 # Doxygen Documentation tool
 docs/pages/
 doxygen/
+
+# CMake
+/build
+CMakeSettings.json
+
+# VS Code
+.vscode/
