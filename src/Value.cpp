@@ -8,9 +8,7 @@ Value::Value(const Value & value) : m_Type(value.Type()), m_Size(value.Size()) {
 	m_Data = value.AsBytes();
 }
 
-//Value::Value(const Value* value) : Value(value->AsBytes(), value->Type()) {}
-
-Value::Value(ByteArray bytes, ValueType type) : m_Type(type), m_Size(getTypeSize(type)) {
+Value::Value(ByteArray bytes, ValueType type) : m_Type(type), m_Size(bytes.size()) {
 	m_Data = bytes;
 }
 
@@ -22,10 +20,10 @@ std::string Value::ToString() const {
 	std::stringstream valueString;
 
 	switch (m_Type) {
-	case ValueType::Byte: valueString << static_cast<int>(AsValue<int8_t>()); break;
-	case ValueType::Short: valueString << AsValue<int16_t>(); break;
-	case ValueType::Int: valueString << AsValue<int32_t>(); break;
-	case ValueType::Long: valueString << AsValue<int64_t>(); break;
+	case ValueType::Int8: valueString << static_cast<int>(AsValue<int8_t>()); break;
+	case ValueType::Int16: valueString << AsValue<int16_t>(); break;
+	case ValueType::Int32: valueString << AsValue<int32_t>(); break;
+	case ValueType::Int64: valueString << AsValue<int64_t>(); break;
 	case ValueType::Float:
 	{
 		float val = AsValue<float>();
@@ -53,10 +51,10 @@ Value Value::operator-() const {
 	if (!IsNumber()) return *this;
 
 	switch (m_Type) {
-	case ValueType::Byte: return Value(-AsValue<int8_t>());
-	case ValueType::Short: return Value(-AsValue<int16_t>());
-	case ValueType::Int: return Value(-AsValue<int32_t>());
-	case ValueType::Long: return Value(-AsValue<int64_t>());
+	case ValueType::Int8: return Value(-AsValue<int8_t>());
+	case ValueType::Int16: return Value(-AsValue<int16_t>());
+	case ValueType::Int32: return Value(-AsValue<int32_t>());
+	case ValueType::Int64: return Value(-AsValue<int64_t>());
 	case ValueType::Float: return Value(-AsValue<float>());
 	case ValueType::Double: return Value(-AsValue<double>());
 	default: return Value();
@@ -69,10 +67,10 @@ Value Value::operator+(Value value) const {
 	ValueType outputType = smallestTypeNeeded(m_Type, value.m_Type);
 
 	switch (outputType) {
-	case ValueType::Byte: return Value(AsValue<int8_t>() + value.AsValue<int8_t>());
-	case ValueType::Short: return Value(AsValue<int16_t>() + value.AsValue<int16_t>());
-	case ValueType::Int: return Value(AsValue<int32_t>() + value.AsValue<int32_t>());
-	case ValueType::Long: return Value(AsValue<int64_t>() + value.AsValue<int64_t>());
+	case ValueType::Int8: return Value(AsValue<int8_t>() + value.AsValue<int8_t>());
+	case ValueType::Int16: return Value(AsValue<int16_t>() + value.AsValue<int16_t>());
+	case ValueType::Int32: return Value(AsValue<int32_t>() + value.AsValue<int32_t>());
+	case ValueType::Int64: return Value(AsValue<int64_t>() + value.AsValue<int64_t>());
 	case ValueType::Float: return Value(AsValue<float>() + value.AsValue<float>());
 	case ValueType::Double: return Value(AsValue<double>() + value.AsValue<double>());
 	default: return Value();
@@ -85,10 +83,10 @@ Value Value::operator-(Value value) const {
 	ValueType outputType = smallestTypeNeeded(m_Type, value.m_Type);
 
 	switch (outputType) {
-	case ValueType::Byte: return Value(AsValue<int8_t>() - value.AsValue<int8_t>());
-	case ValueType::Short: return Value(AsValue<int16_t>() - value.AsValue<int16_t>());
-	case ValueType::Int: return Value(AsValue<int32_t>() - value.AsValue<int32_t>());
-	case ValueType::Long: return Value(AsValue<int64_t>() - value.AsValue<int64_t>());
+	case ValueType::Int8: return Value(AsValue<int8_t>() - value.AsValue<int8_t>());
+	case ValueType::Int16: return Value(AsValue<int16_t>() - value.AsValue<int16_t>());
+	case ValueType::Int32: return Value(AsValue<int32_t>() - value.AsValue<int32_t>());
+	case ValueType::Int64: return Value(AsValue<int64_t>() - value.AsValue<int64_t>());
 	case ValueType::Float: return Value(AsValue<float>() - value.AsValue<float>());
 	case ValueType::Double: return Value(AsValue<double>() - value.AsValue<double>());
 	default: return Value();
@@ -102,10 +100,10 @@ Value Value::operator*(Value value) const {
 	ValueType outputType = smallestTypeNeeded(m_Type, value.m_Type);
 
 	switch (outputType) {
-	case ValueType::Byte: return Value(AsValue<int8_t>() * value.AsValue<int8_t>());
-	case ValueType::Short: return Value(AsValue<int16_t>() * value.AsValue<int16_t>());
-	case ValueType::Int: return Value(AsValue<int32_t>() * value.AsValue<int32_t>());
-	case ValueType::Long: return Value(AsValue<int64_t>() * value.AsValue<int64_t>());
+	case ValueType::Int8: return Value(AsValue<int8_t>() * value.AsValue<int8_t>());
+	case ValueType::Int16: return Value(AsValue<int16_t>() * value.AsValue<int16_t>());
+	case ValueType::Int32: return Value(AsValue<int32_t>() * value.AsValue<int32_t>());
+	case ValueType::Int64: return Value(AsValue<int64_t>() * value.AsValue<int64_t>());
 	case ValueType::Float: return Value(AsValue<float>() * value.AsValue<float>());
 	case ValueType::Double: return Value(AsValue<double>() * value.AsValue<double>());
 	default: return Value();
@@ -119,10 +117,10 @@ Value Value::operator/(Value value) const {
 	ValueType outputType = smallestTypeNeeded(m_Type, value.m_Type);
 
 	switch (outputType) {
-	case ValueType::Byte: return Value(AsValue<int8_t>() / value.AsValue<int8_t>());
-	case ValueType::Short: return Value(AsValue<int16_t>() / value.AsValue<int16_t>());
-	case ValueType::Int: return Value(AsValue<int32_t>() / value.AsValue<int32_t>());
-	case ValueType::Long: return Value(AsValue<int64_t>() / value.AsValue<int64_t>());
+	case ValueType::Int8: return Value(AsValue<int8_t>() / value.AsValue<int8_t>());
+	case ValueType::Int16: return Value(AsValue<int16_t>() / value.AsValue<int16_t>());
+	case ValueType::Int32: return Value(AsValue<int32_t>() / value.AsValue<int32_t>());
+	case ValueType::Int64: return Value(AsValue<int64_t>() / value.AsValue<int64_t>());
 	case ValueType::Float: return Value(AsValue<float>() / value.AsValue<float>());
 	case ValueType::Double: return Value(AsValue<double>() / value.AsValue<double>());
 	default: return Value();
@@ -136,34 +134,38 @@ Value & Value::operator=(const Value & value) {
 	return *this;
 }
 
+template <typename T>
+bool equalTo(T valueA, Value valueB) {
+	static_assert(std::is_arithmetic<T>::value, "Type must be a number.");
+
+	switch (valueB.Type()) {
+	case ValueType::Int8: return valueA == valueB.AsValue<int8_t>();
+	case ValueType::Int16: return valueA == valueB.AsValue<int16_t>();
+	case ValueType::Int32: return valueA == valueB.AsValue<int32_t>();
+	case ValueType::Int64: return valueA == valueB.AsValue<int64_t>();
+	case ValueType::Float: return valueA == valueB.AsValue<float>();
+	case ValueType::Double: return valueA == valueB.AsValue<double>();
+	default: return false;
+	}
+}
+
 bool Value::operator==(const Value& value) const {
+	// Invalid types are always false compared to others. Even other invalids.
+	if (!IsValid() || !value.IsValid()) return false;
+
 	// If they're the same type, just compare the bits directly.
 	if (m_Type == value.Type()) {
 		return m_Data == value.AsBytes();
 	}
 
-	// If one type is a number, but the other isn't, then they are not comparable.
-	if ((IsNumber() && !IsNumber()) ||
-		(!IsNumber() && IsNumber())) return false;
-
-	// Check if value is integral or float
-	if (IsIntegral()) {
-		// For now, get the biggest integral possible. \todo Optimize later
-		int64_t num = AsValue<int64_t>();
-
-		// Compare it to the integral or float of the other value.
-		switch (value.IsIntegral()) {
-		case true: return num == value.AsValue<int32_t>();
-		case false: return num == value.AsValue<float>();
-		}
-	} else {
-		// Same thing as before, but with a double this time.
-		double num = AsValue<float>();
-
-		switch (value.IsIntegral()) {
-		case true: return num == value.AsValue<int32_t>();
-		case false: return num == value.AsValue<float>();
-		}
+	switch (m_Type) {
+	case ValueType::Int8: return equalTo(AsValue<int8_t>(), value);
+	case ValueType::Int16: return equalTo(AsValue<int16_t>(), value);
+	case ValueType::Int32: return equalTo(AsValue<int32_t>(), value);
+	case ValueType::Int64: return equalTo(AsValue<int64_t>(), value);
+	case ValueType::Float: return equalTo(AsValue<float>(), value);
+	case ValueType::Double: return equalTo(AsValue<double>(), value);
+	case ValueType::Bool: return AsValue<bool>() == value.AsValue<bool>();
 	}
 
 	return false;
@@ -172,10 +174,10 @@ bool Value::operator==(const Value& value) const {
 template <typename T>
 bool lessThan(T valueA, Value valueB) {
 	switch (valueB.Type()) {
-	case ValueType::Byte: return valueA < valueB.AsValue<int8_t>();
-	case ValueType::Short: return valueA < valueB.AsValue<int16_t>();
-	case ValueType::Int: return valueA < valueB.AsValue<int32_t>();
-	case ValueType::Long: return valueA < valueB.AsValue<int64_t>();
+	case ValueType::Int8: return valueA < valueB.AsValue<int8_t>();
+	case ValueType::Int16: return valueA < valueB.AsValue<int16_t>();
+	case ValueType::Int32: return valueA < valueB.AsValue<int32_t>();
+	case ValueType::Int64: return valueA < valueB.AsValue<int64_t>();
 	case ValueType::Float: return valueA < valueB.AsValue<float>();
 	case ValueType::Double: return valueA < valueB.AsValue<double>();
 	default: return false;
@@ -189,10 +191,10 @@ bool Value::operator<(const Value& value) const {
 	if (!IsNumber() || !IsNumber()) return false;
 
 	switch (m_Type) {
-	case ValueType::Byte: return lessThan(AsValue<int8_t>(), value);
-	case ValueType::Short: return lessThan(AsValue<int16_t>(), value);
-	case ValueType::Int: return lessThan(AsValue<int32_t>(), value);
-	case ValueType::Long: return lessThan(AsValue<int64_t>(), value);
+	case ValueType::Int8: return lessThan(AsValue<int8_t>(), value);
+	case ValueType::Int16: return lessThan(AsValue<int16_t>(), value);
+	case ValueType::Int32: return lessThan(AsValue<int32_t>(), value);
+	case ValueType::Int64: return lessThan(AsValue<int64_t>(), value);
 	case ValueType::Float: return lessThan(AsValue<float>(), value);
 	case ValueType::Double: return lessThan(AsValue<double>(), value);
 	}

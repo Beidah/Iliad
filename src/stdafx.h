@@ -16,5 +16,3 @@
 #define DEBUG_PRINT_CODE
 
 #endif // DEBUG
-
-typedef uint8_t Byte;

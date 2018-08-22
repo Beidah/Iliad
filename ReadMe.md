@@ -20,4 +20,4 @@ The files contain comments to be read by doxygen in order to Document each class
 - "Modern Compiler Design" by Dick Grune, Henri E. Bal, Ceriel J.H. Jacobs, and Koen G. Langendoen
 
 ## Special Thanks
-Big thanks to Lynden Shields ([@LyndenShields](https://twitter.com/LyndenShields)) for all the advice he's given in the creation of this project.
+Big thanks to Lynden Shields ([\@LyndenShields](https://twitter.com/LyndenShields)) for all the advice he's given in the creation of this project.

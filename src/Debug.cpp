@@ -22,7 +22,7 @@ int Debugger::DisassembleInstruction(Chunk* chunk, int offset) {
 		std::cout << std::setw(4) << chunk->m_Lines[offset] << " ";
 	}
 
-	Byte instruction = chunk->m_Code[offset];
+	byte instruction = chunk->m_Code[offset];
 	switch (static_cast<OpCode>(instruction)) {
 	case OpCode::IntLiteral: return ConstantInstruction("OP Int", chunk, offset);
 	case OpCode::FloatLiteral: return ConstantInstruction("Op Float", chunk, offset);
@@ -48,7 +48,7 @@ int Debugger::DisassembleInstruction(Chunk* chunk, int offset) {
 }
 
 int Debugger::ConstantInstruction(const char* name, Chunk* chunk, int offset) {
-	Byte constant = chunk->m_Code[offset + 1];
+	byte constant = chunk->m_Code[offset + 1];
 	std::cout << std::left << std::setw(16) << name << std::right << (int)constant;
 	std::cout << "'" << chunk->m_Constants[constant].ToString() << "'" << std::endl;
 	return offset + 2;

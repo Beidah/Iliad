@@ -30,7 +30,7 @@ enum class InterpretResults {
 class VM {
 private:
 	std::shared_ptr<Chunk> m_Chunk; //!< Current Chunk of bytecode being interpreted. Shared with Compiler to generate bytecode.
-	const Byte* m_IP; //!< Instruction Pointer. Pointer to current instruction the VM is running from the Chunk.
+	const byte* m_IP; //!< Instruction Pointer. Pointer to current instruction the VM is running from the Chunk.
 	std::vector<Value> m_Stack; //!< A statck of Values.
 	size_t m_StackTop = 0; //!< A pointer to where in m_Stack the next Value will be written to.
 
@@ -79,7 +79,7 @@ private:
 	Value peek(int distance) const { return m_Stack[m_StackTop - 1 - distance]; }
 
 	//! Returns the byte at m_IP and increments the pointer.
-	Byte ReadByte() { return *m_IP++; }
+	byte ReadByte() { return *m_IP++; }
 
 	//! Prints a provided error message to stderr. Supports string formating.
 	void runtimeError(const char* format, ...);

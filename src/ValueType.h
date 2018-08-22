@@ -17,11 +17,7 @@ typedef std::vector<byte> ByteArray;
 //! The type of data the value is meant to represent.
 /*!
 Currently supported types of values are:
-- Integrals
-	- byte (8-bits)
-	- shorts (16-bits)
-	- int (32-bits)
-	- longs (64-bits)
+- Integrals (8-, 16-, 32-, and 64-bit)
 - Decimals
 	- float (32-bit single precision)
 	- double (64-bit double precision)
@@ -35,8 +31,8 @@ enum class ValueType {
 
 	//!@{ 
 	//! Integral Numbers
-	Byte, Short,
-	Int, Long,
+	Int8, Int16,
+	Int32, Int64,
 	//!@}
 
 	//!@{
@@ -52,22 +48,6 @@ enum class ValueType {
 
 	Bool, //!< Boolean
 };
-
-//! Gets the size in bytes of value respresented by ValueType 
-constexpr size_t getTypeSize(ValueType type) {
-	switch (type) {
-	case ValueType::Invalid: return 0;
-	case ValueType::Byte: return sizeof(int8_t);
-	case ValueType::Short: return sizeof(int16_t);
-	case ValueType::Int: return sizeof(int32_t);
-	case ValueType::Long: return sizeof(int64_t);
-	case ValueType::Float: return sizeof(float);
-	case ValueType::Double: return sizeof(double);
-	case ValueType::Char: return sizeof(int8_t);
-	case ValueType::Bool: return sizeof(bool);
-	default: return 0;
-	}
-}
 
 
 //!@{ \name Transformer
@@ -87,22 +67,22 @@ static ValueType getType(T) {
 
 template <>
 static ValueType getType<int8_t>(int8_t) {
-	return ValueType::Byte;
+	return ValueType::Int8;
 }
 
 template <>
 static ValueType getType<int16_t>(int16_t) {
-	return ValueType::Short;
+	return ValueType::Int16;
 }
 
 template <>
 static ValueType getType<int32_t>(int32_t) {
-	return ValueType::Int;
+	return ValueType::Int32;
 }
 
 template <>
 static ValueType getType<int64_t>(int64_t) {
-	return ValueType::Long;
+	return ValueType::Int64;
 }
 
 template <>

@@ -66,6 +66,10 @@ public:
 	template<typename T>
 	T AsValue() const;
 
+	//! Specialized AsValue for bool values. Returns bool operator
+	template<>
+	bool AsValue<bool>() const { return static_cast<bool>(*this); }
+
 	//! Specialized AsValue for float values.
 	template <>
 	float AsValue<float>() const {
@@ -82,10 +86,10 @@ public:
 			return reinterpret_cast<float&>(intermediate);
 		} else {
 			switch (m_Type) {
-			case ValueType::Byte: return static_cast<float>(AsValue<int8_t>());
-			case ValueType::Short: return static_cast<float>(AsValue<int16_t>());
-			case ValueType::Int: return static_cast<float>(AsValue<int32_t>());
-			case ValueType::Long: return static_cast<float>(AsValue<int64_t>());
+			case ValueType::Int8: return static_cast<float>(AsValue<int8_t>());
+			case ValueType::Int16: return static_cast<float>(AsValue<int16_t>());
+			case ValueType::Int32: return static_cast<float>(AsValue<int32_t>());
+			case ValueType::Int64: return static_cast<float>(AsValue<int64_t>());
 			case ValueType::Double: return static_cast<float>(AsValue<double>());	//! \todo compiler warning about loss of percision
 			default: return 0; // Unreachable
 			}
@@ -108,10 +112,10 @@ public:
 			return reinterpret_cast<double&>(intermediate);
 		} else {
 			switch (m_Type) {
-			case ValueType::Byte: return static_cast<double>(AsValue<int8_t>());
-			case ValueType::Short: return static_cast<double>(AsValue<int16_t>());
-			case ValueType::Int: return static_cast<double>(AsValue<int32_t>());
-			case ValueType::Long: return static_cast<double>(AsValue<int64_t>());
+			case ValueType::Int8: return static_cast<double>(AsValue<int8_t>());
+			case ValueType::Int16: return static_cast<double>(AsValue<int16_t>());
+			case ValueType::Int32: return static_cast<double>(AsValue<int32_t>());
+			case ValueType::Int64: return static_cast<double>(AsValue<int64_t>());
 			case ValueType::Float: return static_cast<double>(AsValue<float>());
 			default: return 0; // Unreachable
 			}
@@ -156,7 +160,6 @@ public:
 	//!@{ Comparison
 	//! \todo When available, replace with C++20 "spaceship" operator using partial_ordering for unorderable comparisons.
 	bool operator==(const Value& value) const;
-
 	bool operator!=(const Value& value) const { return !(*this == value); }
 	bool operator<(const Value& value) const;
 	bool operator>(const Value& value) const { return value < *this; }
@@ -171,9 +174,11 @@ public:
 
 	//!@{ \name Utilities
 	//! Functions to help determine the type of Value
-	inline bool IsNumber() const { return m_Type >= ValueType::Byte && m_Type <= ValueType::Double; }
-	inline bool IsIntegral() const { return m_Type >= ValueType::Byte && m_Type <= ValueType::Long; }
+	inline bool IsNumber() const { return m_Type >= ValueType::Int8 && m_Type <= ValueType::Double; }
+	inline bool IsIntegral() const { return m_Type >= ValueType::Int8 && m_Type <= ValueType::Int64; }
 	inline bool IsDecimal() const { return m_Type >= ValueType::Float && m_Type <= ValueType::Double; }
+	inline bool IsBoolean() const { return m_Type == ValueType::Bool; }
+	inline bool IsChar() const { return m_Type == ValueType::Char; }
 	inline bool IsValid() const { return m_Type != ValueType::Invalid; }
 	//!@}
 };
@@ -229,10 +234,10 @@ T Value::AsValue() const {
 
 	// If types do not match up, get origianl type and convert.
 	switch (m_Type) {
-	case ValueType::Byte: return static_cast<T>(AsValue<int8_t>());
-	case ValueType::Short: return static_cast<T>(AsValue<int16_t>());
-	case ValueType::Int: return static_cast<T>(AsValue<int32_t>());
-	case ValueType::Long: return static_cast<T>(AsValue<int64_t>());
+	case ValueType::Int8: return static_cast<T>(AsValue<int8_t>());
+	case ValueType::Int16: return static_cast<T>(AsValue<int16_t>());
+	case ValueType::Int32: return static_cast<T>(AsValue<int32_t>());
+	case ValueType::Int64: return static_cast<T>(AsValue<int64_t>());
 	default: static_assert(true, "Type not supported.");
 	}
 

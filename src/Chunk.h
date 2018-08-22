@@ -12,7 +12,7 @@
   Certain opcodes also take one or more operand, which are bytes that detail 
   the values to be operated on.
 */
-enum class OpCode : Byte {
+enum class OpCode : byte {
 	//!@{
 	//! Literal values
 	IntLiteral, FloatLiteral,
@@ -47,7 +47,7 @@ enum class OpCode : Byte {
 */
 class Chunk {
 private:
-	std::vector<Byte> m_Code; //!< Byte representation of code to be interpreted.
+	std::vector<byte> m_Code; //!< Byte representation of code to be interpreted.
 	std::vector<int> m_Lines; //!< Line at which each byte of code occured on.
 
 #ifdef _DEBUG
@@ -62,13 +62,13 @@ public:
 	  \param byte Either the opcode or operand to write to m_Code.
 	  \param line Line on which the code occurred on.
 	  */
-	void writeByte(Byte byte, int line);
+	void writeByte(byte byte, int line);
 	//! \copybrief writeByte(Byte byte, int line)
 	/*!
 	 \param opCode OpCode representation of byte to write to m_Code.
 	 \param line Line on which the code occurred on.
 	*/
-	void writeByte(OpCode opCode, int line) { writeByte(static_cast<Byte>(opCode), line); }
+	void writeByte(OpCode opCode, int line) { writeByte(static_cast<byte>(opCode), line); }
 	//! Add a constant Value to m_Constants.
 	/*!
 	  \param constant Value to add to m_Constants
@@ -79,5 +79,5 @@ public:
 	/*!
 	  \return Pointer to the beginning of the bytecode
 	*/
-	const Byte* getStart() { return m_Code.data(); };
+	const byte* getStart() { return m_Code.data(); };
 };
