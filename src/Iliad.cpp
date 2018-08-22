@@ -18,6 +18,9 @@ static void repl() {
 
 		std::getline(std::cin, input);
 
+		// Exit on exit command.
+		if (input.compare(".exit") == 0) return;
+
 		vm.Interpret(&input);
 	}
 }
@@ -30,6 +33,7 @@ int main(int argc, char** argv) {
 		repl();
 	} else if (argc == 2) {
 		// TODO: Run file
+		std::string filename = argv[1];
 	} else {
 		std::cerr << "Usage: Illiad [path]" << std::endl;
 		exit(1);

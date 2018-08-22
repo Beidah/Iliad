@@ -32,7 +32,8 @@ InterpretResults VM::run() {
 			runtimeError("Operands must be numbers."); \
 			return InterpretResults::RuntimeError;\
 		} \
-		push(Value(a op b)); \
+		Value val(a op b); \
+		push(val); \
 	} while(false)
 
 	while (true) {
@@ -49,8 +50,16 @@ InterpretResults VM::run() {
 		case OpCode::IntLiteral:
 		case OpCode::FloatLiteral:
 		case OpCode::CharLiteral: push(READ_CONSTANT()); break;
-		case OpCode::TrueLiteral: push(Value(true)); break;
-		case OpCode::FalseLiteral: push(Value(false)); break;
+		case OpCode::TrueLiteral:
+		{
+			Value val(true);
+			push(val); break;
+		}
+		case OpCode::FalseLiteral: 
+		{ 
+			Value val(false);
+			push(val); break;
+		}
 		case OpCode::Equal: BINARY_OP(== ); break;
 		case OpCode::NotEqual: BINARY_OP(!= ); break;
 		case OpCode::Greater: BINARY_OP(> ); break;
@@ -61,14 +70,22 @@ InterpretResults VM::run() {
 		case OpCode::Subtract: BINARY_OP(-); break;
 		case OpCode::Multiply: BINARY_OP(*); break;
 		case OpCode::Divide: BINARY_OP(/ ); break;
-		case OpCode::Not: push(Value(!pop())); break;
+		case OpCode::Not: 
+		{
+			bool not = !pop();
+			Value val(FWD(not));
+			push(val); break; 
+		}
 		case OpCode::Negate:
+		{
 			if (!peek(0).IsNumber()) {
 				runtimeError("Operand must take a number.");
 				return InterpretResults::RuntimeError;
 			}
-			push(-pop());
+			auto val = -pop();
+			push(val);
 			break;
+		}
 		case OpCode::Return:
 			pop();
 			return InterpretResults::OK;

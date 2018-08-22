@@ -50,9 +50,9 @@ public:
 	  \param value value of any supported ValueType.
 	*/
 	template<typename T, typename = std::enable_if_t<!std::is_same_v<T, Value&>&& !std::is_same_v<T, Value>>>
-	Value(T&& value) : Value(toBytes<T>(value), getType(value)) {}
+	Value(T&& value) : Value(Serialize::toBytes<T>(value), Transformer::getType(value)) {}
 
-	static Value charValue(char c) { return Value(toBytes(c), ValueType::Char); }
+	static Value charValue(char c) { return Value(Serialize::toBytes(c), ValueType::Char); }
 
 	//!@}
 
@@ -196,7 +196,7 @@ T Value::AsValue() const {
 	}
 
 	// If the types matchup, just convert byte array to type.
-	if (m_Type == getType(T())) {
+	if (m_Type == Transformer::getType(T())) {
 		T value = 0;
 		for (size_t i = 0; i < m_Size; i++) {
 			value |= (m_Data[i] << (8 * (m_Size - i - 1)));
