@@ -131,8 +131,8 @@ void Compiler::expression() {
 }
 
 void Compiler::character() {
-	char c;
 	std::string& lexeme = m_Parser.previousToken.lexeme;
+	char c = lexeme[1];
 	if (lexeme[1] == '\'') c = 0;
 	else if (lexeme[1] == '\\') {
 		switch (lexeme[2]) {
@@ -145,7 +145,7 @@ void Compiler::character() {
 		default:
 			break;
 		}
-	} else c = lexeme[1];
+	}
 
 	Value value = Value::charValue(c);
 	emitByte(OpCode::CharLiteral);
