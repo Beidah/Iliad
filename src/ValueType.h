@@ -21,6 +21,7 @@ Currently supported types of values are:
 - Decimals
 	- float (32-bit single precision)
 	- double (64-bit double precision)
+- char
 - bool
 
 \todo Add other value types.
@@ -42,7 +43,6 @@ enum class ValueType {
 
 	//!@{
 	//! Char
-	// \todo implement char datatype
 	Char,
 	//!@}
 
@@ -93,6 +93,11 @@ static ValueType getType<float>(float) {
 template <>
 static ValueType getType<double>(double) {
 	return ValueType::Double;
+}
+
+template<>
+static ValueType getType<char>(char) {
+	return ValueType::Char;
 }
 
 template <>

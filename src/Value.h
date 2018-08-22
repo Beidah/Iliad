@@ -52,6 +52,8 @@ public:
 	template<typename T, typename = std::enable_if_t<!std::is_same_v<T, Value&>&& !std::is_same_v<T, Value>>>
 	Value(T&& value) : Value(toBytes<T>(value), getType(value)) {}
 
+	static Value charValue(char c) { return Value(toBytes(c), ValueType::Char); }
+
 	//!@}
 
 	//!@{ \name Getters

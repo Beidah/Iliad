@@ -8,7 +8,7 @@
 
 //! An enumeration of all the different types of token to be scanned from the source code
 enum class TokenType {
-	// Single-character tokens.
+	// Single-character tokens
 	LeftParen, //!< {
 	RightParen, //!< }
 	LeftBrace,  //!< [
@@ -21,7 +21,7 @@ enum class TokenType {
 	Slash, //!< /
 	Star, //!< "*"
 
-	// One or two character tokens.
+	// Comparison operators
 	Bang, //!< !
 	BangEqual, //!< !=
 	Equal, //!< =
@@ -32,12 +32,11 @@ enum class TokenType {
 	LessEqual, //!< <=
 	And, //!< &&
 	Or, //!< ||
-	BitAnd, //!< &
-	BitOr, //!< |
 
 	// Literals
 	Identifier, //!< A set of alphanumerical characters with underscore representing a variable, class, or function name
-	String, //!< A string of characters enclosed with double quotemarks '"'
+	Character, //!< A single character enclosed with single quotemarks ' '
+	String, //!< A string of characters enclosed with double quotemarks " "
 	Integer, //!< A whole number
 	Float, //!< A decimal number
 
@@ -120,11 +119,15 @@ private:
 		\return Returns true if the next char in the source is expected, else false
 	*/
 	bool match(char expected);
+
+	Token consume(char expected, TokenType expectedType, std::string message);
+
 	//! Check the next character without consuming it
 	/*!
 	  \return The next char from the source code, without it being added into the current token.
 	*/
 	char peek() const { return isAtEnd() ? '\0' : *m_CurrentChar; }
+
 	//! Check two characters ahead with consuming it.
 	/*!
 	  \return The char two ahead of the Scanner from the source code, without it being added into the current token.
@@ -133,6 +136,9 @@ private:
 	//!@}
 
 	//!@{ \name Literals
+
+	//! Matches a set of single quotes to a charcater token.
+	Token character();
 
 	//! Matches a set of quotes to a String token.
 	/*!

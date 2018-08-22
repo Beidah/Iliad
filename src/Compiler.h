@@ -108,6 +108,8 @@ private:
 	void grouping();
 	//! Function for parsing expressions
 	void expression();
+	//! Function for parsing a character token.
+	void character();
 	//! Function for parsing integers
 	void integer();
 	//! Function for parsing floats

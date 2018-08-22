@@ -57,6 +57,7 @@ InterpretResults VM::run() {
 			push(READ_CONSTANT());
 			break;
 		}
+		case OpCode::CharLiteral: push(READ_CONSTANT()); break;
 		case OpCode::TrueLiteral:
 			push(Value(true));
 			break;
@@ -70,9 +71,37 @@ InterpretResults VM::run() {
 		case OpCode::Less: BINARY_OP(< ); break;
 		case OpCode::LessEqual: BINARY_OP(<= ); break;
 		case OpCode::Add:
-			BINARY_OP(+); break;
+		{
+			Value b = pop();
+			Value a = pop();
+			if (a.IsChar() || b.IsChar()) {
+				char val = a.AsValue<char>() + b.AsValue<char>();
+				push(Value::charValue(val));
+				break;
+			}
+			if (!a.IsNumber() || !b.IsNumber()) {
+				runtimeError("Operand must take a number or char.");
+				return InterpretResults::RuntimeError;
+			}
+			push(a + b);
+			break;
+		}
 		case OpCode::Subtract:
-			BINARY_OP(-); break;
+		{
+			Value b = pop();
+			Value a = pop();
+			if (a.IsChar() || b.IsChar()) {
+				char val = a.AsValue<char>() - b.AsValue<char>();
+				push(Value::charValue(val));
+				break;
+			}
+			if (!a.IsNumber() || !b.IsNumber()) {
+				runtimeError("Operand must take a number or char.");
+				return InterpretResults::RuntimeError;
+			}
+			push(a - b);
+			break;
+		}
 		case OpCode::Multiply:
 			BINARY_OP(*); break;
 		case OpCode::Divide:
@@ -80,7 +109,7 @@ InterpretResults VM::run() {
 		case OpCode::Not:
 			push(Value(!static_cast<bool>(pop()))); break;
 		case OpCode::Negate:
-			if (peek(0).IsNumber()) {
+			if (!peek(0).IsNumber()) {
 				runtimeError("Operand must take a number.");
 				return InterpretResults::RuntimeError;
 			}

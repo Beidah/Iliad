@@ -44,8 +44,9 @@ Token Scanner::ScanToken() {
 	case '=': return makeToken(match('=') ? TokenType::EqualEqual : TokenType::Equal);
 	case '<': return makeToken(match('=') ? TokenType::LessEqual : TokenType::Less);
 	case '>': return makeToken(match('=') ? TokenType::GreaterEqual : TokenType::Greater);
-	case '&': return makeToken(match('&') ? TokenType::And : TokenType::BitAnd);
-	case '|': return makeToken(match('|') ? TokenType::Or : TokenType::BitOr);
+	case '&': return match('&') ? makeToken(TokenType::And) : errorToken("Expected another '&' for 'and' operator.");
+	case '|': return match('|') ? makeToken(TokenType::Or) : errorToken("Expected another '|' for 'or' operator.");
+	case '\'': return character();
 	case '"': return string();
 	}
 	
@@ -91,6 +92,28 @@ bool Scanner::match(char expected) {
 	m_CurrentChar++;
 	m_CurrentToken << *m_CurrentChar;
 	return true;
+}
+
+Token Scanner::character() {
+	// Handle escape/control character
+	if (peek() == '\\') {
+		m_CurrentToken << advance();
+		switch (peek()) {
+		case '\\':
+		case 'n':
+		case 'r':
+		case '0':
+		case '\'':
+		case '\"':
+			m_CurrentToken << advance(); break;
+		default: return errorToken("Invalid escape character.");
+		}
+	} else m_CurrentToken << advance();
+
+	if (isAtEnd() || peek() != '\'') return errorToken("Unterminated char literal.");
+
+	m_CurrentToken << advance();
+	return makeToken(TokenType::Character);
 }
 
 Token Scanner::string() {

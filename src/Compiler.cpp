@@ -28,15 +28,14 @@ const std::array<Compiler::ParseRule, static_cast<size_t>(TokenType::EoF) + 1> C
 	ParseRule(NO_FUNC, &Compiler::binary, ParsePrecedence::Comparison),		// TOKEN_GREATER_EQUAL
 	ParseRule(NO_FUNC, &Compiler::binary, ParsePrecedence::Comparison),		// TOKEN_LESS
 	ParseRule(NO_FUNC, &Compiler::binary, ParsePrecedence::Comparison),		// TOKEN_LESS_EQUAL
-	ParseRule(&Compiler::binary, NO_FUNC, ParsePrecedence::And),			// TOKEN_AND
-	ParseRule(&Compiler::binary, NO_FUNC, ParsePrecedence::Or),				// TOKEN_OR
-	ParseRule(ParsePrecedence::And),										// Token_BitAnd
-	ParseRule(ParsePrecedence::Or),											// Token BitOr
-	ParseRule(),															// TOKEN_IDENTIFIER
-	ParseRule(),															// TOKEN_STRING
+	ParseRule(&Compiler::binary, NO_FUNC, ParsePrecedence::And),			// Token And
+	ParseRule(&Compiler::binary, NO_FUNC, ParsePrecedence::Or),				// Token Or
+	ParseRule(),															// Token Identifier
+	ParseRule(&Compiler::character, NO_FUNC),								// Token Character
+	ParseRule(),															// Token String
 	ParseRule(&Compiler::integer, NO_FUNC),									// Token Integer
 	ParseRule(&Compiler::_float, NO_FUNC),									// Token Float
-	ParseRule(),															// TOKEN_CLASS
+	ParseRule(),															// Token Class
 	ParseRule(),															// TOKEN_ELSE
 	ParseRule(&Compiler::literals, NO_FUNC),								// TOKEN_FALSE
 	ParseRule(),															// TOKEN_FOR
@@ -129,6 +128,28 @@ void Compiler::grouping() {
 
 void Compiler::expression() {
 	parsePrecedence(ParsePrecedence::Assignment);
+}
+
+void Compiler::character() {
+	char c;
+	std::string& lexeme = m_Parser.previousToken.lexeme;
+	if (lexeme[1] == '\'') c = 0;
+	else if (lexeme[1] == '\\') {
+		switch (lexeme[2]) {
+		case '\\': c = '\\'; break;
+		case 'n': c = '\n'; break;
+		case 'r': c = '\r'; break;
+		case '0': c = '\0'; break;
+		case '\'': c = '\''; break;
+		case '\"': c = '\"'; break;
+		default:
+			break;
+		}
+	} else c = lexeme[1];
+
+	Value value = Value::charValue(c);
+	emitByte(OpCode::CharLiteral);
+	emitByte(makeConstant(value));
 }
 
 void Compiler::integer() {

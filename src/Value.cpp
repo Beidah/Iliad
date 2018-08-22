@@ -40,6 +40,7 @@ std::string Value::ToString() const {
 		valueString << val;
 		break;
 	}
+	case ValueType::Char: valueString << AsValue<char>(); break;
 	case ValueType::Bool: valueString << (static_cast<bool>(*this) ? "true" : "false"); break;
 	default: return "Unknown value type.";
 	}
@@ -67,6 +68,7 @@ Value Value::operator+(Value value) const {
 	ValueType outputType = smallestTypeNeeded(m_Type, value.m_Type);
 
 	switch (outputType) {
+	case ValueType::Char: return Value(AsValue<char>() + AsValue<char>());
 	case ValueType::Int8: return Value(AsValue<int8_t>() + value.AsValue<int8_t>());
 	case ValueType::Int16: return Value(AsValue<int16_t>() + value.AsValue<int16_t>());
 	case ValueType::Int32: return Value(AsValue<int32_t>() + value.AsValue<int32_t>());
