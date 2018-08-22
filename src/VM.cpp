@@ -47,67 +47,21 @@ InterpretResults VM::run() {
 		OpCode instruction;
 		switch (instruction = static_cast<OpCode>(ReadByte())) {
 		case OpCode::IntLiteral:
-		{
-			Value constant = READ_CONSTANT();
-			push(constant);
-			break;
-		}
 		case OpCode::FloatLiteral:
-		{
-			push(READ_CONSTANT());
-			break;
-		}
 		case OpCode::CharLiteral: push(READ_CONSTANT()); break;
-		case OpCode::TrueLiteral:
-			push(Value(true));
-			break;
-		case OpCode::FalseLiteral:
-			push(Value(false));
-			break;
+		case OpCode::TrueLiteral: push(Value(true)); break;
+		case OpCode::FalseLiteral: push(Value(false)); break;
 		case OpCode::Equal: BINARY_OP(== ); break;
 		case OpCode::NotEqual: BINARY_OP(!= ); break;
 		case OpCode::Greater: BINARY_OP(> ); break;
 		case OpCode::GreaterEqual: BINARY_OP(>= ); break;
 		case OpCode::Less: BINARY_OP(< ); break;
 		case OpCode::LessEqual: BINARY_OP(<= ); break;
-		case OpCode::Add:
-		{
-			Value b = pop();
-			Value a = pop();
-			if (a.IsChar() || b.IsChar()) {
-				char val = a.AsValue<char>() + b.AsValue<char>();
-				push(Value::charValue(val));
-				break;
-			}
-			if (!a.IsNumber() || !b.IsNumber()) {
-				runtimeError("Operand must take a number or char.");
-				return InterpretResults::RuntimeError;
-			}
-			push(a + b);
-			break;
-		}
-		case OpCode::Subtract:
-		{
-			Value b = pop();
-			Value a = pop();
-			if (a.IsChar() || b.IsChar()) {
-				char val = a.AsValue<char>() - b.AsValue<char>();
-				push(Value::charValue(val));
-				break;
-			}
-			if (!a.IsNumber() || !b.IsNumber()) {
-				runtimeError("Operand must take a number or char.");
-				return InterpretResults::RuntimeError;
-			}
-			push(a - b);
-			break;
-		}
-		case OpCode::Multiply:
-			BINARY_OP(*); break;
-		case OpCode::Divide:
-			BINARY_OP(/ ); break;
-		case OpCode::Not:
-			push(Value(!static_cast<bool>(pop()))); break;
+		case OpCode::Add: BINARY_OP(+); break;
+		case OpCode::Subtract: BINARY_OP(-); break;
+		case OpCode::Multiply: BINARY_OP(*); break;
+		case OpCode::Divide: BINARY_OP(/ ); break;
+		case OpCode::Not: push(Value(!pop())); break;
 		case OpCode::Negate:
 			if (!peek(0).IsNumber()) {
 				runtimeError("Operand must take a number.");
