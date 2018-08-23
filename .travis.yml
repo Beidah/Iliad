@@ -21,5 +21,6 @@ deploy:
   local_dir: docs/html
   github_token: $GH_REPO_TOKEN
   keep-history: true
+  fqdn: iliadprogramming.com
   on:
     branch: master
