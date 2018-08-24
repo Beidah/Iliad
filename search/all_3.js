@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['char',['Char',['../_value_type_8h.html#ad9971b6ef33e02ba2c75d19c1d2518a1a8e95e84813830072b7516cfaa7dbc1a9',1,'ValueType.h']]],
   ['character',['character',['../class_compiler.html#a75d2b170149344279ec20de589c022af',1,'Compiler::character()'],['../class_scanner.html#a79b8af311a9ac40c9a165242b2dde0da',1,'Scanner::character()'],['../_scanner_8h.html#aa520fbf142ba1e7e659590c07da31921a76a40e4f974fd895a0a2598c1cee28b4',1,'Character():&#160;Scanner.h']]],
   ['charliteral',['CharLiteral',['../_chunk_8h.html#a0519976c90f19cb4731613ac2def566ea616b859bc3920670a4509686f20de06e',1,'Chunk.h']]],
   ['charvalue',['charValue',['../class_value.html#ae9c4de6b805f19cb1e815303e16c3ea1',1,'Value']]],

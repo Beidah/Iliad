@@ -12,7 +12,7 @@ var searchData=
   ['smallesttypeneeded',['smallestTypeNeeded',['../_value_8h.html#ad636142e40cdec89b6496d25a15969b4',1,'Value.cpp']]],
   ['stack_5fmax',['STACK_MAX',['../_v_m_8h.html#a27b296fccb4da1e9cfcf1f9c810e619e',1,'VM.h']]],
   ['star',['Star',['../_scanner_8h.html#aa520fbf142ba1e7e659590c07da31921a26f93e6e68e28a698377e941cb59f29a',1,'Scanner.h']]],
-  ['string',['string',['../class_scanner.html#ab32009f01ca94ea6b5537a0283514aaa',1,'Scanner::string()'],['../_scanner_8h.html#aa520fbf142ba1e7e659590c07da31921a27118326006d3829667a400ad23d5d98',1,'String():&#160;Scanner.h']]],
+  ['string',['string',['../class_compiler.html#aa36203a61cb3a470f39d14e3d247a27f',1,'Compiler::string()'],['../class_scanner.html#ab32009f01ca94ea6b5537a0283514aaa',1,'Scanner::string()'],['../_scanner_8h.html#aa520fbf142ba1e7e659590c07da31921a27118326006d3829667a400ad23d5d98',1,'String():&#160;Scanner.h']]],
   ['stringliteral',['StringLiteral',['../_chunk_8h.html#a0519976c90f19cb4731613ac2def566ea7029cff17180550e1214f19dba74a32a',1,'Chunk.h']]],
   ['subtract',['Subtract',['../_chunk_8h.html#a0519976c90f19cb4731613ac2def566ea1d9baf077ee87921f57a8fe42d510b65',1,'Chunk.h']]],
   ['super',['Super',['../_scanner_8h.html#aa520fbf142ba1e7e659590c07da31921a0ce3266d4eb71ad50f7a90aee6d21dcd',1,'Scanner.h']]]
