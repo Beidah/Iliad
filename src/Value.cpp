@@ -40,7 +40,8 @@ std::string Value::ToString() const {
 		valueString << val;
 		break;
 	}
-	case ValueType::Char: valueString << AsValue<char>(); break;
+	case ValueType::Char: valueString << "'" << AsValue<char>() << "'"; break;
+	case ValueType::String: valueString << "\"" << AsValue<std::string>() << "\""; break;
 	case ValueType::Bool: valueString << (static_cast<bool>(*this) ? "true" : "false"); break;
 	default: return "Unknown value type.";
 	}

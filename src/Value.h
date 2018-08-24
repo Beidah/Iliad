@@ -52,7 +52,10 @@ public:
 	template<typename T, typename = std::enable_if_t<!std::is_same_v<T, Value&>&& !std::is_same_v<T, Value>>>
 	Value(T&& value) : Value(Serialize::toBytes<T>(value), Transformer::getType(value)) {}
 
+	//! Creates and returns a char Value.
 	static Value charValue(char c) { return Value(Serialize::toBytes(c), ValueType::Char); }
+
+	
 
 	//!@}
 
@@ -100,7 +103,7 @@ public:
 
 	//! Specialized AsValue for double Values.
 	template <>
-	double Value::AsValue<double>() const {
+	double AsValue<double>() const {
 		// If value is not a number, it's not convertable to a float.
 		if (!IsNumber()) return 0;
 
@@ -122,6 +125,12 @@ public:
 			default: return 0; // Unreachable
 			}
 		}
+	}
+
+	//! Specialized AsValue for string values.
+	template<>
+	std::string AsValue<std::string>() const {
+		return std::string(m_Data.begin(), m_Data.end());
 	}
 
 	//! returns a byte array of the value.

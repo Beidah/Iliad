@@ -8,7 +8,7 @@
 
 #define NO_FUNC &Compiler::emptyFunction
 
-const std::array<Compiler::ParseRule, static_cast<size_t>(TokenType::EoF) + 1> Compiler::m_Rules = {
+const std::array<Compiler::ParseRule, Token::NUMBER_OF_TOKENS> Compiler::m_Rules = {
 	ParseRule(&Compiler::grouping, NO_FUNC, ParsePrecedence::Call),			// Token LeftParen
 	ParseRule(),															// Token RightParen
 	ParseRule(),															// TOKEN_LEFT_BRACE
@@ -32,7 +32,7 @@ const std::array<Compiler::ParseRule, static_cast<size_t>(TokenType::EoF) + 1> C
 	ParseRule(&Compiler::binary, NO_FUNC, ParsePrecedence::Or),				// Token Or
 	ParseRule(),															// Token Identifier
 	ParseRule(&Compiler::character, NO_FUNC),								// Token Character
-	ParseRule(),															// Token String
+	ParseRule(&Compiler::string, NO_FUNC),									// Token String
 	ParseRule(&Compiler::integer, NO_FUNC),									// Token Integer
 	ParseRule(&Compiler::_float, NO_FUNC),									// Token Float
 	ParseRule(),															// Token Class
@@ -147,7 +147,7 @@ void Compiler::character() {
 		}
 	}
 
-	Value value = Value::charValue(c);
+	Value value(FWD(c));
 	emitByte(OpCode::CharLiteral);
 	emitByte(makeConstant(value));
 }
@@ -159,9 +159,14 @@ void Compiler::integer() {
 
 void Compiler::_float() {
 	float value = std::stof(m_Parser.previousToken.lexeme);
-	emitByte(OpCode::FloatLiteral);
-	emitByte(makeConstant(Value(FWD(value))));
-	//emitConstant(Value(FWD(value)));
+	emitConstant(Value(FWD(value)));
+}
+
+void Compiler::string() {
+	auto lexeme = m_Parser.previousToken.lexeme;
+	std::string valueString = lexeme.substr(1, lexeme.length() - 2);
+	Value value(FWD(valueString));
+	emitConstant(value);
 }
 
 void Compiler::literals() {

@@ -42,8 +42,8 @@ enum class ValueType {
 	//!@}
 
 	//!@{
-	//! Char
-	Char,
+	//! 
+	Char, String,
 	//!@}
 
 	Bool, //!< Boolean
@@ -101,6 +101,11 @@ public:
 		return ValueType::Char;
 	}
 
+	template<>
+	static ValueType getType<std::string>(std::string) {
+		return ValueType::String;
+	}
+
 	template <>
 	static ValueType getType<bool>(bool) {
 		return ValueType::Bool;
@@ -150,6 +155,12 @@ public:
 	static ByteArray toBytes<double>(double value) {
 		int64_t intermediate = reinterpret_cast<int64_t&>(value);
 		return toBytes(intermediate);
+	}
+
+	template<>
+	static ByteArray toBytes<std::string>(std::string value) {
+		ByteArray bytes(value.begin(), value.end());
+		return bytes;
 	}
 
 	template<>

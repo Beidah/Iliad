@@ -39,6 +39,8 @@ enum class OpCode : byte {
 	Return
 };
 
+OpCode valueTypeToOpCode(ValueType type);
+
 //! A chunk of byte code.
 /*!
   A Chunk is a class with a resizable array of unsigned 8-bit values that represent bytecode. A

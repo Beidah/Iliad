@@ -49,6 +49,7 @@ InterpretResults VM::run() {
 		switch (instruction = static_cast<OpCode>(ReadByte())) {
 		case OpCode::IntLiteral:
 		case OpCode::FloatLiteral:
+		case OpCode::StringLiteral:
 		case OpCode::CharLiteral: push(READ_CONSTANT()); break;
 		case OpCode::TrueLiteral:
 		{

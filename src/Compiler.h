@@ -100,20 +100,22 @@ private:
 	//!@{ \name ParseFun
 	//! A set of functions to be given to ParseRule as its ParseFun members.
 
-	//! Function for parsing unary operators
+	//! Function for parsing unary operators.
 	void unary();
-	//! Function for parsing binary operators
+	//! Function for parsing binary operators.
 	void binary();
-	//! Function for parsing parentheses
+	//! Function for parsing parentheses.
 	void grouping();
-	//! Function for parsing expressions
+	//! Function for parsing expressions.
 	void expression();
 	//! Function for parsing a character token.
 	void character();
-	//! Function for parsing integers
+	//! Function for parsing integers.
 	void integer();
-	//! Function for parsing floats
+	//! Function for parsing floats.
 	void _float();
+	//! Function for parsing strings.
+	void string();
 	//!function for parsing literals
 	void literals();
 	//! An empty function, meant for parse rules with nothing to parse
@@ -144,22 +146,26 @@ private:
 	  \param byte A byte of data to be written to the current Chunk
 	*/
 	void emitByte(uint8_t byte) { m_CompilingChunk->writeByte(byte, m_Parser.previousToken.line); }
+
 	//! \copybrief emitByte(uint8_t byte)
 	/*!
 	  \param opCode The opcode representation of the byte to be written to the current Chunk.
 	*/
 	void emitByte(OpCode opCode) { emitByte(static_cast<uint8_t>(opCode)); }
+
 	//! Write two bytes to the current Chunk.
 	/*!
 	  \param byte1 Byte to be written to the Chunk first.
 	  \param byte2 Byte to be wrttien to the Chunk second.
 	*/
 	void emitBytes(uint8_t byte1, uint8_t byte2) { emitByte(byte1); emitByte(byte2); }
+
 	//! Writes a constant value into the current chunk
 	/*!
 	  \param value The value to be written to the Chunk
 	*/
-	void emitConstant(Value value) { emitBytes(static_cast<uint8_t>(OpCode::IntLiteral), makeConstant(value)); }
+	void emitConstant(Value value) { emitByte(valueTypeToOpCode(value.Type())); emitByte(makeConstant(value)); }
+
 	//! Writes the "Return" opcode into the Chunk.
 	void emitReturn() { emitByte(static_cast<uint8_t>(OpCode::Return)); }
 	

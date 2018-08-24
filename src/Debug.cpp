@@ -27,6 +27,7 @@ int Debugger::DisassembleInstruction(Chunk* chunk, int offset) {
 	case OpCode::IntLiteral: return ConstantInstruction("OP Int", chunk, offset);
 	case OpCode::FloatLiteral: return ConstantInstruction("OP Float", chunk, offset);
 	case OpCode::CharLiteral: return ConstantInstruction("OP Char", chunk, offset);
+	case OpCode::StringLiteral: return ConstantInstruction("Op String", chunk, offset);
 	case OpCode::TrueLiteral: return SimpleInstruction("OP True", offset);
 	case OpCode::FalseLiteral: return SimpleInstruction("OP False", offset);
 	case OpCode::Equal: return SimpleInstruction("OP Equal", offset);
@@ -51,7 +52,7 @@ int Debugger::DisassembleInstruction(Chunk* chunk, int offset) {
 int Debugger::ConstantInstruction(const char* name, Chunk* chunk, int offset) {
 	byte constant = chunk->m_Code[offset + 1];
 	std::cout << std::left << std::setw(16) << name << std::right << (int)constant;
-	std::cout << "'" << chunk->m_Constants[constant].ToString() << "'" << std::endl;
+	std::cout << " | " << chunk->m_Constants[constant].ToString() << " |" << std::endl;
 	return offset + 2;
 }
 
