@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['haderror',['hadError',['../struct_compiler_1_1_parser.html#ab49617160d485cbf8e672f013b119526',1,'Compiler::Parser']]]
+  ['infixrule',['infixRule',['../struct_compiler_1_1_parse_rule.html#ab5d5b4f17d1823c91c5ff30e52f21131',1,'Compiler::ParseRule']]]
 ];

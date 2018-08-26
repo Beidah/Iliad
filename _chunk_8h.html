@@ -116,22 +116,25 @@ Enumerations</h2></td></tr>
 <br/>
 &#160;&#160;<a class="el" href="_chunk_8h.html#a0519976c90f19cb4731613ac2def566ea616b859bc3920670a4509686f20de06e">OpCode::CharLiteral</a>, 
 <a class="el" href="_chunk_8h.html#a0519976c90f19cb4731613ac2def566ea7029cff17180550e1214f19dba74a32a">OpCode::StringLiteral</a>, 
+<a class="el" href="_chunk_8h.html#a0519976c90f19cb4731613ac2def566eae503652547652104ead59108c6ad5f8f">OpCode::IntVar</a>, 
 <a class="el" href="_chunk_8h.html#a0519976c90f19cb4731613ac2def566eaf5f286e73bda105e538310b3190f75c5">OpCode::Equal</a>, 
-<a class="el" href="_chunk_8h.html#a0519976c90f19cb4731613ac2def566ea19bb0af2c3c530538cb41aff7f235b96">OpCode::NotEqual</a>, 
 <br/>
-&#160;&#160;<a class="el" href="_chunk_8h.html#a0519976c90f19cb4731613ac2def566ea8768a6821cd735aea4f5b0df88c1fc6a">OpCode::Greater</a>, 
+&#160;&#160;<a class="el" href="_chunk_8h.html#a0519976c90f19cb4731613ac2def566ea19bb0af2c3c530538cb41aff7f235b96">OpCode::NotEqual</a>, 
+<a class="el" href="_chunk_8h.html#a0519976c90f19cb4731613ac2def566ea8768a6821cd735aea4f5b0df88c1fc6a">OpCode::Greater</a>, 
 <a class="el" href="_chunk_8h.html#a0519976c90f19cb4731613ac2def566ea758b05d899def79c9eb864ad4f96be1f">OpCode::GreaterEqual</a>, 
 <a class="el" href="_chunk_8h.html#a0519976c90f19cb4731613ac2def566ea1cfdf0e8d0c87a228c1f40d9bee7888b">OpCode::Less</a>, 
-<a class="el" href="_chunk_8h.html#a0519976c90f19cb4731613ac2def566ead3e6fdac55bb7b0edd7834c968ba1f38">OpCode::LessEqual</a>, 
 <br/>
-&#160;&#160;<a class="el" href="_chunk_8h.html#a0519976c90f19cb4731613ac2def566eaec211f7c20af43e742bf2570c3cb84f9">OpCode::Add</a>, 
+&#160;&#160;<a class="el" href="_chunk_8h.html#a0519976c90f19cb4731613ac2def566ead3e6fdac55bb7b0edd7834c968ba1f38">OpCode::LessEqual</a>, 
+<a class="el" href="_chunk_8h.html#a0519976c90f19cb4731613ac2def566eaec211f7c20af43e742bf2570c3cb84f9">OpCode::Add</a>, 
 <a class="el" href="_chunk_8h.html#a0519976c90f19cb4731613ac2def566ea1d9baf077ee87921f57a8fe42d510b65">OpCode::Subtract</a>, 
 <a class="el" href="_chunk_8h.html#a0519976c90f19cb4731613ac2def566eae257376d913f3b53cbb4a9b19d770648">OpCode::Multiply</a>, 
-<a class="el" href="_chunk_8h.html#a0519976c90f19cb4731613ac2def566ea0b914e196182d02615487e9793ecff3d">OpCode::Divide</a>, 
 <br/>
-&#160;&#160;<a class="el" href="_chunk_8h.html#a0519976c90f19cb4731613ac2def566eaa74c05d080620f087c4e523977230666">OpCode::Not</a>, 
+&#160;&#160;<a class="el" href="_chunk_8h.html#a0519976c90f19cb4731613ac2def566ea0b914e196182d02615487e9793ecff3d">OpCode::Divide</a>, 
+<a class="el" href="_chunk_8h.html#a0519976c90f19cb4731613ac2def566ea6d476c3c6b02a03f1cd07697c687980d">OpCode::Concatenate</a>, 
+<a class="el" href="_chunk_8h.html#a0519976c90f19cb4731613ac2def566eaa74c05d080620f087c4e523977230666">OpCode::Not</a>, 
 <a class="el" href="_chunk_8h.html#a0519976c90f19cb4731613ac2def566ea67d9ebb87ad2c62fe6b9de06c8da7fa5">OpCode::Negate</a>, 
-<a class="el" href="_chunk_8h.html#a0519976c90f19cb4731613ac2def566ea988fd738de9c6d177440c5dcf69e73ce">OpCode::Return</a>
+<br/>
+&#160;&#160;<a class="el" href="_chunk_8h.html#a0519976c90f19cb4731613ac2def566ea988fd738de9c6d177440c5dcf69e73ce">OpCode::Return</a>
 <br/>
  }</td></tr>
 <tr class="memdesc:a0519976c90f19cb4731613ac2def566e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Representation of opcodes to write into a <a class="el" href="class_chunk.html" title="A chunk of byte code. ">Chunk</a>.  <a href="_chunk_8h.html#a0519976c90f19cb4731613ac2def566e">More...</a><br/></td></tr>
@@ -185,6 +188,9 @@ Functions</h2></td></tr>
 <tr><td class="fieldname"><em><a class="anchor" id="a0519976c90f19cb4731613ac2def566ea7029cff17180550e1214f19dba74a32a"></a>StringLiteral</em>&#160;</td><td class="fielddoc">
 <p>Literal values </p>
 </td></tr>
+<tr><td class="fieldname"><em><a class="anchor" id="a0519976c90f19cb4731613ac2def566eae503652547652104ead59108c6ad5f8f"></a>IntVar</em>&#160;</td><td class="fielddoc">
+<p>Variables </p>
+</td></tr>
 <tr><td class="fieldname"><em><a class="anchor" id="a0519976c90f19cb4731613ac2def566eaf5f286e73bda105e538310b3190f75c5"></a>Equal</em>&#160;</td><td class="fielddoc">
 <p>Binary Operators </p>
 </td></tr>
@@ -213,6 +219,9 @@ Functions</h2></td></tr>
 <p>Binary Operators </p>
 </td></tr>
 <tr><td class="fieldname"><em><a class="anchor" id="a0519976c90f19cb4731613ac2def566ea0b914e196182d02615487e9793ecff3d"></a>Divide</em>&#160;</td><td class="fielddoc">
+<p>Binary Operators </p>
+</td></tr>
+<tr><td class="fieldname"><em><a class="anchor" id="a0519976c90f19cb4731613ac2def566ea6d476c3c6b02a03f1cd07697c687980d"></a>Concatenate</em>&#160;</td><td class="fielddoc">
 <p>Binary Operators </p>
 </td></tr>
 <tr><td class="fieldname"><em><a class="anchor" id="a0519976c90f19cb4731613ac2def566eaa74c05d080620f087c4e523977230666"></a>Not</em>&#160;</td><td class="fielddoc">

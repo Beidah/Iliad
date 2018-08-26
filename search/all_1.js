@@ -1,7 +1,8 @@
 var searchData=
 [
   ['add',['Add',['../_chunk_8h.html#a0519976c90f19cb4731613ac2def566eaec211f7c20af43e742bf2570c3cb84f9',1,'Chunk.h']]],
-  ['addconstant',['addConstant',['../class_chunk.html#a138fc2e29b0a19f87d6c3fd7560815f8',1,'Chunk']]],
+  ['addconstant',['addConstant',['../class_chunk.html#ade9c9f0c7f56550c48b5e5d583bbe72d',1,'Chunk']]],
+  ['addtoken',['addToken',['../class_compiler.html#a16959a5bd6b4d7345e305f898545bc0a',1,'Compiler']]],
   ['advance',['advance',['../class_compiler.html#a390358e6eaafd9e3c916307da6f8e46d',1,'Compiler::advance()'],['../class_scanner.html#a48162dd3db322ae58745bacacd98c463',1,'Scanner::advance()']]],
   ['and',['And',['../_scanner_8h.html#aa520fbf142ba1e7e659590c07da31921ac33315685a0cba3ce53be378b3c7874b',1,'Scanner.h']]],
   ['asbytes',['AsBytes',['../class_value.html#a01e1d759afdf409330da953caad547c8',1,'Value']]],

@@ -8,11 +8,11 @@ var searchData=
   ['chunk_2eh',['Chunk.h',['../_chunk_8h.html',1,'']]],
   ['class',['Class',['../_scanner_8h.html#aa520fbf142ba1e7e659590c07da31921a9bd81329febf6efe22788e03ddeaf0af',1,'Scanner.h']]],
   ['comma',['Comma',['../_scanner_8h.html#aa520fbf142ba1e7e659590c07da31921a58be47db9455679e6a44df2eff9c9fa6',1,'Scanner.h']]],
-  ['compile',['Compile',['../class_compiler.html#acab82bf3a56c9891021aa1341ac639d3',1,'Compiler']]],
+  ['compile',['Compile',['../class_compiler.html#a24ae1a22edd586902e4001737afd8b7e',1,'Compiler']]],
   ['compileerror',['CompileError',['../_v_m_8h.html#ae6d9431ba75ad63e3dc378957e0aad8fa8512184f958cde80eef601c0c9e27f08',1,'VM.h']]],
   ['compiler',['Compiler',['../class_compiler.html',1,'']]],
   ['compiler_2eh',['Compiler.h',['../_compiler_8h.html',1,'']]],
+  ['concatenate',['Concatenate',['../_chunk_8h.html#a0519976c90f19cb4731613ac2def566ea6d476c3c6b02a03f1cd07697c687980d',1,'Chunk.h']]],
   ['constantinstruction',['ConstantInstruction',['../class_debugger.html#a45ff366eab3ac2751992eb61cf0fee7c',1,'Debugger']]],
-  ['consume',['consume',['../class_compiler.html#a29e8b2ba1be26ae94395865c19f2fdee',1,'Compiler::consume()'],['../class_scanner.html#a9ce22aa462d97ef0098e93e7a80bc80b',1,'Scanner::consume()']]],
-  ['currenttoken',['currentToken',['../struct_compiler_1_1_parser.html#a5142aa37ee164473435d59b4027ed970',1,'Compiler::Parser']]]
+  ['consume',['consume',['../class_compiler.html#a29e8b2ba1be26ae94395865c19f2fdee',1,'Compiler']]]
 ];

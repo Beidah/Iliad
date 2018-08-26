@@ -12,6 +12,5 @@ var searchData=
   ['pop',['pop',['../class_v_m.html#af5f97f93ca522dd02dbaba309fd1706c',1,'VM']]],
   ['precedence',['precedence',['../struct_compiler_1_1_parse_rule.html#a62b8e0e92b8fac409c6fdd730b84f7c3',1,'Compiler::ParseRule']]],
   ['prefixrule',['prefixRule',['../struct_compiler_1_1_parse_rule.html#a4ffdde9cb2c8f1174b962e631a797d05',1,'Compiler::ParseRule']]],
-  ['previoustoken',['previousToken',['../struct_compiler_1_1_parser.html#a650279ddaef1e9ce7ca241e80a763050',1,'Compiler::Parser']]],
   ['push',['push',['../class_v_m.html#a64db3acebce1eee7ef6fc31e0e21ce89',1,'VM']]]
 ];

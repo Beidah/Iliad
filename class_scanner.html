@@ -98,10 +98,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:abccccf14f4b755fe2c0d3d6d4e52616a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abccccf14f4b755fe2c0d3d6d4e52616a"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scanner.html#abccccf14f4b755fe2c0d3d6d4e52616a">Scanner</a> (const std::string *source)</td></tr>
-<tr class="memdesc:abccccf14f4b755fe2c0d3d6d4e52616a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initilizes the scanner with the source code provided. <br/></td></tr>
-<tr class="separator:abccccf14f4b755fe2c0d3d6d4e52616a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a805c236a69aa35015d94f372cdb5a532"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a805c236a69aa35015d94f372cdb5a532"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scanner.html#a805c236a69aa35015d94f372cdb5a532">Scanner</a> (const std::string &amp;source)</td></tr>
+<tr class="memdesc:a805c236a69aa35015d94f372cdb5a532"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initilizes the scanner with the source code provided. <br/></td></tr>
+<tr class="separator:a805c236a69aa35015d94f372cdb5a532"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae576450fd0cbbe93dd00b7a1acfaae8b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_token.html">Token</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scanner.html#ae576450fd0cbbe93dd00b7a1acfaae8b">ScanToken</a> ()</td></tr>
 <tr class="memdesc:ae576450fd0cbbe93dd00b7a1acfaae8b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the next token.  <a href="#ae576450fd0cbbe93dd00b7a1acfaae8b">More...</a><br/></td></tr>
 <tr class="separator:ae576450fd0cbbe93dd00b7a1acfaae8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -122,9 +122,6 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="memitem:a54cd78a16ceb924d3177f281cddd2fb6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scanner.html#a54cd78a16ceb924d3177f281cddd2fb6">match</a> (char expected)</td></tr>
 <tr class="memdesc:a54cd78a16ceb924d3177f281cddd2fb6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the next character is one that is expected.  <a href="#a54cd78a16ceb924d3177f281cddd2fb6">More...</a><br/></td></tr>
 <tr class="separator:a54cd78a16ceb924d3177f281cddd2fb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9ce22aa462d97ef0098e93e7a80bc80b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_token.html">Token</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scanner.html#a9ce22aa462d97ef0098e93e7a80bc80b">consume</a> (char expected, <a class="el" href="_scanner_8h.html#aa520fbf142ba1e7e659590c07da31921">TokenType</a> expectedType, std::string message)</td></tr>
-<tr class="memdesc:a9ce22aa462d97ef0098e93e7a80bc80b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the next character is one that is expected.  <a href="#a9ce22aa462d97ef0098e93e7a80bc80b">More...</a><br/></td></tr>
-<tr class="separator:a9ce22aa462d97ef0098e93e7a80bc80b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1dbbcb8646bc8d1ec73d06f03f82bfbb"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scanner.html#a1dbbcb8646bc8d1ec73d06f03f82bfbb">peek</a> () const </td></tr>
 <tr class="memdesc:a1dbbcb8646bc8d1ec73d06f03f82bfbb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check the next character without consuming it.  <a href="#a1dbbcb8646bc8d1ec73d06f03f82bfbb">More...</a><br/></td></tr>
 <tr class="separator:a1dbbcb8646bc8d1ec73d06f03f82bfbb"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -163,9 +160,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="memitem:a67c546b078ac1e6780aa5ded2bfc4754"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_token.html">Token</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scanner.html#a67c546b078ac1e6780aa5ded2bfc4754">makeToken</a> (<a class="el" href="_scanner_8h.html#aa520fbf142ba1e7e659590c07da31921">TokenType</a> type)</td></tr>
 <tr class="memdesc:a67c546b078ac1e6780aa5ded2bfc4754"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a token of a given type.  <a href="#a67c546b078ac1e6780aa5ded2bfc4754">More...</a><br/></td></tr>
 <tr class="separator:a67c546b078ac1e6780aa5ded2bfc4754"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad397e5672820f6200043a1c885404e9b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_token.html">Token</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scanner.html#ad397e5672820f6200043a1c885404e9b">errorToken</a> (std::string message)</td></tr>
-<tr class="memdesc:ad397e5672820f6200043a1c885404e9b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an error token with a supplied message.  <a href="#ad397e5672820f6200043a1c885404e9b">More...</a><br/></td></tr>
-<tr class="separator:ad397e5672820f6200043a1c885404e9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab3383d2f9d9c784e52d3cd1800b8645d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_token.html">Token</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scanner.html#ab3383d2f9d9c784e52d3cd1800b8645d">errorToken</a> (const std::string &amp;message)</td></tr>
+<tr class="memdesc:ab3383d2f9d9c784e52d3cd1800b8645d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an error token with a supplied message.  <a href="#ab3383d2f9d9c784e52d3cd1800b8645d">More...</a><br/></td></tr>
+<tr class="separator:ab3383d2f9d9c784e52d3cd1800b8645d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -268,57 +265,7 @@ std::stringstream&#160;</td><td class="memItemRight" valign="bottom"><a class="e
 
 </div>
 </div>
-<a class="anchor" id="a9ce22aa462d97ef0098e93e7a80bc80b"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="struct_token.html">Token</a> Scanner::consume </td>
-          <td>(</td>
-          <td class="paramtype">char&#160;</td>
-          <td class="paramname"><em>expected</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="_scanner_8h.html#aa520fbf142ba1e7e659590c07da31921">TokenType</a>&#160;</td>
-          <td class="paramname"><em>expectedType</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::string&#160;</td>
-          <td class="paramname"><em>message</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Check if the next character is one that is expected. </p>
-<p>Checks one character ahead of the current one, and consumes it if it is the predicted char. If the char is not the predicted one, the scanner goes back to it's original place. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">expected</td><td>The char that is predicted to come next in the sequence. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Returns true if the next char in the source is expected, else false </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="ad397e5672820f6200043a1c885404e9b"></a>
+<a class="anchor" id="ab3383d2f9d9c784e52d3cd1800b8645d"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -328,7 +275,7 @@ std::stringstream&#160;</td><td class="memItemRight" valign="bottom"><a class="e
         <tr>
           <td class="memname"><a class="el" href="struct_token.html">Token</a> Scanner::errorToken </td>
           <td>(</td>
-          <td class="paramtype">std::string&#160;</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>message</em></td><td>)</td>
           <td></td>
         </tr>
