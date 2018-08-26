@@ -10,7 +10,7 @@ VM::VM() {
 	m_Stack.reserve(STACK_MAX);
 }
 
-InterpretResults VM::Interpret(const std::string* source) {
+InterpretResults VM::Interpret(const std::string& source) {
 	Compiler compiler;
 	m_Chunk = std::make_shared<Chunk>();
 
@@ -71,6 +71,15 @@ InterpretResults VM::run() {
 		case OpCode::Subtract: BINARY_OP(-); break;
 		case OpCode::Multiply: BINARY_OP(*); break;
 		case OpCode::Divide: BINARY_OP(/ ); break;
+		case OpCode::Concatenate:
+		{
+			auto b = pop();
+			auto a = pop();
+			std::string newString = a.AsValue<std::string>() + b.AsValue<std::string>();
+			Value value(FWD(newString));
+			push(value);
+			break;
+		}
 		case OpCode::Not: 
 		{
 			bool not = !pop();

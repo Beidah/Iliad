@@ -39,6 +39,7 @@ int Debugger::DisassembleInstruction(Chunk* chunk, int offset) {
 	case OpCode::Add: return SimpleInstruction("OP Add", offset);
 	case OpCode::Subtract: return SimpleInstruction("OP Subtract", offset);
 	case OpCode::Multiply: return SimpleInstruction("OP Multiply", offset);
+	case OpCode::Concatenate: return SimpleInstruction("Op Concatenate", offset);
 	case OpCode::Not: return SimpleInstruction("OP Not", offset);
 	case OpCode::Negate: return SimpleInstruction("OP Negate", offset);
 	case OpCode::Divide: return SimpleInstruction("OP Divide", offset);

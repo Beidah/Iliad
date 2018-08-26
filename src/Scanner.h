@@ -65,6 +65,11 @@ struct Token {
 	std::string lexeme; //!< The string that produced the token.
 	int line; //!< The line the token was found on.
 
+	Token() : type(TokenType::EoF), lexeme(""), line(0) {}
+
+	//! Full constructor
+	Token(TokenType type, const std::string& lexeme, int line) : type(type), lexeme(lexeme), line(line) {}
+
 	//! The total amount of token types that can be scanned.
 	static const int NUMBER_OF_TOKENS = static_cast<int>(TokenType::EoF) + 1;
 };
@@ -86,7 +91,7 @@ public:
 	Scanner() = delete;
 
 	//! Initilizes the scanner with the source code provided.
-	Scanner(const std::string* source);
+	Scanner(const std::string& source);
 	
 	//! Retrieve the next token.
 	/*!
@@ -119,8 +124,6 @@ private:
 		\return Returns true if the next char in the source is expected, else false
 	*/
 	bool match(char expected);
-
-	Token consume(char expected, TokenType expectedType, std::string message);
 
 	//! Check the next character without consuming it
 	/*!
@@ -213,7 +216,7 @@ private:
 	 \param message Message to attach to the error.
 	 \return A Token with TokenType::Error, the current line, and the message in place of a lexeme.
 	*/
-	Token errorToken(std::string message);
+	Token errorToken(const std::string& message);
 	//!@}
 };
 

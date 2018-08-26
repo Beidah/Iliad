@@ -21,7 +21,7 @@ static void repl() {
 		// Exit on exit command.
 		if (input.compare(".exit") == 0) return;
 
-		vm.Interpret(&input);
+		vm.Interpret(input);
 	}
 }
 

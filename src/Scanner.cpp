@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Scanner.h"
 
-Scanner::Scanner(const std::string* source) : m_Source(*source) {
+Scanner::Scanner(const std::string& source) : m_Source(source) {
 	m_Line = 1;
 	m_CurrentChar = m_Source.begin();
 }
@@ -190,17 +190,11 @@ TokenType Scanner::identifierType() {
 }
 
 Token Scanner::makeToken(TokenType type) {
-	Token token;
-	token.type = type;
-	token.line = m_Line;
-	token.lexeme = m_CurrentToken.str();
+	Token token(type, m_CurrentToken.str(), m_Line);
 	return token;
 }
 
-Token Scanner::errorToken(std::string message) {
-	Token token;
-	token.type = TokenType::Error;
-	token.lexeme = message;
-	token.line = m_Line;
+Token Scanner::errorToken(const std::string& message) {
+	Token token(TokenType::Error, message, m_Line);
 	return token;
 }

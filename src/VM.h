@@ -48,7 +48,7 @@ public:
 		- InterpretResults::CompileError if there was an error in the compiling phase.
 		- InterpretResults::RuntimeError if there was an error in the running phase.
 	*/
-	InterpretResults Interpret(const std::string* source);
+	InterpretResults Interpret(const std::string& source);
 
 private:
 	//! Runs the bytecode from m_Chunk.

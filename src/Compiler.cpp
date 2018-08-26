@@ -50,7 +50,7 @@ const std::array<Compiler::ParseRule, Token::NUMBER_OF_TOKENS> Compiler::m_Rules
 	ParseRule(),															// TOKEN_EOF
 };
 
-bool Compiler::Compile(const std::string* source, std::shared_ptr<Chunk> chunk) {
+bool Compiler::Compile(const std::string& source, std::shared_ptr<Chunk> chunk) {
 	m_Scanner = std::make_unique<Scanner>(source);
 	m_CompilingChunk = chunk;
 
@@ -62,19 +62,19 @@ bool Compiler::Compile(const std::string* source, std::shared_ptr<Chunk> chunk) 
 }
 
 void Compiler::advance() {
-	m_Parser.previousToken = m_Parser.currentToken;
 
 	while (true) {
-		m_Parser.currentToken = m_Scanner->ScanToken();
+		Token token = m_Scanner->ScanToken();
+		m_Parser.tokens.push_back(token);
 
-		if (m_Parser.currentToken.type != TokenType::Error) break;
+		if (CurrentToken().type != TokenType::Error) break;
 
-		errorAtCurrent(m_Parser.currentToken.lexeme.c_str());
+		errorAtCurrent(CurrentToken().lexeme.c_str());
 	}
 }
 
 void Compiler::consume(TokenType expectedToken, const char * message) {
-	if (m_Parser.currentToken.type == expectedToken) {
+	if (CurrentToken().type == expectedToken) {
 		advance();
 		return;
 	}
@@ -84,7 +84,7 @@ void Compiler::consume(TokenType expectedToken, const char * message) {
 
 void Compiler::unary() {
 	// Get the operator
-	TokenType op = m_Parser.previousToken.type;
+	TokenType op = PreviousToken().type;
 
 	// Compile the operand
 	parsePrecedence(ParsePrecedence::Unary);
@@ -99,7 +99,9 @@ void Compiler::unary() {
 
 void Compiler::binary() {
 	// Get the operator
-	TokenType op = m_Parser.previousToken.type;
+	TokenType op = PreviousToken().type;
+	Token previous = TokenAt(2);
+	Token next = CurrentToken();
 
 	// Compile the right operand
 	const ParseRule* rule = getRule(op);
@@ -113,7 +115,15 @@ void Compiler::binary() {
 	case TokenType::Less: emitByte(OpCode::Less); break;
 	case TokenType::LessEqual: emitByte(OpCode::LessEqual); break;
 	case TokenType::Minus: emitByte(OpCode::Subtract); break;
-	case TokenType::Plus: emitByte(OpCode::Add); break;
+	case TokenType::Plus:
+		if (previous.type == TokenType::String) 
+		{ 
+			emitByte(OpCode::Concatenate); 
+		}
+		else {
+			emitByte(OpCode::Add);
+		}
+		break;
 	case TokenType::Star: emitByte(OpCode::Multiply); break;
 	case TokenType::Slash: emitByte(OpCode::Divide); break;
 	default:
@@ -131,7 +141,7 @@ void Compiler::expression() {
 }
 
 void Compiler::character() {
-	std::string& lexeme = m_Parser.previousToken.lexeme;
+	std::string lexeme = PreviousToken().lexeme;
 	char c = lexeme[1];
 	if (lexeme[1] == '\'') c = 0;
 	else if (lexeme[1] == '\\') {
@@ -153,24 +163,24 @@ void Compiler::character() {
 }
 
 void Compiler::integer() {
-	int32_t value = std::stoi(m_Parser.previousToken.lexeme, nullptr);
+	int32_t value = std::stoi(PreviousToken().lexeme, nullptr);
 	emitConstant(Value(FWD(value)));
 }
 
 void Compiler::_float() {
-	float value = std::stof(m_Parser.previousToken.lexeme);
+	float value = std::stof(PreviousToken().lexeme);
 	emitConstant(Value(FWD(value)));
 }
 
 void Compiler::string() {
-	auto lexeme = m_Parser.previousToken.lexeme;
+	auto lexeme = PreviousToken().lexeme;
 	std::string valueString = lexeme.substr(1, lexeme.length() - 2);
 	Value value(FWD(valueString));
 	emitConstant(value);
 }
 
 void Compiler::literals() {
-	switch (m_Parser.previousToken.type) {
+	switch (PreviousToken().type) {
 	case TokenType::True: emitByte(OpCode::TrueLiteral); break;
 	case TokenType::False: emitByte(OpCode::FalseLiteral); break;
 	default:
@@ -180,7 +190,7 @@ void Compiler::literals() {
 
 void Compiler::parsePrecedence(ParsePrecedence precedence) {
 	advance();
-	ParseFun prefix = getRule(m_Parser.previousToken.type)->prefixRule;
+	ParseFun prefix = getRule(PreviousToken().type)->prefixRule;
 	if (prefix == NO_FUNC || prefix == nullptr) {
 		error("Expected expression.");
 		return;
@@ -188,9 +198,9 @@ void Compiler::parsePrecedence(ParsePrecedence precedence) {
 
 	(*this.*prefix)();
 
-	while (precedence < getRule(m_Parser.currentToken.type)->precedence) {
+	while (precedence < getRule(CurrentToken().type)->precedence) {
 		advance();
-		ParseFun infix = getRule(m_Parser.previousToken.type)->infixRule;
+		ParseFun infix = getRule(PreviousToken().type)->infixRule;
 		(*this.*infix)();
 	}
 
@@ -198,7 +208,7 @@ void Compiler::parsePrecedence(ParsePrecedence precedence) {
 
 
 
-uint8_t Compiler::makeConstant(Value value) {
+uint8_t Compiler::makeConstant(const Value& value) {
 	int constant = m_CompilingChunk->addConstant(value);
 
 	if (constant > UINT8_MAX) {
@@ -219,7 +229,7 @@ void Compiler::endCompiler() {
 
 }
 
-void Compiler::errorAt(Token token, const char* message) {
+void Compiler::errorAt(Token token, const std::string& message) {
 	if (m_Parser.panicMode) return;
 	m_Parser.panicMode = true;
 

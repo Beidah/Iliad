@@ -130,7 +130,9 @@ public:
 	//! Specialized AsValue for string values.
 	template<>
 	std::string AsValue<std::string>() const {
-		return std::string(m_Data.begin(), m_Data.end());
+		if (IsChar() || IsString())
+			return std::string(m_Data.begin(), m_Data.end());
+		else return ToString();
 	}
 
 	//! returns a byte array of the value.
@@ -190,6 +192,7 @@ public:
 	inline bool IsDecimal() const { return m_Type >= ValueType::Float && m_Type <= ValueType::Double; }
 	inline bool IsBoolean() const { return m_Type == ValueType::Bool; }
 	inline bool IsChar() const { return m_Type == ValueType::Char; }
+	inline bool IsString() const { return m_Type == ValueType::String; }
 	inline bool IsValid() const { return m_Type != ValueType::Invalid; }
 	//!@}
 };

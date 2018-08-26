@@ -21,12 +21,18 @@ enum class OpCode : byte {
 	//!@}
 
 	//!@{
+	//! Variables
+	IntVar,
+	//!@}
+
+	//!@{
 	//! Binary Operators
 	Equal, NotEqual,
 	Greater, GreaterEqual,
 	Less, LessEqual,
 	Add, Subtract,
 	Multiply, Divide,
+	Concatenate,
 	//!@}
 
 	//!@{
@@ -76,7 +82,7 @@ public:
 	  \param constant Value to add to m_Constants
 	  \return Index of m_Constants where value was added.
 	*/
-	int addConstant(Value constant);
+	int addConstant(const Value& constant);
 
 	/*!
 	  \return Pointer to the beginning of the bytecode
