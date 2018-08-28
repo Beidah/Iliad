@@ -4,8 +4,7 @@
 
 #include "ValueType.h"
 
-//! Helper function to find the "smallest" value given.
-ValueType smallestTypeNeeded(ValueType a, ValueType b);
+
 
 //! Basical value representation
 /*!

@@ -54,7 +54,7 @@ bool Compiler::Compile(const std::string& source, std::shared_ptr<Chunk> chunk) 
 	m_Scanner = std::make_unique<Scanner>(source);
 	m_CompilingChunk = chunk;
 
-	advance();
+	m_Parser.StartParser(*m_Scanner);
 	expression();
 	consume(TokenType::EoF, "Expeceded end of file.");
 	endCompiler();
@@ -63,9 +63,11 @@ bool Compiler::Compile(const std::string& source, std::shared_ptr<Chunk> chunk) 
 
 void Compiler::advance() {
 
+	if (CurrentToken().type == TokenType::EoF) return;
+
 	while (true) {
-		Token token = m_Scanner->ScanToken();
-		m_Parser.tokens.push_back(token);
+
+		m_Parser.currentToken++;
 
 		if (CurrentToken().type != TokenType::Error) break;
 
@@ -84,14 +86,21 @@ void Compiler::consume(TokenType expectedToken, const char * message) {
 
 void Compiler::unary() {
 	// Get the operator
-	TokenType op = PreviousToken().type;
+	Token opToken = PreviousToken();
+	TokenType op = opToken.type;
 
 	// Compile the operand
 	parsePrecedence(ParsePrecedence::Unary);
 
+	ValueType rhs = m_Parser.currentExpression;
+
 	switch (op) {
 	case TokenType::Bang: emitByte(OpCode::Not); break;
-	case TokenType::Minus: emitByte(OpCode::Negate); break;
+	case TokenType::Minus:
+		if (!IsNumber(rhs)) {
+			errorAt(opToken, "Incorrect value. Expected number, found " + ValueTypeToString(rhs) + ".");
+		}
+		emitByte(OpCode::Negate); break;
 	default:
 		return;	// Unreachable
 	}
@@ -99,33 +108,98 @@ void Compiler::unary() {
 
 void Compiler::binary() {
 	// Get the operator
-	TokenType op = PreviousToken().type;
-	Token previous = TokenAt(2);
-	Token next = CurrentToken();
+	Token opToken = PreviousToken();
+	TokenType op = opToken.type;
+	ValueType lhs = m_Parser.currentExpression;
 
 	// Compile the right operand
 	const ParseRule* rule = getRule(op);
 	parsePrecedence(static_cast<ParsePrecedence>(static_cast<int>(rule->precedence) + 1));
 
+	ValueType rhs = m_Parser.currentExpression;
+
 	switch (op) {
-	case TokenType::EqualEqual: emitByte(OpCode::Equal); break;
-	case TokenType::BangEqual: emitByte(OpCode::NotEqual); break;
-	case TokenType::Greater: emitByte(OpCode::Greater); break;
-	case TokenType::GreaterEqual: emitByte(OpCode::GreaterEqual); break;
-	case TokenType::Less: emitByte(OpCode::Less); break;
-	case TokenType::LessEqual: emitByte(OpCode::LessEqual); break;
-	case TokenType::Minus: emitByte(OpCode::Subtract); break;
-	case TokenType::Plus:
-		if (previous.type == TokenType::String) 
-		{ 
-			emitByte(OpCode::Concatenate); 
-		}
-		else {
-			emitByte(OpCode::Add);
-		}
+	case TokenType::EqualEqual: 
+		emitByte(OpCode::Equal); 
+		m_Parser.currentExpression = ValueType::Bool;
 		break;
-	case TokenType::Star: emitByte(OpCode::Multiply); break;
-	case TokenType::Slash: emitByte(OpCode::Divide); break;
+	case TokenType::BangEqual: 
+		emitByte(OpCode::NotEqual);
+		m_Parser.currentExpression = ValueType::Bool;
+		break;
+	case TokenType::Greater:
+		if (!IsNumber(lhs) || !IsNumber(rhs)) {
+			errorAt(opToken, "Invalid operands. Expected numbers, found" + ValueTypeToString(lhs) + ", and " + ValueTypeToString(rhs) + ".");
+			break;
+		}
+		emitByte(OpCode::Greater);
+		m_Parser.currentExpression = ValueType::Bool;
+		break;
+	case TokenType::GreaterEqual:
+		if (!IsNumber(lhs) || !IsNumber(rhs)) {
+			errorAt(opToken, "Invalid operands. Expected numbers, found" + ValueTypeToString(lhs) + ", and " + ValueTypeToString(rhs) + ".");
+			break;
+		}
+		emitByte(OpCode::GreaterEqual);
+		m_Parser.currentExpression = ValueType::Bool;
+		break;
+	case TokenType::Less: 
+		if (!IsNumber(lhs) || !IsNumber(rhs)) {
+			errorAt(opToken, "Invalid operands. Expected two numbers, found " + ValueTypeToString(lhs) + ", and " + ValueTypeToString(rhs) + ".");
+			break;
+		}
+		emitByte(OpCode::Less);
+		m_Parser.currentExpression = ValueType::Bool;
+		break;
+	case TokenType::LessEqual: 
+		if (!IsNumber(lhs) || !IsNumber(rhs)) {
+			errorAt(opToken, "Invalid operands. Expected two numbers, found " + ValueTypeToString(lhs) + ", and " + ValueTypeToString(rhs) + ".");
+			break;
+		}
+		emitByte(OpCode::LessEqual);
+		m_Parser.currentExpression = ValueType::Bool;
+		break;
+	case TokenType::Minus:
+		if (!IsNumber(lhs) || !IsNumber(rhs)) {
+			errorAt(opToken, "Invalid operands. Expected two numbers, found " + ValueTypeToString(lhs) + ", and " + ValueTypeToString(rhs) +".");
+			break;
+		}
+		emitByte(OpCode::Subtract);
+		m_Parser.currentExpression = smallestTypeNeeded(lhs, rhs);
+		break;
+	case TokenType::Plus: 
+		if (IsString(lhs)) {
+			if (!IsString(rhs)) {
+				errorAt(opToken, "Cannot convert " + ValueTypeToString(rhs) + " explicity to string.");
+				break;
+			}
+			emitByte(OpCode::Concatenate);
+			m_Parser.currentExpression = ValueType::String;
+			break;
+		}
+		if (!IsNumber(lhs) || !IsNumber(rhs)) {
+			errorAt(opToken, "Invalid operands. Expected two numbers, found " + ValueTypeToString(lhs) + ", and " + ValueTypeToString(rhs) + ".");
+			break;
+		}
+		emitByte(OpCode::Add);
+		m_Parser.currentExpression = smallestTypeNeeded(lhs, rhs);
+		break;
+	case TokenType::Star:
+		if (!IsNumber(lhs) || !IsNumber(rhs)) {
+			errorAt(opToken, "Invalid operands. Expected two numbers, found " + ValueTypeToString(lhs) + ", and " + ValueTypeToString(rhs) + ".");
+			break;
+		}
+		emitByte(OpCode::Multiply);
+		m_Parser.currentExpression = smallestTypeNeeded(lhs, rhs);
+		break;
+	case TokenType::Slash: 
+		if (!IsNumber(lhs) || !IsNumber(rhs)) {
+			errorAt(opToken, "Invalid operands. Expected two numbers, found " + ValueTypeToString(lhs) + ", and " + ValueTypeToString(rhs) + ".");
+			break;
+		}
+		emitByte(OpCode::Divide);
+		m_Parser.currentExpression = smallestTypeNeeded(lhs, rhs);
+		break;
 	default:
 		return; // Unreachable
 	}
@@ -158,18 +232,22 @@ void Compiler::character() {
 	}
 
 	Value value(FWD(c));
-	emitByte(OpCode::CharLiteral);
-	emitByte(makeConstant(value));
+	emitConstant(value);
+	m_Parser.currentExpression = ValueType::Char;
 }
 
 void Compiler::integer() {
-	int32_t value = std::stoi(PreviousToken().lexeme, nullptr);
-	emitConstant(Value(FWD(value)));
+	int32_t numValue = std::stoi(PreviousToken().lexeme, nullptr);
+	Value value(FWD(numValue));
+	emitConstant(value);
+	m_Parser.currentExpression = ValueType::Int32;
 }
 
 void Compiler::_float() {
-	float value = std::stof(PreviousToken().lexeme);
-	emitConstant(Value(FWD(value)));
+	float numValue = std::stof(PreviousToken().lexeme);
+	Value value(FWD(numValue));
+	emitConstant(value);
+	m_Parser.currentExpression = ValueType::Float;
 }
 
 void Compiler::string() {
@@ -177,12 +255,19 @@ void Compiler::string() {
 	std::string valueString = lexeme.substr(1, lexeme.length() - 2);
 	Value value(FWD(valueString));
 	emitConstant(value);
+	m_Parser.currentExpression = ValueType::String;
 }
 
 void Compiler::literals() {
 	switch (PreviousToken().type) {
-	case TokenType::True: emitByte(OpCode::TrueLiteral); break;
-	case TokenType::False: emitByte(OpCode::FalseLiteral); break;
+	case TokenType::True: 
+		emitByte(OpCode::TrueLiteral);
+		m_Parser.currentExpression = ValueType::Bool;
+		break;
+	case TokenType::False: 
+		emitByte(OpCode::FalseLiteral); 
+		m_Parser.currentExpression = ValueType::Bool;
+		break;
 	default:
 		return; // unreachable.
 	}
@@ -205,7 +290,6 @@ void Compiler::parsePrecedence(ParsePrecedence precedence) {
 	}
 
 }
-
 
 
 uint8_t Compiler::makeConstant(const Value& value) {
@@ -245,4 +329,9 @@ void Compiler::errorAt(Token token, const std::string& message) {
 
 	std::cerr << ": " << message << std::endl;
 	m_Parser.hadError = true;
+}
+
+void Compiler::Parser::StartParser(Scanner& scanner) {
+	tokensToBeParsed = scanner.ScanAllTokens();
+	currentToken = tokensToBeParsed.begin();
 }

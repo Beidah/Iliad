@@ -213,6 +213,4 @@ Value::operator bool() const {
 	}
 }
 
-ValueType smallestTypeNeeded(ValueType a, ValueType b) {
-	return a > b ? a : b;
-}
+

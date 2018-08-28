@@ -28,10 +28,6 @@ InterpretResults VM::run() {
 #define BINARY_OP(op) do { \
 		Value b = pop(); \
 		Value a = pop(); \
-		if (!a.IsNumber() || !b.IsNumber()) { \
-			runtimeError("Operands must be numbers."); \
-			return InterpretResults::RuntimeError;\
-		} \
 		Value val(a op b); \
 		push(val); \
 	} while(false)
@@ -88,10 +84,6 @@ InterpretResults VM::run() {
 		}
 		case OpCode::Negate:
 		{
-			if (!peek(0).IsNumber()) {
-				runtimeError("Operand must take a number.");
-				return InterpretResults::RuntimeError;
-			}
 			auto val = -pop();
 			push(val);
 			break;

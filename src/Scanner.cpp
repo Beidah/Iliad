@@ -53,6 +53,18 @@ Token Scanner::ScanToken() {
 	return errorToken("Unexpected character.");
 }
 
+std::vector<Token> Scanner::ScanAllTokens() {
+	std::vector<Token> tokens;
+	
+	while (!isAtEnd()) {
+		Token token = ScanToken();
+		tokens.push_back(token);
+	}
+
+	tokens.push_back(ScanToken());
+	return tokens;
+}
+
 void Scanner::skipWhitespace() {
 	while (true) {
 		char c = peek();

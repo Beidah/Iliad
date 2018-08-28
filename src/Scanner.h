@@ -100,6 +100,13 @@ public:
 	*/
 	Token ScanToken();
 
+	//! Retrieve all tokens.
+	/*!
+	  Run throught the source until it reaches the End of File, and token the entire thing.
+	  \return A list of every token in the source file.
+	*/
+	std::vector<Token> ScanAllTokens();
+
 private:
 	//! Move the Scanner forward by one character
 	/*!

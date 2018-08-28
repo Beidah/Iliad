@@ -41,13 +41,29 @@ enum class ValueType {
 	Float, Double,
 	//!@}
 
-	//!@{
-	//! 
-	Char, String,
-	//!@}
+	
+	Char, //!< Char
+	String, //!< String
 
 	Bool, //!< Boolean
 };
+
+//! Helper function to find the "smallest" value given.
+ValueType smallestTypeNeeded(ValueType a, ValueType b);
+
+//!@{
+//! Functions to help determine the type of Value
+inline bool IsValid(ValueType type) { return type > ValueType::Invalid; }
+inline bool IsNumber(ValueType type) { return type >= ValueType::Int8 && type <= ValueType::Double; }
+inline bool IsInt(ValueType type) { return type >= ValueType::Int8 && type <= ValueType::Int64; }
+inline bool IsFloat(ValueType type) { return type == ValueType::Float || type == ValueType::Double; }
+inline bool IsChar(ValueType type) { return type == ValueType::Char; }
+inline bool IsString(ValueType type) { return type == ValueType::String; }
+inline bool IsBool(ValueType type) { return type == ValueType::Bool; }
+//!@}
+
+//! Get a string of the type name.
+std::string ValueTypeToString(ValueType type);
 
 
 //!@{ \name Transformer
