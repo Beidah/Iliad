@@ -9,29 +9,29 @@
 //! An enumeration of all the different types of token to be scanned from the source code
 enum class TokenType {
 	// Single-character tokens
-	LeftParen, //!< {
-	RightParen, //!< }
-	LeftBrace,  //!< [
-	RightBrace,//!< ]
-	Comma, //!< ,
-	Dot, //!< \.
-	Minus, //!< \-
-	Plus,//!< \+
-	Semicolon, //!< ;
-	Slash, //!< /
+	LeftParen, //!< "("
+	RightParen, //!< ")"
+	LeftBrace,  //!< "["
+	RightBrace,//!< "]"
+	Comma, //!< ","
+	Dot, //!< "."
+	Minus, //!< "-"
+	Plus,//!< "+"
+	Semicolon, //!< ";"
+	Slash, //!< "/"
 	Star, //!< "*"
 
 	// Comparison operators
-	Bang, //!< !
-	BangEqual, //!< !=
-	Equal, //!< =
-	EqualEqual, //!< =
-	Greater, //!< >
-	GreaterEqual, //!< >=
-	Less, //!< <
-	LessEqual, //!< <=
-	And, //!< &&
-	Or, //!< ||
+	Bang, //!< "!"
+	BangEqual, //!< "!="
+	Equal, //!< "="
+	EqualEqual, //!< "=="
+	Greater, //!< ">"
+	GreaterEqual, //!< ">="
+	Less, //!< "<"
+	LessEqual, //!< "<="
+	And, //!< "&&"
+	Or, //!< "||"
 
 	// Literals
 	Identifier, //!< A set of alphanumerical characters with underscore representing a variable, class, or function name
