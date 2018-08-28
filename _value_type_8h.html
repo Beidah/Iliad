@@ -88,7 +88,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#define-members">Macros</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
-<a href="#enum-members">Enumerations</a>  </div>
+<a href="#enum-members">Enumerations</a> &#124;
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">ValueType.h File Reference</div>  </div>
 </div><!--header-->
@@ -137,13 +138,39 @@ Enumerations</h2></td></tr>
 &#160;&#160;<a class="el" href="_value_type_8h.html#ad9971b6ef33e02ba2c75d19c1d2518a1afbde23b11d7e59af7828e81144c8b487">ValueType::Int64</a>, 
 <a class="el" href="_value_type_8h.html#ad9971b6ef33e02ba2c75d19c1d2518a1a22ae0e2b89e5e3d477f988cc36d3272b">ValueType::Float</a>, 
 <a class="el" href="_value_type_8h.html#ad9971b6ef33e02ba2c75d19c1d2518a1ad909d38d705ce75386dd86e611a82f5b">ValueType::Double</a>, 
-<b>Char</b>, 
+<a class="el" href="_value_type_8h.html#ad9971b6ef33e02ba2c75d19c1d2518a1a8e95e84813830072b7516cfaa7dbc1a9">ValueType::Char</a>, 
 <br/>
-&#160;&#160;<b>String</b>, 
+&#160;&#160;<a class="el" href="_value_type_8h.html#ad9971b6ef33e02ba2c75d19c1d2518a1a27118326006d3829667a400ad23d5d98">ValueType::String</a>, 
 <a class="el" href="_value_type_8h.html#ad9971b6ef33e02ba2c75d19c1d2518a1ac26f15e86e3de4c398a8273272aba034">ValueType::Bool</a>
 <br/>
  }</td></tr>
 <tr class="separator:ad9971b6ef33e02ba2c75d19c1d2518a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:ad636142e40cdec89b6496d25a15969b4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad636142e40cdec89b6496d25a15969b4"></a>
+<a class="el" href="_value_type_8h.html#ad9971b6ef33e02ba2c75d19c1d2518a1">ValueType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_value_type_8h.html#ad636142e40cdec89b6496d25a15969b4">smallestTypeNeeded</a> (<a class="el" href="_value_type_8h.html#ad9971b6ef33e02ba2c75d19c1d2518a1">ValueType</a> a, <a class="el" href="_value_type_8h.html#ad9971b6ef33e02ba2c75d19c1d2518a1">ValueType</a> b)</td></tr>
+<tr class="memdesc:ad636142e40cdec89b6496d25a15969b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to find the "smallest" value given. <br/></td></tr>
+<tr class="separator:ad636142e40cdec89b6496d25a15969b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad987bae5166b7bafdd273e1ce1e82e0b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad987bae5166b7bafdd273e1ce1e82e0b"></a>
+std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_value_type_8h.html#ad987bae5166b7bafdd273e1ce1e82e0b">ValueTypeToString</a> (<a class="el" href="_value_type_8h.html#ad9971b6ef33e02ba2c75d19c1d2518a1">ValueType</a> type)</td></tr>
+<tr class="memdesc:ad987bae5166b7bafdd273e1ce1e82e0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a string of the type name. <br/></td></tr>
+<tr class="separator:ad987bae5166b7bafdd273e1ce1e82e0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader"></div></td></tr>
+<tr class="memitem:a9a8798223e88a396e798b55a1823e64c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_value_type_8h.html#a9a8798223e88a396e798b55a1823e64c">IsValid</a> (<a class="el" href="_value_type_8h.html#ad9971b6ef33e02ba2c75d19c1d2518a1">ValueType</a> type)</td></tr>
+<tr class="separator:a9a8798223e88a396e798b55a1823e64c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a55c47de6a3528b94971a3fc80c2b2c03"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_value_type_8h.html#a55c47de6a3528b94971a3fc80c2b2c03">IsNumber</a> (<a class="el" href="_value_type_8h.html#ad9971b6ef33e02ba2c75d19c1d2518a1">ValueType</a> type)</td></tr>
+<tr class="separator:a55c47de6a3528b94971a3fc80c2b2c03"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac64aa0c8ba4a5d46a0c4988c759df740"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_value_type_8h.html#ac64aa0c8ba4a5d46a0c4988c759df740">IsInt</a> (<a class="el" href="_value_type_8h.html#ad9971b6ef33e02ba2c75d19c1d2518a1">ValueType</a> type)</td></tr>
+<tr class="separator:ac64aa0c8ba4a5d46a0c4988c759df740"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afda2cf3ddc0b10bc60536bb0160fae4d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_value_type_8h.html#afda2cf3ddc0b10bc60536bb0160fae4d">IsFloat</a> (<a class="el" href="_value_type_8h.html#ad9971b6ef33e02ba2c75d19c1d2518a1">ValueType</a> type)</td></tr>
+<tr class="separator:afda2cf3ddc0b10bc60536bb0160fae4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad184d09a9864669c2481061f3d7d976b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_value_type_8h.html#ad184d09a9864669c2481061f3d7d976b">IsChar</a> (<a class="el" href="_value_type_8h.html#ad9971b6ef33e02ba2c75d19c1d2518a1">ValueType</a> type)</td></tr>
+<tr class="separator:ad184d09a9864669c2481061f3d7d976b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f8bfd25f7ef37bc8208e792e7a775df"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_value_type_8h.html#a1f8bfd25f7ef37bc8208e792e7a775df">IsString</a> (<a class="el" href="_value_type_8h.html#ad9971b6ef33e02ba2c75d19c1d2518a1">ValueType</a> type)</td></tr>
+<tr class="separator:a1f8bfd25f7ef37bc8208e792e7a775df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8627f6b1bde6a0f09b64b308fe0d5d04"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_value_type_8h.html#a8627f6b1bde6a0f09b64b308fe0d5d04">IsBool</a> (<a class="el" href="_value_type_8h.html#ad9971b6ef33e02ba2c75d19c1d2518a1">ValueType</a> type)</td></tr>
+<tr class="separator:a8627f6b1bde6a0f09b64b308fe0d5d04"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The ValueType enum, as well as helper functions to build <a class="el" href="class_value.html" title="Basical value representation. ">Value</a> from different types. </p>
@@ -197,10 +224,192 @@ Enumerations</h2></td></tr>
 <tr><td class="fieldname"><em><a class="anchor" id="ad9971b6ef33e02ba2c75d19c1d2518a1ad909d38d705ce75386dd86e611a82f5b"></a>Double</em>&#160;</td><td class="fielddoc">
 <p>Floating Point numbers </p>
 </td></tr>
+<tr><td class="fieldname"><em><a class="anchor" id="ad9971b6ef33e02ba2c75d19c1d2518a1a8e95e84813830072b7516cfaa7dbc1a9"></a>Char</em>&#160;</td><td class="fielddoc">
+<p>Char. </p>
+</td></tr>
+<tr><td class="fieldname"><em><a class="anchor" id="ad9971b6ef33e02ba2c75d19c1d2518a1a27118326006d3829667a400ad23d5d98"></a>String</em>&#160;</td><td class="fielddoc">
+<p>String. </p>
+</td></tr>
 <tr><td class="fieldname"><em><a class="anchor" id="ad9971b6ef33e02ba2c75d19c1d2518a1ac26f15e86e3de4c398a8273272aba034"></a>Bool</em>&#160;</td><td class="fielddoc">
 <p>Boolean. </p>
 </td></tr>
 </table>
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a class="anchor" id="a8627f6b1bde6a0f09b64b308fe0d5d04"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool IsBool </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="_value_type_8h.html#ad9971b6ef33e02ba2c75d19c1d2518a1">ValueType</a>&#160;</td>
+          <td class="paramname"><em>type</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Functions to help determine the type of <a class="el" href="class_value.html" title="Basical value representation. ">Value</a> </p>
+
+</div>
+</div>
+<a class="anchor" id="ad184d09a9864669c2481061f3d7d976b"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool IsChar </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="_value_type_8h.html#ad9971b6ef33e02ba2c75d19c1d2518a1">ValueType</a>&#160;</td>
+          <td class="paramname"><em>type</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Functions to help determine the type of <a class="el" href="class_value.html" title="Basical value representation. ">Value</a> </p>
+
+</div>
+</div>
+<a class="anchor" id="afda2cf3ddc0b10bc60536bb0160fae4d"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool IsFloat </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="_value_type_8h.html#ad9971b6ef33e02ba2c75d19c1d2518a1">ValueType</a>&#160;</td>
+          <td class="paramname"><em>type</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Functions to help determine the type of <a class="el" href="class_value.html" title="Basical value representation. ">Value</a> </p>
+
+</div>
+</div>
+<a class="anchor" id="ac64aa0c8ba4a5d46a0c4988c759df740"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool IsInt </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="_value_type_8h.html#ad9971b6ef33e02ba2c75d19c1d2518a1">ValueType</a>&#160;</td>
+          <td class="paramname"><em>type</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Functions to help determine the type of <a class="el" href="class_value.html" title="Basical value representation. ">Value</a> </p>
+
+</div>
+</div>
+<a class="anchor" id="a55c47de6a3528b94971a3fc80c2b2c03"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool IsNumber </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="_value_type_8h.html#ad9971b6ef33e02ba2c75d19c1d2518a1">ValueType</a>&#160;</td>
+          <td class="paramname"><em>type</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Functions to help determine the type of <a class="el" href="class_value.html" title="Basical value representation. ">Value</a> </p>
+
+</div>
+</div>
+<a class="anchor" id="a1f8bfd25f7ef37bc8208e792e7a775df"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool IsString </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="_value_type_8h.html#ad9971b6ef33e02ba2c75d19c1d2518a1">ValueType</a>&#160;</td>
+          <td class="paramname"><em>type</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Functions to help determine the type of <a class="el" href="class_value.html" title="Basical value representation. ">Value</a> </p>
+
+</div>
+</div>
+<a class="anchor" id="a9a8798223e88a396e798b55a1823e64c"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool IsValid </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="_value_type_8h.html#ad9971b6ef33e02ba2c75d19c1d2518a1">ValueType</a>&#160;</td>
+          <td class="paramname"><em>type</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Functions to help determine the type of <a class="el" href="class_value.html" title="Basical value representation. ">Value</a> </p>
 
 </div>
 </div>

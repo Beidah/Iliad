@@ -105,6 +105,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ae576450fd0cbbe93dd00b7a1acfaae8b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_token.html">Token</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scanner.html#ae576450fd0cbbe93dd00b7a1acfaae8b">ScanToken</a> ()</td></tr>
 <tr class="memdesc:ae576450fd0cbbe93dd00b7a1acfaae8b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the next token.  <a href="#ae576450fd0cbbe93dd00b7a1acfaae8b">More...</a><br/></td></tr>
 <tr class="separator:ae576450fd0cbbe93dd00b7a1acfaae8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a376c965dd431a1fb9f0c834747cf1a82"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="struct_token.html">Token</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scanner.html#a376c965dd431a1fb9f0c834747cf1a82">ScanAllTokens</a> ()</td></tr>
+<tr class="memdesc:a376c965dd431a1fb9f0c834747cf1a82"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve all tokens.  <a href="#a376c965dd431a1fb9f0c834747cf1a82">More...</a><br/></td></tr>
+<tr class="separator:a376c965dd431a1fb9f0c834747cf1a82"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
@@ -584,6 +587,25 @@ std::stringstream&#160;</td><td class="memItemRight" valign="bottom"><a class="e
 
 <p>Check two characters ahead with consuming it. </p>
 <dl class="section return"><dt>Returns</dt><dd>The char two ahead of the <a class="el" href="class_scanner.html" title="A class to scan through the source code and tokenize it. ">Scanner</a> from the source code, without it being added into the current token. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a376c965dd431a1fb9f0c834747cf1a82"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; <a class="el" href="struct_token.html">Token</a> &gt; Scanner::ScanAllTokens </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Retrieve all tokens. </p>
+<p>Run throught the source until it reaches the End of File, and token the entire thing. </p>
+<dl class="section return"><dt>Returns</dt><dd>A list of every token in the source file. </dd></dl>
 
 </div>
 </div>

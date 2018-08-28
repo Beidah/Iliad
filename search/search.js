@@ -11,7 +11,7 @@ var indexSectionsWithContent =
   1: "cdpstv",
   2: "cdisv",
   3: "_abcdegilmnoprstuvw",
-  4: "hilmnptv",
+  4: "chilmnptv",
   5: "bp",
   6: "ioptv",
   7: "abcdefgilmnoprstvw",
