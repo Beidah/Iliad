@@ -172,19 +172,52 @@ TokenType Scanner::identifierType() {
 	const std::string token = m_CurrentToken.str();
 	
 	switch (token[0]) {
-	case 'c': return checkKeyword(token, "class", TokenType::Class);
+	case 'b': return checkKeyword(token, "bool", TokenType::DecBool);
+	case 'c': 
+		if (token.length() > 1) {
+			switch (token[1]) {
+			case 'h': return checkKeyword(token, "char", TokenType::DecChar);
+			case 'l': return checkKeyword(token, "class", TokenType::Class);
+			}
+		}
+		break;
+	case 'd': return checkKeyword(token, "double", TokenType::DecDouble);
 	case 'e': return checkKeyword(token, "else", TokenType::Else);
 	case 'f':
 		if (token.length() > 1) {
 			switch (token[1]) {
 			case 'a': return checkKeyword(token, "false", TokenType::False);
+			case 'l': return checkKeyword(token, "float", TokenType::DecFloat);
 			case 'o': return checkKeyword(token, "for", TokenType::For);
 			}
 		}
 		break;
-	case 'i': return checkKeyword(token, "if", TokenType::If);
+	case 'i': 
+		if (token.length() > 1) {
+			switch (token[1]) {
+			case 'f': return checkKeyword(token, "if", TokenType::If);
+			case 'n':
+				if (token.length() == 3) return checkKeyword(token, "int", TokenType::DecInt32);
+				else if (token.length() == 4) return checkKeyword(token, "int8", TokenType::DecInt8);
+				else if (token.length() == 5) {
+					switch (token[3]) {
+					case '1': return checkKeyword(token, "int16", TokenType::DecInt16);
+					case '3': return checkKeyword(token, "int32", TokenType::DecInt32);
+					case '6': return checkKeyword(token, "int64", TokenType::DecInt64);
+					}
+				}
+			}
+		}
+		break;
 	case 'r': return checkKeyword(token, "return", TokenType::Return);
-	case 's': return checkKeyword(token, "super", TokenType::Super);
+	case 's':
+		if (token.length() > 1) {
+			switch (token[1]) {
+			case 't': return checkKeyword(token, "string", TokenType::DecString);
+			case 'u': return checkKeyword(token, "super", TokenType::Super);
+			}
+		}
+		break;
 	case 't':
 		if (token.length() > 1) {
 			switch (token[1]) {

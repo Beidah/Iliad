@@ -3,9 +3,11 @@
 #pragma once
 
 #include <memory>
+#include <unordered_map>
 
 #include "Chunk.h"
 #include "Value.h"
+#include "Compiler.h"
 
 //! The maximum number of Value the VM can hold in its statck.
 #define STACK_MAX 256
@@ -33,6 +35,8 @@ private:
 	const byte* m_IP; //!< Instruction Pointer. Pointer to current instruction the VM is running from the Chunk.
 	std::vector<Value> m_Stack; //!< A statck of Values.
 	size_t m_StackTop = 0; //!< A pointer to where in m_Stack the next Value will be written to.
+
+	std::unordered_map<std::string, Value> m_Variables; //!< A map of all the variables, indexed by string of the variable name.
 
 public:
 	//! Default compiler
@@ -80,6 +84,9 @@ private:
 
 	//! Returns the byte at m_IP and increments the pointer.
 	byte ReadByte() { return *m_IP++; }
+
+	//! Returns the constant from the index provided by the next byte
+	Value ReadConstant() { return m_Chunk->m_Constants[ReadByte()]; }
 
 	//! Prints a provided error message to stderr. Supports string formating.
 	void runtimeError(const char* format, ...);

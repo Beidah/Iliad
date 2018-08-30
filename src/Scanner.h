@@ -9,29 +9,29 @@
 //! An enumeration of all the different types of token to be scanned from the source code
 enum class TokenType {
 	// Single-character tokens
-	LeftParen, //!< {
-	RightParen, //!< }
-	LeftBrace,  //!< [
-	RightBrace,//!< ]
-	Comma, //!< ,
-	Dot, //!< \.
-	Minus, //!< \-
-	Plus,//!< \+
-	Semicolon, //!< ;
-	Slash, //!< /
+	LeftParen, //!< "("
+	RightParen, //!< ")"
+	LeftBrace,  //!< "["
+	RightBrace,//!< "]"
+	Comma, //!< ","
+	Dot, //!< "."
+	Minus, //!< "-"
+	Plus,//!< "+"
+	Semicolon, //!< ";"
+	Slash, //!< "/"
 	Star, //!< "*"
 
 	// Comparison operators
-	Bang, //!< !
-	BangEqual, //!< !=
-	Equal, //!< =
-	EqualEqual, //!< =
-	Greater, //!< >
-	GreaterEqual, //!< >=
-	Less, //!< <
-	LessEqual, //!< <=
-	And, //!< &&
-	Or, //!< ||
+	Bang, //!< "!"
+	BangEqual, //!< "!="
+	Equal, //!< "="
+	EqualEqual, //!< "=="
+	Greater, //!< ">"
+	GreaterEqual, //!< ">="
+	Less, //!< "<"
+	LessEqual, //!< "<="
+	And, //!< "&&"
+	Or, //!< "||"
 
 	// Literals
 	Identifier, //!< A set of alphanumerical characters with underscore representing a variable, class, or function name
@@ -39,6 +39,15 @@ enum class TokenType {
 	String, //!< A string of characters enclosed with double quotemarks " "
 	Integer, //!< A whole number
 	Float, //!< A decimal number
+
+	// Type keywords
+	DecInt8, DecInt16,
+	DecInt32, DecInt64,
+	DecFloat, DecDouble,
+	DecChar, DecString,
+	DecBool,
+	Var, //!< "var"
+
 
 	// Keywords
 	Class, //!< Instatiates a class
@@ -50,7 +59,6 @@ enum class TokenType {
 	Super, //!< super
 	This, //!< this
 	True, //!< true
-	Var, //!< var
 	While, //!< while
 
 	Error, //!< A Token representing a compile-time error.
