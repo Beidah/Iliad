@@ -110,25 +110,32 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:a2a3d5932884568d26f5f142d59dd80e6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2a3d5932884568d26f5f142d59dd80e6"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_compiler.html#a2a3d5932884568d26f5f142d59dd80e6">Compiler</a> ()=default</td></tr>
+<tr class="memdesc:a2a3d5932884568d26f5f142d59dd80e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor. <br/></td></tr>
+<tr class="separator:a2a3d5932884568d26f5f142d59dd80e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a24ae1a22edd586902e4001737afd8b7e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_compiler.html#a24ae1a22edd586902e4001737afd8b7e">Compile</a> (const std::string &amp;source, std::shared_ptr&lt; <a class="el" href="class_chunk.html">Chunk</a> &gt; chunk)</td></tr>
 <tr class="memdesc:a24ae1a22edd586902e4001737afd8b7e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compiles text into bytecode.  <a href="#a24ae1a22edd586902e4001737afd8b7e">More...</a><br/></td></tr>
 <tr class="separator:a24ae1a22edd586902e4001737afd8b7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">Token Getters</div></td></tr>
 <tr class="memitem:a162182e77e24a0eef213e3d0095c0fec"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a162182e77e24a0eef213e3d0095c0fec"></a>
-const <a class="el" href="struct_token.html">Token</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>CurrentToken</b> () const </td></tr>
+const <a class="el" href="struct_token.html">Token</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_compiler.html#a162182e77e24a0eef213e3d0095c0fec">CurrentToken</a> () const </td></tr>
+<tr class="memdesc:a162182e77e24a0eef213e3d0095c0fec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Current <a class="el" href="struct_token.html" title="A struct representing a token giving by the compiler. ">Token</a>. <br/></td></tr>
 <tr class="separator:a162182e77e24a0eef213e3d0095c0fec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1913bff260de58f0f0c94329e5e38d50"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1913bff260de58f0f0c94329e5e38d50"></a>
-const <a class="el" href="struct_token.html">Token</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>PreviousToken</b> () const </td></tr>
+const <a class="el" href="struct_token.html">Token</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_compiler.html#a1913bff260de58f0f0c94329e5e38d50">PreviousToken</a> () const </td></tr>
+<tr class="memdesc:a1913bff260de58f0f0c94329e5e38d50"><td class="mdescLeft">&#160;</td><td class="mdescRight">Previous <a class="el" href="struct_token.html" title="A struct representing a token giving by the compiler. ">Token</a>. <br/></td></tr>
 <tr class="separator:a1913bff260de58f0f0c94329e5e38d50"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a11b91931ef6630816fd4ed73e676c4bc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a11b91931ef6630816fd4ed73e676c4bc"></a>
-const <a class="el" href="struct_token.html">Token</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>TokenAt</b> (size_t distance) const </td></tr>
+<tr class="memitem:a11b91931ef6630816fd4ed73e676c4bc"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="struct_token.html">Token</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_compiler.html#a11b91931ef6630816fd4ed73e676c4bc">TokenAt</a> (size_t distance) const </td></tr>
+<tr class="memdesc:a11b91931ef6630816fd4ed73e676c4bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets token from specified location.  <a href="#a11b91931ef6630816fd4ed73e676c4bc">More...</a><br/></td></tr>
 <tr class="separator:a11b91931ef6630816fd4ed73e676c4bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-types"></a>
 Private Types</h2></td></tr>
-<tr class="memitem:acb17940753fee3bd5676d9d135293635"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acb17940753fee3bd5676d9d135293635"></a>
-typedef void(Compiler::*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_compiler.html#acb17940753fee3bd5676d9d135293635">ParseFun</a> )()</td></tr>
-<tr class="memdesc:acb17940753fee3bd5676d9d135293635"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function pointer for Parsing functions, which are used for <a class="el" href="struct_compiler_1_1_parse_rule.html" title="Stores functions on how to parse different tokens, as well as the precedence in parsing. ">ParseRule</a>. <br/></td></tr>
-<tr class="separator:acb17940753fee3bd5676d9d135293635"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d6b4fc8fbab0a189c7776b76fd5ba0a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7d6b4fc8fbab0a189c7776b76fd5ba0a"></a>
+typedef void(Compiler::*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_compiler.html#a7d6b4fc8fbab0a189c7776b76fd5ba0a">ParseFun</a> )(bool canAssign)</td></tr>
+<tr class="memdesc:a7d6b4fc8fbab0a189c7776b76fd5ba0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function pointer for Parsing functions, which are used for <a class="el" href="struct_compiler_1_1_parse_rule.html" title="Stores functions on how to parse different tokens, as well as the precedence in parsing. ">ParseRule</a>. <br/></td></tr>
+<tr class="separator:a7d6b4fc8fbab0a189c7776b76fd5ba0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
@@ -142,56 +149,82 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="memitem:af5162b33664ca453c615dd9cef8938ea"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_compiler.html#af5162b33664ca453c615dd9cef8938ea">parsePrecedence</a> (<a class="el" href="_compiler_8h.html#a916d5c37341c55c25b123d8c78439562">ParsePrecedence</a> precedence)</td></tr>
 <tr class="memdesc:af5162b33664ca453c615dd9cef8938ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the next token and parses the rules for it.  <a href="#af5162b33664ca453c615dd9cef8938ea">More...</a><br/></td></tr>
 <tr class="separator:af5162b33664ca453c615dd9cef8938ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr><td colspan="2"><div class="groupHeader"></div></td></tr>
-<tr class="memitem:a390358e6eaafd9e3c916307da6f8e46d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_compiler.html#a390358e6eaafd9e3c916307da6f8e46d">advance</a> ()</td></tr>
-<tr class="memdesc:a390358e6eaafd9e3c916307da6f8e46d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the next token from the scanner to parse.  <a href="#a390358e6eaafd9e3c916307da6f8e46d">More...</a><br/></td></tr>
+<tr><td colspan="2"><div class="groupHeader">Advance</div></td></tr>
+<tr><td colspan="2"><div class="groupText"><p>Functions used for advancing the parser. </p>
+</div></td></tr>
+<tr class="memitem:a390358e6eaafd9e3c916307da6f8e46d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a390358e6eaafd9e3c916307da6f8e46d"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_compiler.html#a390358e6eaafd9e3c916307da6f8e46d">advance</a> ()</td></tr>
+<tr class="memdesc:a390358e6eaafd9e3c916307da6f8e46d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the next token from the scanner to parse. <br/></td></tr>
 <tr class="separator:a390358e6eaafd9e3c916307da6f8e46d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a29e8b2ba1be26ae94395865c19f2fdee"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_compiler.html#a29e8b2ba1be26ae94395865c19f2fdee">consume</a> (<a class="el" href="_scanner_8h.html#aa520fbf142ba1e7e659590c07da31921">TokenType</a> expectedToken, const char *message)</td></tr>
-<tr class="memdesc:a29e8b2ba1be26ae94395865c19f2fdee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Takes an expected token and throws an error if it isn't found.  <a href="#a29e8b2ba1be26ae94395865c19f2fdee">More...</a><br/></td></tr>
-<tr class="separator:a29e8b2ba1be26ae94395865c19f2fdee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a61071aa56f5416457e7402253c3fb763"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_compiler.html#a61071aa56f5416457e7402253c3fb763">match</a> (<a class="el" href="_scanner_8h.html#aa520fbf142ba1e7e659590c07da31921">TokenType</a> expectedToken)</td></tr>
+<tr class="memdesc:a61071aa56f5416457e7402253c3fb763"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the next <a class="el" href="struct_token.html" title="A struct representing a token giving by the compiler. ">Token</a> is one that is expected.  <a href="#a61071aa56f5416457e7402253c3fb763">More...</a><br/></td></tr>
+<tr class="separator:a61071aa56f5416457e7402253c3fb763"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaab9c55cb1468d7556522e136386bfea"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_compiler.html#aaab9c55cb1468d7556522e136386bfea">consume</a> (<a class="el" href="_scanner_8h.html#aa520fbf142ba1e7e659590c07da31921">TokenType</a> expectedToken, const std::string &amp;message)</td></tr>
+<tr class="memdesc:aaab9c55cb1468d7556522e136386bfea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Takes an expected token and throws an error if it isn't found.  <a href="#aaab9c55cb1468d7556522e136386bfea">More...</a><br/></td></tr>
+<tr class="separator:aaab9c55cb1468d7556522e136386bfea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">ParseFun</div></td></tr>
 <tr><td colspan="2"><div class="groupText"><p>A set of functions to be given to <a class="el" href="struct_compiler_1_1_parse_rule.html" title="Stores functions on how to parse different tokens, as well as the precedence in parsing. ">ParseRule</a> as its ParseFun members. </p>
 </div></td></tr>
-<tr class="memitem:af3997786e54f41aadbf60499aacfe5bf"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af3997786e54f41aadbf60499aacfe5bf"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_compiler.html#af3997786e54f41aadbf60499aacfe5bf">unary</a> ()</td></tr>
-<tr class="memdesc:af3997786e54f41aadbf60499aacfe5bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function for parsing unary operators. <br/></td></tr>
-<tr class="separator:af3997786e54f41aadbf60499aacfe5bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a002356854483346c034da5bafefb48d1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a002356854483346c034da5bafefb48d1"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_compiler.html#a002356854483346c034da5bafefb48d1">binary</a> ()</td></tr>
-<tr class="memdesc:a002356854483346c034da5bafefb48d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function for parsing binary operators. <br/></td></tr>
-<tr class="separator:a002356854483346c034da5bafefb48d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a74dad7480281bdc9070b76bad1bf3767"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a74dad7480281bdc9070b76bad1bf3767"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_compiler.html#a74dad7480281bdc9070b76bad1bf3767">grouping</a> ()</td></tr>
-<tr class="memdesc:a74dad7480281bdc9070b76bad1bf3767"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function for parsing parentheses. <br/></td></tr>
-<tr class="separator:a74dad7480281bdc9070b76bad1bf3767"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac0abf28108ea505cc411e88d0f79c18"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aac0abf28108ea505cc411e88d0f79c18"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_compiler.html#aac0abf28108ea505cc411e88d0f79c18">unary</a> (bool canAssign)</td></tr>
+<tr class="memdesc:aac0abf28108ea505cc411e88d0f79c18"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function for parsing unary operators. <br/></td></tr>
+<tr class="separator:aac0abf28108ea505cc411e88d0f79c18"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a307bdd59421ff16b866b0b3a4a088dcc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a307bdd59421ff16b866b0b3a4a088dcc"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_compiler.html#a307bdd59421ff16b866b0b3a4a088dcc">binary</a> (bool canAssign)</td></tr>
+<tr class="memdesc:a307bdd59421ff16b866b0b3a4a088dcc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function for parsing binary operators. <br/></td></tr>
+<tr class="separator:a307bdd59421ff16b866b0b3a4a088dcc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a79d6c364c729ced64bfc54c28566804b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a79d6c364c729ced64bfc54c28566804b"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_compiler.html#a79d6c364c729ced64bfc54c28566804b">grouping</a> (bool canAssign)</td></tr>
+<tr class="memdesc:a79d6c364c729ced64bfc54c28566804b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function for parsing parentheses. <br/></td></tr>
+<tr class="separator:a79d6c364c729ced64bfc54c28566804b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e47b030fcbfd6617f5680e32d98f572"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9e47b030fcbfd6617f5680e32d98f572"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_compiler.html#a9e47b030fcbfd6617f5680e32d98f572">character</a> (bool canAssign)</td></tr>
+<tr class="memdesc:a9e47b030fcbfd6617f5680e32d98f572"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function for parsing a character token. <br/></td></tr>
+<tr class="separator:a9e47b030fcbfd6617f5680e32d98f572"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ab8dc1905a852e87d7b4a124a3a18e8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8ab8dc1905a852e87d7b4a124a3a18e8"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_compiler.html#a8ab8dc1905a852e87d7b4a124a3a18e8">integer</a> (bool canAssign)</td></tr>
+<tr class="memdesc:a8ab8dc1905a852e87d7b4a124a3a18e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function for parsing integers. <br/></td></tr>
+<tr class="separator:a8ab8dc1905a852e87d7b4a124a3a18e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a03726a48996652f2b8b1b93ef656b1dc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a03726a48996652f2b8b1b93ef656b1dc"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_compiler.html#a03726a48996652f2b8b1b93ef656b1dc">_float</a> (bool canAssign)</td></tr>
+<tr class="memdesc:a03726a48996652f2b8b1b93ef656b1dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function for parsing floats. <br/></td></tr>
+<tr class="separator:a03726a48996652f2b8b1b93ef656b1dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22741e75e41aefb4a10211f115c224ef"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a22741e75e41aefb4a10211f115c224ef"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_compiler.html#a22741e75e41aefb4a10211f115c224ef">string</a> (bool canAssign)</td></tr>
+<tr class="memdesc:a22741e75e41aefb4a10211f115c224ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function for parsing strings. <br/></td></tr>
+<tr class="separator:a22741e75e41aefb4a10211f115c224ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ad634ce4696c9862d72737012e0d8ea"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8ad634ce4696c9862d72737012e0d8ea"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_compiler.html#a8ad634ce4696c9862d72737012e0d8ea">literals</a> (bool canAssign)</td></tr>
+<tr class="memdesc:a8ad634ce4696c9862d72737012e0d8ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function for parsing literals. <br/></td></tr>
+<tr class="separator:a8ad634ce4696c9862d72737012e0d8ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b072a53e8f51da4b0eeb22f8f870cf0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9b072a53e8f51da4b0eeb22f8f870cf0"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_compiler.html#a9b072a53e8f51da4b0eeb22f8f870cf0">variable</a> (bool canAssign)</td></tr>
+<tr class="memdesc:a9b072a53e8f51da4b0eeb22f8f870cf0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function for parsing variables. <br/></td></tr>
+<tr class="separator:a9b072a53e8f51da4b0eeb22f8f870cf0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a275102ca6979eba5aeada82ef3c50b0a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a275102ca6979eba5aeada82ef3c50b0a"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_compiler.html#a275102ca6979eba5aeada82ef3c50b0a">emptyFunction</a> (bool canAssign)</td></tr>
+<tr class="memdesc:a275102ca6979eba5aeada82ef3c50b0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">An empty function, meant for parse rules with nothing to parse. <br/></td></tr>
+<tr class="separator:a275102ca6979eba5aeada82ef3c50b0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">Statements and Expressions.</div></td></tr>
 <tr class="memitem:a23ce9691f436cf7d6bbb49d3f24dd4b3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a23ce9691f436cf7d6bbb49d3f24dd4b3"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_compiler.html#a23ce9691f436cf7d6bbb49d3f24dd4b3">expression</a> ()</td></tr>
 <tr class="memdesc:a23ce9691f436cf7d6bbb49d3f24dd4b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function for parsing expressions. <br/></td></tr>
 <tr class="separator:a23ce9691f436cf7d6bbb49d3f24dd4b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a75d2b170149344279ec20de589c022af"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a75d2b170149344279ec20de589c022af"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_compiler.html#a75d2b170149344279ec20de589c022af">character</a> ()</td></tr>
-<tr class="memdesc:a75d2b170149344279ec20de589c022af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function for parsing a character token. <br/></td></tr>
-<tr class="separator:a75d2b170149344279ec20de589c022af"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abee097035a577ddf2ce1742c9d63b3cd"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abee097035a577ddf2ce1742c9d63b3cd"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_compiler.html#abee097035a577ddf2ce1742c9d63b3cd">integer</a> ()</td></tr>
-<tr class="memdesc:abee097035a577ddf2ce1742c9d63b3cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function for parsing integers. <br/></td></tr>
-<tr class="separator:abee097035a577ddf2ce1742c9d63b3cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9d0a937fb83a72a44491a04de724930a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9d0a937fb83a72a44491a04de724930a"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_compiler.html#a9d0a937fb83a72a44491a04de724930a">_float</a> ()</td></tr>
-<tr class="memdesc:a9d0a937fb83a72a44491a04de724930a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function for parsing floats. <br/></td></tr>
-<tr class="separator:a9d0a937fb83a72a44491a04de724930a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa36203a61cb3a470f39d14e3d247a27f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa36203a61cb3a470f39d14e3d247a27f"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_compiler.html#aa36203a61cb3a470f39d14e3d247a27f">string</a> ()</td></tr>
-<tr class="memdesc:aa36203a61cb3a470f39d14e3d247a27f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function for parsing strings. <br/></td></tr>
-<tr class="separator:aa36203a61cb3a470f39d14e3d247a27f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a13cc3af3dda47ff869956c95fd6ae330"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a13cc3af3dda47ff869956c95fd6ae330"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_compiler.html#a13cc3af3dda47ff869956c95fd6ae330">literals</a> ()</td></tr>
-<tr class="memdesc:a13cc3af3dda47ff869956c95fd6ae330"><td class="mdescLeft">&#160;</td><td class="mdescRight">function for parsing literals <br/></td></tr>
-<tr class="separator:a13cc3af3dda47ff869956c95fd6ae330"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afa19242e5e1fb0c2f14b943fd55c63c0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afa19242e5e1fb0c2f14b943fd55c63c0"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_compiler.html#afa19242e5e1fb0c2f14b943fd55c63c0">emptyFunction</a> ()</td></tr>
-<tr class="memdesc:afa19242e5e1fb0c2f14b943fd55c63c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">An empty function, meant for parse rules with nothing to parse. <br/></td></tr>
-<tr class="separator:afa19242e5e1fb0c2f14b943fd55c63c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af6f6b8f28013ed3d8468638355a1f8eb"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af6f6b8f28013ed3d8468638355a1f8eb"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_compiler.html#af6f6b8f28013ed3d8468638355a1f8eb">declaration</a> ()</td></tr>
+<tr class="memdesc:af6f6b8f28013ed3d8468638355a1f8eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function for declarations. <br/></td></tr>
+<tr class="separator:af6f6b8f28013ed3d8468638355a1f8eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8f854a8c1b82d0d255e1b716725d98f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac8f854a8c1b82d0d255e1b716725d98f"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_compiler.html#ac8f854a8c1b82d0d255e1b716725d98f">varDeclaration</a> ()</td></tr>
+<tr class="memdesc:ac8f854a8c1b82d0d255e1b716725d98f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function for variable declaration. <br/></td></tr>
+<tr class="separator:ac8f854a8c1b82d0d255e1b716725d98f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a920d48799cdd2a1eac69db79af625851"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_compiler.html#a920d48799cdd2a1eac69db79af625851">AssignVar</a> (<a class="el" href="_value_type_8h.html#ad9971b6ef33e02ba2c75d19c1d2518a1">ValueType</a> varType, <a class="el" href="struct_token.html">Token</a> &amp;name)</td></tr>
+<tr class="memdesc:a920d48799cdd2a1eac69db79af625851"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to assign a variable.  <a href="#a920d48799cdd2a1eac69db79af625851">More...</a><br/></td></tr>
+<tr class="separator:a920d48799cdd2a1eac69db79af625851"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a59156fd2978d2185299575c90420e63c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a59156fd2978d2185299575c90420e63c"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_compiler.html#a59156fd2978d2185299575c90420e63c">statement</a> ()</td></tr>
+<tr class="memdesc:a59156fd2978d2185299575c90420e63c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function for parsing statements. <br/></td></tr>
+<tr class="separator:a59156fd2978d2185299575c90420e63c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">Writing</div></td></tr>
 <tr><td colspan="2"><div class="groupText"><p>A set of functions to write data to the current <a class="el" href="class_chunk.html" title="A chunk of byte code. ">Chunk</a>. </p>
 </div></td></tr>
@@ -246,6 +279,11 @@ std::unique_ptr&lt; <a class="el" href="class_scanner.html">Scanner</a> &gt;&#16
 std::shared_ptr&lt; <a class="el" href="class_chunk.html">Chunk</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_compiler.html#a1f46be8a320414d97aa6c132ce0cbbfa">m_CompilingChunk</a></td></tr>
 <tr class="memdesc:a1f46be8a320414d97aa6c132ce0cbbfa"><td class="mdescLeft">&#160;</td><td class="mdescRight">A <a class="el" href="class_chunk.html" title="A chunk of byte code. ">Chunk</a> shared with by the <a class="el" href="class_v_m.html" title="A small virtual machine to run generated bytecode. ">VM</a> that is currently being written to. <br/></td></tr>
 <tr class="separator:a1f46be8a320414d97aa6c132ce0cbbfa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af6feb61eb4d53888346f9f70762ac651"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af6feb61eb4d53888346f9f70762ac651"></a>
+std::unordered_map<br class="typebreak"/>
+&lt; std::string, <a class="el" href="_value_type_8h.html#ad9971b6ef33e02ba2c75d19c1d2518a1">ValueType</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_compiler.html#af6feb61eb4d53888346f9f70762ac651">m_Variables</a></td></tr>
+<tr class="memdesc:af6feb61eb4d53888346f9f70762ac651"><td class="mdescLeft">&#160;</td><td class="mdescRight">A hash map containing the <a class="el" href="class_value.html" title="Basical value representation. ">Value</a> and their ValueType for type-checking. <br/></td></tr>
+<tr class="separator:af6feb61eb4d53888346f9f70762ac651"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-static-attribs"></a>
 Static Private Attributes</h2></td></tr>
@@ -260,7 +298,7 @@ static const std::array<br class="typebreak"/>
 <div class="textblock"><p>Converts text to byte code. </p>
 <p>The compiler is takes the source code and hands it off to the <a class="el" href="class_scanner.html" title="A class to scan through the source code and tokenize it. ">Scanner</a> to be tokenized. As the <a class="el" href="class_scanner.html" title="A class to scan through the source code and tokenize it. ">Scanner</a> does this, the compiler takes the tokens and makes sure they occur in a grammatical sequence that can be understood by the <a class="el" href="class_v_m.html" title="A small virtual machine to run generated bytecode. ">VM</a>. It then writes a bytecode representation of the source code to a <a class="el" href="class_chunk.html" title="A chunk of byte code. ">Chunk</a> provided by the <a class="el" href="class_v_m.html" title="A small virtual machine to run generated bytecode. ">VM</a>. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a390358e6eaafd9e3c916307da6f8e46d"></a>
+<a class="anchor" id="a920d48799cdd2a1eac69db79af625851"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -268,10 +306,21 @@ static const std::array<br class="typebreak"/>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void Compiler::advance </td>
+          <td class="memname">void Compiler::AssignVar </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype"><a class="el" href="_value_type_8h.html#ad9971b6ef33e02ba2c75d19c1d2518a1">ValueType</a>&#160;</td>
+          <td class="paramname"><em>varType</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype"><a class="el" href="struct_token.html">Token</a> &amp;&#160;</td>
+          <td class="paramname"><em>name</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -281,8 +330,8 @@ static const std::array<br class="typebreak"/>
 </table>
 </div><div class="memdoc">
 
-<p>Gets the next token from the scanner to parse. </p>
-<p>Functions used for advancing the parser. </p>
+<p>Function to assign a variable. </p>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000001">Todo:</a></b></dt><dd><a class="el" href="class_compiler.html" title="Converts text to byte code. ">Compiler</a> warning. </dd></dl>
 
 </div>
 </div>
@@ -322,7 +371,7 @@ static const std::array<br class="typebreak"/>
 
 </div>
 </div>
-<a class="anchor" id="a29e8b2ba1be26ae94395865c19f2fdee"></a>
+<a class="anchor" id="aaab9c55cb1468d7556522e136386bfea"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -338,7 +387,7 @@ static const std::array<br class="typebreak"/>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const char *&#160;</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>message</em>&#160;</td>
         </tr>
         <tr>
@@ -630,6 +679,40 @@ static const std::array<br class="typebreak"/>
 
 </div>
 </div>
+<a class="anchor" id="a61071aa56f5416457e7402253c3fb763"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Compiler::match </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="_scanner_8h.html#aa520fbf142ba1e7e659590c07da31921">TokenType</a>&#160;</td>
+          <td class="paramname"><em>expectedToken</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Check if the next <a class="el" href="struct_token.html" title="A struct representing a token giving by the compiler. ">Token</a> is one that is expected. </p>
+<p>Checks one <a class="el" href="struct_token.html" title="A struct representing a token giving by the compiler. ">Token</a> ahead of the current one, and consumes it if it is the predicted <a class="el" href="struct_token.html" title="A struct representing a token giving by the compiler. ">Token</a>. If the <a class="el" href="struct_token.html" title="A struct representing a token giving by the compiler. ">Token</a> is not the predicted one, the scanner goes back to it's original place. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">expectedToken</td><td>The <a class="el" href="struct_token.html" title="A struct representing a token giving by the compiler. ">Token</a> that is predicted to come next in the sequence. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns true if the next <a class="el" href="struct_token.html" title="A struct representing a token giving by the compiler. ">Token</a> in the source is expected, else false </dd></dl>
+
+</div>
+</div>
 <a class="anchor" id="af5162b33664ca453c615dd9cef8938ea"></a>
 <div class="memitem">
 <div class="memproto">
@@ -659,6 +742,40 @@ static const std::array<br class="typebreak"/>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a class="anchor" id="a11b91931ef6630816fd4ed73e676c4bc"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="struct_token.html">Token</a>&amp; Compiler::TokenAt </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>distance</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets token from specified location. </p>
+<p>Retrieves the token a set distance back from current one being parsed. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">distance</td><td>How many tokens before the current one. 0 = current token, 1 = previous token. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="struct_token.html" title="A struct representing a token giving by the compiler. ">Token</a> </dd></dl>
 
 </div>
 </div>

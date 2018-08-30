@@ -8,7 +8,7 @@ var searchData=
   ['operator_2f',['operator/',['../class_value.html#a8dd974618174218de9d03e3cbc680a4e',1,'Value']]],
   ['operator_3c',['operator&lt;',['../class_value.html#a13a2aa2ce17f14463c55fc891fc6466c',1,'Value']]],
   ['operator_3c_3d',['operator&lt;=',['../class_value.html#a1847a4009427f6cfa8ed0422dff57f16',1,'Value']]],
-  ['operator_3d',['operator=',['../class_value.html#a0f9a5ddb48b1996b4dd7433eac17425d',1,'Value']]],
+  ['operator_3d',['operator=',['../class_value.html#a0f9a5ddb48b1996b4dd7433eac17425d',1,'Value::operator=(const Value &amp;value)'],['../class_value.html#a17e6efe58df2a2d1dd724274908b022f',1,'Value::operator=(T value)'],['../class_value.html#a9b823ac67ab72596c80e29d4e4ce2fd1',1,'Value::operator=(std::string value)']]],
   ['operator_3d_3d',['operator==',['../class_value.html#afaf812da2f99106a10153124c8149043',1,'Value']]],
   ['operator_3e',['operator&gt;',['../class_value.html#acbcea878354b262f0e76fae77581951d',1,'Value']]],
   ['operator_3e_3d',['operator&gt;=',['../class_value.html#ae49ca87ccdbe5e5b14343d9914164a11',1,'Value']]]

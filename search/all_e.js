@@ -1,7 +1,7 @@
 var searchData=
 [
   ['panicmode',['panicMode',['../struct_compiler_1_1_parser.html#aa16626f4f3d02d7928ee4f1bb4134663',1,'Compiler::Parser']]],
-  ['parsefun',['ParseFun',['../class_compiler.html#acb17940753fee3bd5676d9d135293635',1,'Compiler']]],
+  ['parsefun',['ParseFun',['../class_compiler.html#a7d6b4fc8fbab0a189c7776b76fd5ba0a',1,'Compiler']]],
   ['parseprecedence',['parsePrecedence',['../class_compiler.html#af5162b33664ca453c615dd9cef8938ea',1,'Compiler::parsePrecedence()'],['../_compiler_8h.html#a916d5c37341c55c25b123d8c78439562',1,'ParsePrecedence():&#160;Compiler.h']]],
   ['parser',['Parser',['../struct_compiler_1_1_parser.html',1,'Compiler']]],
   ['parserule',['ParseRule',['../struct_compiler_1_1_parse_rule.html',1,'Compiler']]],
@@ -12,5 +12,6 @@ var searchData=
   ['pop',['pop',['../class_v_m.html#af5f97f93ca522dd02dbaba309fd1706c',1,'VM']]],
   ['precedence',['precedence',['../struct_compiler_1_1_parse_rule.html#a62b8e0e92b8fac409c6fdd730b84f7c3',1,'Compiler::ParseRule']]],
   ['prefixrule',['prefixRule',['../struct_compiler_1_1_parse_rule.html#a4ffdde9cb2c8f1174b962e631a797d05',1,'Compiler::ParseRule']]],
+  ['previoustoken',['PreviousToken',['../class_compiler.html#a1913bff260de58f0f0c94329e5e38d50',1,'Compiler']]],
   ['push',['push',['../class_v_m.html#a64db3acebce1eee7ef6fc31e0e21ce89',1,'VM']]]
 ];

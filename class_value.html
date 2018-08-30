@@ -160,6 +160,16 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hre
 <a class="el" href="class_value.html">Value</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_value.html#a0f9a5ddb48b1996b4dd7433eac17425d">operator=</a> (const <a class="el" href="class_value.html">Value</a> &amp;value)</td></tr>
 <tr class="memdesc:a0f9a5ddb48b1996b4dd7433eac17425d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assignment. <br/></td></tr>
 <tr class="separator:a0f9a5ddb48b1996b4dd7433eac17425d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a17e6efe58df2a2d1dd724274908b022f"><td class="memTemplParams" colspan="2"><a class="anchor" id="a17e6efe58df2a2d1dd724274908b022f"></a>
+template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a17e6efe58df2a2d1dd724274908b022f"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="class_value.html">Value</a> &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_value.html#a17e6efe58df2a2d1dd724274908b022f">operator=</a> (T value)</td></tr>
+<tr class="memdesc:a17e6efe58df2a2d1dd724274908b022f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assignment. <br/></td></tr>
+<tr class="separator:a17e6efe58df2a2d1dd724274908b022f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b823ac67ab72596c80e29d4e4ce2fd1"><td class="memTemplParams" colspan="2"><a class="anchor" id="a9b823ac67ab72596c80e29d4e4ce2fd1"></a>
+template&lt;&gt; </td></tr>
+<tr class="memitem:a9b823ac67ab72596c80e29d4e4ce2fd1"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="class_value.html">Value</a> &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_value.html#a9b823ac67ab72596c80e29d4e4ce2fd1">operator=</a> (std::string value)</td></tr>
+<tr class="memdesc:a9b823ac67ab72596c80e29d4e4ce2fd1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assignment. <br/></td></tr>
+<tr class="separator:a9b823ac67ab72596c80e29d4e4ce2fd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader"></div></td></tr>
 <tr class="memitem:afaf812da2f99106a10153124c8149043"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_value.html#afaf812da2f99106a10153124c8149043">operator==</a> (const <a class="el" href="class_value.html">Value</a> &amp;value) const </td></tr>
 <tr class="separator:afaf812da2f99106a10153124c8149043"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -199,6 +209,12 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>IsChar</b> () const <
 <tr class="memitem:a14f9bdf99b075a8084d974aaf5f9851b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a14f9bdf99b075a8084d974aaf5f9851b"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>IsString</b> () const </td></tr>
 <tr class="separator:a14f9bdf99b075a8084d974aaf5f9851b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a29861c8919423f71dc58edf6338ae717"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a29861c8919423f71dc58edf6338ae717"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>IsNull</b> () const </td></tr>
+<tr class="separator:a29861c8919423f71dc58edf6338ae717"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a98da9e1ff4a728f09cbe90b293028b08"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a98da9e1ff4a728f09cbe90b293028b08"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>IsInitilized</b> () const </td></tr>
+<tr class="separator:a98da9e1ff4a728f09cbe90b293028b08"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae26c3efee2c0382dc953fabe78253232"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae26c3efee2c0382dc953fabe78253232"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>IsValid</b> () const </td></tr>
 <tr class="separator:ae26c3efee2c0382dc953fabe78253232"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -209,14 +225,18 @@ Private Attributes</h2></td></tr>
 const <a class="el" href="_value_type_8h.html#ad9971b6ef33e02ba2c75d19c1d2518a1">ValueType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_value.html#adb747e11b9bb6f9ecd92e22a14511f4b">m_Type</a></td></tr>
 <tr class="memdesc:adb747e11b9bb6f9ecd92e22a14511f4b"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type the value represents. <br/></td></tr>
 <tr class="separator:adb747e11b9bb6f9ecd92e22a14511f4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a358098a9acb4de0c22c15edaa19b85f4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a358098a9acb4de0c22c15edaa19b85f4"></a>
-const size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_value.html#a358098a9acb4de0c22c15edaa19b85f4">m_Size</a></td></tr>
-<tr class="memdesc:a358098a9acb4de0c22c15edaa19b85f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Size of the data in bytes. <br/></td></tr>
-<tr class="separator:a358098a9acb4de0c22c15edaa19b85f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f387ecdcd699bf24d236e00c0d3d24b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8f387ecdcd699bf24d236e00c0d3d24b"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_value.html#a8f387ecdcd699bf24d236e00c0d3d24b">m_Size</a></td></tr>
+<tr class="memdesc:a8f387ecdcd699bf24d236e00c0d3d24b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Size of the data in bytes. <br/></td></tr>
+<tr class="separator:a8f387ecdcd699bf24d236e00c0d3d24b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4537e65179777b80a9ec162c3db7306b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4537e65179777b80a9ec162c3db7306b"></a>
 <a class="el" href="_value_type_8h.html#a0a7acfd9d76d7be794d78addc87236da">ByteArray</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_value.html#a4537e65179777b80a9ec162c3db7306b">m_Data</a></td></tr>
 <tr class="memdesc:a4537e65179777b80a9ec162c3db7306b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bytes of data. Stored in little endian. <br/></td></tr>
 <tr class="separator:a4537e65179777b80a9ec162c3db7306b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63704384325ee3cb6bee5927182cb3dc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a63704384325ee3cb6bee5927182cb3dc"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_value.html#a63704384325ee3cb6bee5927182cb3dc">m_Initialized</a></td></tr>
+<tr class="memdesc:a63704384325ee3cb6bee5927182cb3dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">If it has been given a value to begin with or not. <br/></td></tr>
+<tr class="separator:a63704384325ee3cb6bee5927182cb3dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="member-group"></a>
 Constructors</h2></td></tr>
@@ -224,7 +244,7 @@ Constructors</h2></td></tr>
 </td></tr>
 <tr class="memitem:abc2a5a2e6484fac66dae2539cc955667"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abc2a5a2e6484fac66dae2539cc955667"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_value.html#abc2a5a2e6484fac66dae2539cc955667">Value</a> ()</td></tr>
-<tr class="memdesc:abc2a5a2e6484fac66dae2539cc955667"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor, returns an "Invalid" value. <br/></td></tr>
+<tr class="memdesc:abc2a5a2e6484fac66dae2539cc955667"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor, returns an "Null" value. <br/></td></tr>
 <tr class="separator:abc2a5a2e6484fac66dae2539cc955667"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7c6bba92f9ebbdc9878e5eaeb15c9408"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7c6bba92f9ebbdc9878e5eaeb15c9408"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_value.html#a7c6bba92f9ebbdc9878e5eaeb15c9408">Value</a> (const <a class="el" href="class_value.html">Value</a> &amp;value)</td></tr>
@@ -234,13 +254,13 @@ Constructors</h2></td></tr>
 <tr class="memitem:a561b0217744a6f7744b8ee01528ce233"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_value.html#a561b0217744a6f7744b8ee01528ce233">Value</a> (T &amp;&amp;value)</td></tr>
 <tr class="memdesc:a561b0217744a6f7744b8ee01528ce233"><td class="mdescLeft">&#160;</td><td class="mdescRight">Template constructor, takes in a value and serializes it.  <a href="#a561b0217744a6f7744b8ee01528ce233">More...</a><br/></td></tr>
 <tr class="separator:a561b0217744a6f7744b8ee01528ce233"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a000b008549f5b3dd4b9cb630208d5a44"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a000b008549f5b3dd4b9cb630208d5a44"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_value.html#a000b008549f5b3dd4b9cb630208d5a44">Value</a> (<a class="el" href="_value_type_8h.html#ad9971b6ef33e02ba2c75d19c1d2518a1">ValueType</a> type)</td></tr>
+<tr class="memdesc:a000b008549f5b3dd4b9cb630208d5a44"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an "uninitilized" value of the given type. <br/></td></tr>
+<tr class="separator:a000b008549f5b3dd4b9cb630208d5a44"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0c0357e5fb3304c84e33276e976eddb7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_value.html#a0c0357e5fb3304c84e33276e976eddb7">Value</a> (<a class="el" href="_value_type_8h.html#a0a7acfd9d76d7be794d78addc87236da">ByteArray</a> bytes, <a class="el" href="_value_type_8h.html#ad9971b6ef33e02ba2c75d19c1d2518a1">ValueType</a> type)</td></tr>
 <tr class="memdesc:a0c0357e5fb3304c84e33276e976eddb7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main constructor.  <a href="#a0c0357e5fb3304c84e33276e976eddb7">More...</a><br/></td></tr>
 <tr class="separator:a0c0357e5fb3304c84e33276e976eddb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae9c4de6b805f19cb1e815303e16c3ea1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae9c4de6b805f19cb1e815303e16c3ea1"></a>
-static <a class="el" href="class_value.html">Value</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_value.html#ae9c4de6b805f19cb1e815303e16c3ea1">charValue</a> (char c)</td></tr>
-<tr class="memdesc:ae9c4de6b805f19cb1e815303e16c3ea1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates and returns a char <a class="el" href="class_value.html" title="Basical value representation. ">Value</a>. <br/></td></tr>
-<tr class="separator:ae9c4de6b805f19cb1e815303e16c3ea1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Basical value representation. </p>
@@ -371,7 +391,7 @@ template&lt;&gt; </div>
 </div><div class="memdoc">
 
 <p>Specialized AsValue for float values. </p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000002">Todo:</a></b></dt><dd>compiler warning about loss of percision </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000003">Todo:</a></b></dt><dd>compiler warning about loss of percision </dd></dl>
 
 </div>
 </div>
@@ -397,7 +417,7 @@ template&lt;&gt; </div>
 </table>
 </div><div class="memdoc">
 <p>Comparison </p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000003">Todo:</a></b></dt><dd>When available, replace with C++20 "spaceship" operator using partial_ordering for unorderable comparisons. </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000004">Todo:</a></b></dt><dd>When available, replace with C++20 "spaceship" operator using partial_ordering for unorderable comparisons. </dd></dl>
 
 </div>
 </div>
@@ -434,7 +454,7 @@ template&lt;&gt; </div>
       </table>
 </div><div class="memdoc">
 <p>Comparison </p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000003">Todo:</a></b></dt><dd>When available, replace with C++20 "spaceship" operator using partial_ordering for unorderable comparisons. </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000004">Todo:</a></b></dt><dd>When available, replace with C++20 "spaceship" operator using partial_ordering for unorderable comparisons. </dd></dl>
 
 </div>
 </div>
@@ -460,7 +480,7 @@ template&lt;&gt; </div>
 </table>
 </div><div class="memdoc">
 <p>Comparison </p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000003">Todo:</a></b></dt><dd>When available, replace with C++20 "spaceship" operator using partial_ordering for unorderable comparisons. </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000004">Todo:</a></b></dt><dd>When available, replace with C++20 "spaceship" operator using partial_ordering for unorderable comparisons. </dd></dl>
 
 </div>
 </div>
@@ -478,7 +498,7 @@ template&lt;&gt; </div>
       </table>
 </div><div class="memdoc">
 <p>Comparison </p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000003">Todo:</a></b></dt><dd>When available, replace with C++20 "spaceship" operator using partial_ordering for unorderable comparisons. </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000004">Todo:</a></b></dt><dd>When available, replace with C++20 "spaceship" operator using partial_ordering for unorderable comparisons. </dd></dl>
 
 </div>
 </div>
@@ -504,7 +524,7 @@ template&lt;&gt; </div>
 </table>
 </div><div class="memdoc">
 <p>Comparison </p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000003">Todo:</a></b></dt><dd>When available, replace with C++20 "spaceship" operator using partial_ordering for unorderable comparisons. </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000004">Todo:</a></b></dt><dd>When available, replace with C++20 "spaceship" operator using partial_ordering for unorderable comparisons. </dd></dl>
 
 </div>
 </div>
@@ -530,7 +550,7 @@ template&lt;&gt; </div>
 </table>
 </div><div class="memdoc">
 <p>Comparison </p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000003">Todo:</a></b></dt><dd>When available, replace with C++20 "spaceship" operator using partial_ordering for unorderable comparisons. </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000004">Todo:</a></b></dt><dd>When available, replace with C++20 "spaceship" operator using partial_ordering for unorderable comparisons. </dd></dl>
 
 </div>
 </div>

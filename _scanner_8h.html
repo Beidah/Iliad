@@ -143,20 +143,31 @@ Enumerations</h2></td></tr>
 <br/>
 &#160;&#160;<a class="el" href="_scanner_8h.html#aa520fbf142ba1e7e659590c07da31921aa0faef0851b4294c06f2b94bb1cb2044">TokenType::Integer</a>, 
 <a class="el" href="_scanner_8h.html#aa520fbf142ba1e7e659590c07da31921a22ae0e2b89e5e3d477f988cc36d3272b">TokenType::Float</a>, 
-<a class="el" href="_scanner_8h.html#aa520fbf142ba1e7e659590c07da31921a9bd81329febf6efe22788e03ddeaf0af">TokenType::Class</a>, 
-<a class="el" href="_scanner_8h.html#aa520fbf142ba1e7e659590c07da31921a6a0053231db40a4539b8f783a719a54a">TokenType::Else</a>, 
+<b>DecInt8</b>, 
+<b>DecInt16</b>, 
 <br/>
-&#160;&#160;<a class="el" href="_scanner_8h.html#aa520fbf142ba1e7e659590c07da31921af8320b26d30ab433c5a54546d21f414c">TokenType::False</a>, 
-<a class="el" href="_scanner_8h.html#aa520fbf142ba1e7e659590c07da31921a39e61d57e9209611edd4f884e9e47c11">TokenType::For</a>, 
-<a class="el" href="_scanner_8h.html#aa520fbf142ba1e7e659590c07da31921a786887572f6ef1c20f2d8177cb2f1639">TokenType::If</a>, 
-<a class="el" href="_scanner_8h.html#aa520fbf142ba1e7e659590c07da31921a988fd738de9c6d177440c5dcf69e73ce">TokenType::Return</a>, 
+&#160;&#160;<b>DecInt32</b>, 
+<b>DecInt64</b>, 
+<b>DecFloat</b>, 
+<b>DecDouble</b>, 
 <br/>
-&#160;&#160;<a class="el" href="_scanner_8h.html#aa520fbf142ba1e7e659590c07da31921a0ce3266d4eb71ad50f7a90aee6d21dcd">TokenType::Super</a>, 
-<a class="el" href="_scanner_8h.html#aa520fbf142ba1e7e659590c07da31921a77631ca4f0e08419b70726a447333ab6">TokenType::This</a>, 
-<a class="el" href="_scanner_8h.html#aa520fbf142ba1e7e659590c07da31921af827cf462f62848df37c5e1e94a4da74">TokenType::True</a>, 
+&#160;&#160;<b>DecChar</b>, 
+<b>DecString</b>, 
+<b>DecBool</b>, 
 <a class="el" href="_scanner_8h.html#aa520fbf142ba1e7e659590c07da31921a5a92344ee95acf10c31901b36418be77">TokenType::Var</a>, 
 <br/>
-&#160;&#160;<a class="el" href="_scanner_8h.html#aa520fbf142ba1e7e659590c07da31921a3cddbb8f43a4e074e2c2ce3e8622f43e">TokenType::While</a>, 
+&#160;&#160;<a class="el" href="_scanner_8h.html#aa520fbf142ba1e7e659590c07da31921a9bd81329febf6efe22788e03ddeaf0af">TokenType::Class</a>, 
+<a class="el" href="_scanner_8h.html#aa520fbf142ba1e7e659590c07da31921a6a0053231db40a4539b8f783a719a54a">TokenType::Else</a>, 
+<a class="el" href="_scanner_8h.html#aa520fbf142ba1e7e659590c07da31921af8320b26d30ab433c5a54546d21f414c">TokenType::False</a>, 
+<a class="el" href="_scanner_8h.html#aa520fbf142ba1e7e659590c07da31921a39e61d57e9209611edd4f884e9e47c11">TokenType::For</a>, 
+<br/>
+&#160;&#160;<a class="el" href="_scanner_8h.html#aa520fbf142ba1e7e659590c07da31921a786887572f6ef1c20f2d8177cb2f1639">TokenType::If</a>, 
+<a class="el" href="_scanner_8h.html#aa520fbf142ba1e7e659590c07da31921a988fd738de9c6d177440c5dcf69e73ce">TokenType::Return</a>, 
+<a class="el" href="_scanner_8h.html#aa520fbf142ba1e7e659590c07da31921a0ce3266d4eb71ad50f7a90aee6d21dcd">TokenType::Super</a>, 
+<a class="el" href="_scanner_8h.html#aa520fbf142ba1e7e659590c07da31921a77631ca4f0e08419b70726a447333ab6">TokenType::This</a>, 
+<br/>
+&#160;&#160;<a class="el" href="_scanner_8h.html#aa520fbf142ba1e7e659590c07da31921af827cf462f62848df37c5e1e94a4da74">TokenType::True</a>, 
+<a class="el" href="_scanner_8h.html#aa520fbf142ba1e7e659590c07da31921a3cddbb8f43a4e074e2c2ce3e8622f43e">TokenType::While</a>, 
 <a class="el" href="_scanner_8h.html#aa520fbf142ba1e7e659590c07da31921a902b0d55fddef6f8d651fe1035b7d4bd">TokenType::Error</a>, 
 <a class="el" href="_scanner_8h.html#aa520fbf142ba1e7e659590c07da31921aff6620b605642fc8a70795b0ff429afc">TokenType::EoF</a>
 <br/>
@@ -188,70 +199,67 @@ Enumerations</h2></td></tr>
 <p>An enumeration of all the different types of token to be scanned from the source code. </p>
 <table class="fieldtable">
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><em><a class="anchor" id="aa520fbf142ba1e7e659590c07da31921af02071a8b56c676adabcad98429fa14e"></a>LeftParen</em>&#160;</td><td class="fielddoc">
-<p>{ </p>
+<p>"(" </p>
 </td></tr>
 <tr><td class="fieldname"><em><a class="anchor" id="aa520fbf142ba1e7e659590c07da31921a2d7e137ea20e2c01ce105573d47ce525"></a>RightParen</em>&#160;</td><td class="fielddoc">
-<p>} </p>
+<p>")" </p>
 </td></tr>
 <tr><td class="fieldname"><em><a class="anchor" id="aa520fbf142ba1e7e659590c07da31921a9a590bb59f32c0c4689f171f92dfbe8f"></a>LeftBrace</em>&#160;</td><td class="fielddoc">
-<p>[ </p>
+<p>"[" </p>
 </td></tr>
 <tr><td class="fieldname"><em><a class="anchor" id="aa520fbf142ba1e7e659590c07da31921af6b8627fb24d257c2eb8509a4094803a"></a>RightBrace</em>&#160;</td><td class="fielddoc">
-<p>] </p>
+<p>"]" </p>
 </td></tr>
 <tr><td class="fieldname"><em><a class="anchor" id="aa520fbf142ba1e7e659590c07da31921a58be47db9455679e6a44df2eff9c9fa6"></a>Comma</em>&#160;</td><td class="fielddoc">
-<p>, </p>
+<p>"," </p>
 </td></tr>
 <tr><td class="fieldname"><em><a class="anchor" id="aa520fbf142ba1e7e659590c07da31921aaf6c6cf7a454b4ef4a850ac4d960a2cc"></a>Dot</em>&#160;</td><td class="fielddoc">
+<p>"." </p>
 </td></tr>
 <tr><td class="fieldname"><em><a class="anchor" id="aa520fbf142ba1e7e659590c07da31921a453fb623e752c5993f65bc410fd74fe5"></a>Minus</em>&#160;</td><td class="fielddoc">
-<ul>
-<li></li>
-</ul>
+<p>"-" </p>
 </td></tr>
 <tr><td class="fieldname"><em><a class="anchor" id="aa520fbf142ba1e7e659590c07da31921a32ba78fe43257d3e7f88e3935a8ea0d4"></a>Plus</em>&#160;</td><td class="fielddoc">
-<ul>
-<li></li>
-</ul>
+<p>"+" </p>
 </td></tr>
 <tr><td class="fieldname"><em><a class="anchor" id="aa520fbf142ba1e7e659590c07da31921a9806fa37a3ecd39bf637c203aa011ed0"></a>Semicolon</em>&#160;</td><td class="fielddoc">
-<p>; </p>
+<p>";" </p>
 </td></tr>
 <tr><td class="fieldname"><em><a class="anchor" id="aa520fbf142ba1e7e659590c07da31921a358cfe58715d680d9ab09f82e4010cbc"></a>Slash</em>&#160;</td><td class="fielddoc">
-<p>/ </p>
+<p>"/" </p>
 </td></tr>
 <tr><td class="fieldname"><em><a class="anchor" id="aa520fbf142ba1e7e659590c07da31921a26f93e6e68e28a698377e941cb59f29a"></a>Star</em>&#160;</td><td class="fielddoc">
 <p>"*" </p>
 </td></tr>
 <tr><td class="fieldname"><em><a class="anchor" id="aa520fbf142ba1e7e659590c07da31921a526e67744f0b90739ec17c191c62d24c"></a>Bang</em>&#160;</td><td class="fielddoc">
-<p>! </p>
+<p>"!" </p>
 </td></tr>
 <tr><td class="fieldname"><em><a class="anchor" id="aa520fbf142ba1e7e659590c07da31921a5278bcb93db8ac282d71486badfa20e5"></a>BangEqual</em>&#160;</td><td class="fielddoc">
-<p>!= </p>
+<p>"!=" </p>
 </td></tr>
 <tr><td class="fieldname"><em><a class="anchor" id="aa520fbf142ba1e7e659590c07da31921af5f286e73bda105e538310b3190f75c5"></a>Equal</em>&#160;</td><td class="fielddoc">
-<p>= </p>
+<p>"=" </p>
 </td></tr>
 <tr><td class="fieldname"><em><a class="anchor" id="aa520fbf142ba1e7e659590c07da31921a7ff62054fd04c01e17aff31f77f7929b"></a>EqualEqual</em>&#160;</td><td class="fielddoc">
-<p>= </p>
+<p>"==" </p>
 </td></tr>
 <tr><td class="fieldname"><em><a class="anchor" id="aa520fbf142ba1e7e659590c07da31921a8768a6821cd735aea4f5b0df88c1fc6a"></a>Greater</em>&#160;</td><td class="fielddoc">
-<p>&gt; </p>
+<p>"&gt;" </p>
 </td></tr>
 <tr><td class="fieldname"><em><a class="anchor" id="aa520fbf142ba1e7e659590c07da31921a758b05d899def79c9eb864ad4f96be1f"></a>GreaterEqual</em>&#160;</td><td class="fielddoc">
-<p>&gt;= </p>
+<p>"&gt;=" </p>
 </td></tr>
 <tr><td class="fieldname"><em><a class="anchor" id="aa520fbf142ba1e7e659590c07da31921a1cfdf0e8d0c87a228c1f40d9bee7888b"></a>Less</em>&#160;</td><td class="fielddoc">
-<p>&lt; </p>
+<p>"&lt;" </p>
 </td></tr>
 <tr><td class="fieldname"><em><a class="anchor" id="aa520fbf142ba1e7e659590c07da31921ad3e6fdac55bb7b0edd7834c968ba1f38"></a>LessEqual</em>&#160;</td><td class="fielddoc">
-<p>&lt;= </p>
+<p>"&lt;=" </p>
 </td></tr>
 <tr><td class="fieldname"><em><a class="anchor" id="aa520fbf142ba1e7e659590c07da31921ac33315685a0cba3ce53be378b3c7874b"></a>And</em>&#160;</td><td class="fielddoc">
-<p>&amp;&amp; </p>
+<p>"&amp;&amp;" </p>
 </td></tr>
 <tr><td class="fieldname"><em><a class="anchor" id="aa520fbf142ba1e7e659590c07da31921a3a2d5fe857d8f9541136a124c2edec6c"></a>Or</em>&#160;</td><td class="fielddoc">
-<p>|| </p>
+<p>"||" </p>
 </td></tr>
 <tr><td class="fieldname"><em><a class="anchor" id="aa520fbf142ba1e7e659590c07da31921a29ee5d1ebcc033234938a5234f1f2075"></a>Identifier</em>&#160;</td><td class="fielddoc">
 <p>A set of alphanumerical characters with underscore representing a variable, class, or function name. </p>
@@ -267,6 +275,9 @@ Enumerations</h2></td></tr>
 </td></tr>
 <tr><td class="fieldname"><em><a class="anchor" id="aa520fbf142ba1e7e659590c07da31921a22ae0e2b89e5e3d477f988cc36d3272b"></a>Float</em>&#160;</td><td class="fielddoc">
 <p>A decimal number. </p>
+</td></tr>
+<tr><td class="fieldname"><em><a class="anchor" id="aa520fbf142ba1e7e659590c07da31921a5a92344ee95acf10c31901b36418be77"></a>Var</em>&#160;</td><td class="fielddoc">
+<p>"var" </p>
 </td></tr>
 <tr><td class="fieldname"><em><a class="anchor" id="aa520fbf142ba1e7e659590c07da31921a9bd81329febf6efe22788e03ddeaf0af"></a>Class</em>&#160;</td><td class="fielddoc">
 <p>Instatiates a class. </p>
@@ -294,9 +305,6 @@ Enumerations</h2></td></tr>
 </td></tr>
 <tr><td class="fieldname"><em><a class="anchor" id="aa520fbf142ba1e7e659590c07da31921af827cf462f62848df37c5e1e94a4da74"></a>True</em>&#160;</td><td class="fielddoc">
 <p>true </p>
-</td></tr>
-<tr><td class="fieldname"><em><a class="anchor" id="aa520fbf142ba1e7e659590c07da31921a5a92344ee95acf10c31901b36418be77"></a>Var</em>&#160;</td><td class="fielddoc">
-<p>var </p>
 </td></tr>
 <tr><td class="fieldname"><em><a class="anchor" id="aa520fbf142ba1e7e659590c07da31921a3cddbb8f43a4e074e2c2ce3e8622f43e"></a>While</em>&#160;</td><td class="fielddoc">
 <p>while </p>

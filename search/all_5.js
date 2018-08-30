@@ -5,7 +5,7 @@ var searchData=
   ['emitbytes',['emitBytes',['../class_compiler.html#a815a75c9444d281252990947b2cd9792',1,'Compiler']]],
   ['emitconstant',['emitConstant',['../class_compiler.html#ad406972c3b8d1ad6f03141e71d09500a',1,'Compiler']]],
   ['emitreturn',['emitReturn',['../class_compiler.html#a4a49f4edafe9fc1fe1445fc2484a72c0',1,'Compiler']]],
-  ['emptyfunction',['emptyFunction',['../class_compiler.html#afa19242e5e1fb0c2f14b943fd55c63c0',1,'Compiler']]],
+  ['emptyfunction',['emptyFunction',['../class_compiler.html#a275102ca6979eba5aeada82ef3c50b0a',1,'Compiler']]],
   ['endcompiler',['endCompiler',['../class_compiler.html#a6bd8ecde77333864430dcadd1f0538ca',1,'Compiler']]],
   ['eof',['EoF',['../_scanner_8h.html#aa520fbf142ba1e7e659590c07da31921aff6620b605642fc8a70795b0ff429afc',1,'Scanner.h']]],
   ['equal',['Equal',['../_chunk_8h.html#a0519976c90f19cb4731613ac2def566eaf5f286e73bda105e538310b3190f75c5',1,'Equal():&#160;Chunk.h'],['../_scanner_8h.html#aa520fbf142ba1e7e659590c07da31921af5f286e73bda105e538310b3190f75c5',1,'Equal():&#160;Scanner.h']]],

@@ -7,6 +7,5 @@ var searchData=
   ['int64',['Int64',['../_value_type_8h.html#ad9971b6ef33e02ba2c75d19c1d2518a1afbde23b11d7e59af7828e81144c8b487',1,'ValueType.h']]],
   ['int8',['Int8',['../_value_type_8h.html#ad9971b6ef33e02ba2c75d19c1d2518a1a7d839b2c12bfd40ac121b4cc9e81c539',1,'ValueType.h']]],
   ['integer',['Integer',['../_scanner_8h.html#aa520fbf142ba1e7e659590c07da31921aa0faef0851b4294c06f2b94bb1cb2044',1,'Scanner.h']]],
-  ['intliteral',['IntLiteral',['../_chunk_8h.html#a0519976c90f19cb4731613ac2def566eacda97c2a497d47d83988f15420afc42e',1,'Chunk.h']]],
-  ['intvar',['IntVar',['../_chunk_8h.html#a0519976c90f19cb4731613ac2def566eae503652547652104ead59108c6ad5f8f',1,'Chunk.h']]]
+  ['intliteral',['IntLiteral',['../_chunk_8h.html#a0519976c90f19cb4731613ac2def566eacda97c2a497d47d83988f15420afc42e',1,'Chunk.h']]]
 ];

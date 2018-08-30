@@ -105,8 +105,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_transformer.html">Transformer</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A static class to transform different types into the appropriate ValueType enum.  <a href="class_transformer.html#details">More...</a><br/></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_serialize.html">Serialize</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A static class to serialize a value into a vector of unsigned chars.  <a href="class_serialize.html#details">More...</a><br/></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
@@ -141,7 +143,8 @@ Enumerations</h2></td></tr>
 <a class="el" href="_value_type_8h.html#ad9971b6ef33e02ba2c75d19c1d2518a1a8e95e84813830072b7516cfaa7dbc1a9">ValueType::Char</a>, 
 <br/>
 &#160;&#160;<a class="el" href="_value_type_8h.html#ad9971b6ef33e02ba2c75d19c1d2518a1a27118326006d3829667a400ad23d5d98">ValueType::String</a>, 
-<a class="el" href="_value_type_8h.html#ad9971b6ef33e02ba2c75d19c1d2518a1ac26f15e86e3de4c398a8273272aba034">ValueType::Bool</a>
+<a class="el" href="_value_type_8h.html#ad9971b6ef33e02ba2c75d19c1d2518a1ac26f15e86e3de4c398a8273272aba034">ValueType::Bool</a>, 
+<a class="el" href="_value_type_8h.html#ad9971b6ef33e02ba2c75d19c1d2518a1abbb93ef26e3c101ff11cdd21cab08a94">ValueType::Null</a>
 <br/>
  }</td></tr>
 <tr class="separator:ad9971b6ef33e02ba2c75d19c1d2518a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -156,6 +159,10 @@ Functions</h2></td></tr>
 std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_value_type_8h.html#ad987bae5166b7bafdd273e1ce1e82e0b">ValueTypeToString</a> (<a class="el" href="_value_type_8h.html#ad9971b6ef33e02ba2c75d19c1d2518a1">ValueType</a> type)</td></tr>
 <tr class="memdesc:ad987bae5166b7bafdd273e1ce1e82e0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a string of the type name. <br/></td></tr>
 <tr class="separator:ad987bae5166b7bafdd273e1ce1e82e0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a004105654cc2f1f3330e4ae2e591628c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a004105654cc2f1f3330e4ae2e591628c"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_value_type_8h.html#a004105654cc2f1f3330e4ae2e591628c">ValueTypeSize</a> (<a class="el" href="_value_type_8h.html#ad9971b6ef33e02ba2c75d19c1d2518a1">ValueType</a> type)</td></tr>
+<tr class="memdesc:a004105654cc2f1f3330e4ae2e591628c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the default size of each <a class="el" href="class_value.html" title="Basical value representation. ">Value</a> associated with ValueType. <br/></td></tr>
+<tr class="separator:a004105654cc2f1f3330e4ae2e591628c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader"></div></td></tr>
 <tr class="memitem:a9a8798223e88a396e798b55a1823e64c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_value_type_8h.html#a9a8798223e88a396e798b55a1823e64c">IsValid</a> (<a class="el" href="_value_type_8h.html#ad9971b6ef33e02ba2c75d19c1d2518a1">ValueType</a> type)</td></tr>
 <tr class="separator:a9a8798223e88a396e798b55a1823e64c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -203,7 +210,7 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hre
 <li>char</li>
 <li>bool</li>
 </ul>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000004">Todo:</a></b></dt><dd>Add other value types. </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000005">Todo:</a></b></dt><dd>Add other value types. </dd></dl>
 <p>The type of data the value is meant to represent. </p>
 <table class="fieldtable">
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><em><a class="anchor" id="ad9971b6ef33e02ba2c75d19c1d2518a1a7d839b2c12bfd40ac121b4cc9e81c539"></a>Int8</em>&#160;</td><td class="fielddoc">
@@ -232,6 +239,9 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hre
 </td></tr>
 <tr><td class="fieldname"><em><a class="anchor" id="ad9971b6ef33e02ba2c75d19c1d2518a1ac26f15e86e3de4c398a8273272aba034"></a>Bool</em>&#160;</td><td class="fielddoc">
 <p>Boolean. </p>
+</td></tr>
+<tr><td class="fieldname"><em><a class="anchor" id="ad9971b6ef33e02ba2c75d19c1d2518a1abbb93ef26e3c101ff11cdd21cab08a94"></a>Null</em>&#160;</td><td class="fielddoc">
+<p>Null. </p>
 </td></tr>
 </table>
 

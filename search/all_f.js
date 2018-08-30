@@ -1,6 +1,7 @@
 var searchData=
 [
   ['readbyte',['ReadByte',['../class_v_m.html#a021347bfd0ba129afe6dd50f41e6d406',1,'VM']]],
+  ['readconstant',['ReadConstant',['../class_v_m.html#acc9da38db98dca43905f6c848828a8fe',1,'VM']]],
   ['repl',['repl',['../_iliad_8cpp.html#a60bd31668659aace6154ac0a5aaa0718',1,'Iliad.cpp']]],
   ['return',['Return',['../_chunk_8h.html#a0519976c90f19cb4731613ac2def566ea988fd738de9c6d177440c5dcf69e73ce',1,'Return():&#160;Chunk.h'],['../_scanner_8h.html#aa520fbf142ba1e7e659590c07da31921a988fd738de9c6d177440c5dcf69e73ce',1,'Return():&#160;Scanner.h']]],
   ['rightbrace',['RightBrace',['../_scanner_8h.html#aa520fbf142ba1e7e659590c07da31921af6b8627fb24d257c2eb8509a4094803a',1,'Scanner.h']]],

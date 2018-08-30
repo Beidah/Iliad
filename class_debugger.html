@@ -102,17 +102,20 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:ac3cbfa0697e3883a6523a4e31146ec9c"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_debugger.html#ac3cbfa0697e3883a6523a4e31146ec9c">DisassembleInstruction</a> (<a class="el" href="class_chunk.html">Chunk</a> *chunk, int i)</td></tr>
 <tr class="memdesc:ac3cbfa0697e3883a6523a4e31146ec9c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disassembles instruction and prints out human readable opcodes.  <a href="#ac3cbfa0697e3883a6523a4e31146ec9c">More...</a><br/></td></tr>
 <tr class="separator:ac3cbfa0697e3883a6523a4e31146ec9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a45ff366eab3ac2751992eb61cf0fee7c"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_debugger.html#a45ff366eab3ac2751992eb61cf0fee7c">ConstantInstruction</a> (const char *name, <a class="el" href="class_chunk.html">Chunk</a> *chunk, int offset)</td></tr>
-<tr class="memdesc:a45ff366eab3ac2751992eb61cf0fee7c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disassembles number literals and prints out the type and value of the literal.  <a href="#a45ff366eab3ac2751992eb61cf0fee7c">More...</a><br/></td></tr>
-<tr class="separator:a45ff366eab3ac2751992eb61cf0fee7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a12e5a5bf103958a9df94a97111cc3459"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_debugger.html#a12e5a5bf103958a9df94a97111cc3459">SimpleInstruction</a> (const char *name, int offset)</td></tr>
-<tr class="memdesc:a12e5a5bf103958a9df94a97111cc3459"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disassembles simpler instructions (without operands) into a human readable format.  <a href="#a12e5a5bf103958a9df94a97111cc3459">More...</a><br/></td></tr>
-<tr class="separator:a12e5a5bf103958a9df94a97111cc3459"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6df9b6e459bc1384ef6c4fb3685e2362"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_debugger.html#a6df9b6e459bc1384ef6c4fb3685e2362">DeclarationInstruction</a> (const std::string &amp;name, <a class="el" href="class_chunk.html">Chunk</a> *chunk, int offset)</td></tr>
+<tr class="memdesc:a6df9b6e459bc1384ef6c4fb3685e2362"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disassembles Declaration instructions and prints out human readable information.  <a href="#a6df9b6e459bc1384ef6c4fb3685e2362">More...</a><br/></td></tr>
+<tr class="separator:a6df9b6e459bc1384ef6c4fb3685e2362"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb7d52fc70392254781f5e593ac88da3"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_debugger.html#afb7d52fc70392254781f5e593ac88da3">ConstantInstruction</a> (const std::string &amp;name, <a class="el" href="class_chunk.html">Chunk</a> *chunk, int offset)</td></tr>
+<tr class="memdesc:afb7d52fc70392254781f5e593ac88da3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disassembles number literals and prints out the type and value of the literal.  <a href="#afb7d52fc70392254781f5e593ac88da3">More...</a><br/></td></tr>
+<tr class="separator:afb7d52fc70392254781f5e593ac88da3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f1d0bf9c37d6b06e06b76513dcd78d2"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_debugger.html#a5f1d0bf9c37d6b06e06b76513dcd78d2">SimpleInstruction</a> (const std::string &amp;name, int offset)</td></tr>
+<tr class="memdesc:a5f1d0bf9c37d6b06e06b76513dcd78d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disassembles simpler instructions (without operands) into a human readable format.  <a href="#a5f1d0bf9c37d6b06e06b76513dcd78d2">More...</a><br/></td></tr>
+<tr class="separator:a5f1d0bf9c37d6b06e06b76513dcd78d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A class used to disassemble a chunk and print it's values in a human readable code. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a45ff366eab3ac2751992eb61cf0fee7c"></a>
+<a class="anchor" id="afb7d52fc70392254781f5e593ac88da3"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -122,7 +125,7 @@ Static Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">int Debugger::ConstantInstruction </td>
           <td>(</td>
-          <td class="paramtype">const char *&#160;</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>name</em>, </td>
         </tr>
         <tr>
@@ -154,6 +157,57 @@ Static Public Member Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">name</td><td>The name of the Op Code (e.g. "OP Int"). </td></tr>
+    <tr><td class="paramname">chunk</td><td><a class="el" href="class_chunk.html" title="A chunk of byte code. ">Chunk</a> containing the instruction. </td></tr>
+    <tr><td class="paramname">offset</td><td>Index of bytearray for the instruction. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Index of bytearray the next instruction is in (skips over operands). </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a6df9b6e459bc1384ef6c4fb3685e2362"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Debugger::DeclarationInstruction </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_chunk.html">Chunk</a> *&#160;</td>
+          <td class="paramname"><em>chunk</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>offset</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Disassembles Declaration instructions and prints out human readable information. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>The name of the Op Code (e.g. "Var declaration"). </td></tr>
     <tr><td class="paramname">chunk</td><td><a class="el" href="class_chunk.html" title="A chunk of byte code. ">Chunk</a> containing the instruction. </td></tr>
     <tr><td class="paramname">offset</td><td>Index of bytearray for the instruction. </td></tr>
   </table>
@@ -250,7 +304,7 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a12e5a5bf103958a9df94a97111cc3459"></a>
+<a class="anchor" id="a5f1d0bf9c37d6b06e06b76513dcd78d2"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -260,7 +314,7 @@ Static Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">int Debugger::SimpleInstruction </td>
           <td>(</td>
-          <td class="paramtype">const char *&#160;</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>name</em>, </td>
         </tr>
         <tr>
