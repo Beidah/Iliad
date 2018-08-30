@@ -9,45 +9,54 @@
 #define NO_FUNC &Compiler::emptyFunction
 
 const std::array<Compiler::ParseRule, Token::NUMBER_OF_TOKENS> Compiler::m_Rules = {
-	ParseRule(&Compiler::grouping, NO_FUNC, ParsePrecedence::Call),			// Token LeftParen
-	ParseRule(),															// Token RightParen
-	ParseRule(),															// TOKEN_LEFT_BRACE
-	ParseRule(),															// TOKEN_RIGHT_BRACE
-	ParseRule(),															// TOKEN_COMMA
-	ParseRule(),															// TOKEN_DOT
-	ParseRule(&Compiler::unary, &Compiler::binary, ParsePrecedence::Term),	// TOKEN_MINUS
-	ParseRule(NO_FUNC, &Compiler::binary, ParsePrecedence::Term),			// TOKEN_PLUS
-	ParseRule(),															// TOKEN_SEMICOLON
-	ParseRule(NO_FUNC, &Compiler::binary, ParsePrecedence::Factor),			// TOKEN_SLASH
-	ParseRule(NO_FUNC, &Compiler::binary, ParsePrecedence::Factor),			// TOKEN_STAR
-	ParseRule(&Compiler::unary, NO_FUNC),									// TOKEN_BANG
-	ParseRule(NO_FUNC, &Compiler::binary, ParsePrecedence::Equality),		// TOKEN_BANG_EQUAL
-	ParseRule(),															// TOKEN_EQUAL
-	ParseRule(NO_FUNC, &Compiler::binary, ParsePrecedence::Equality),		// TOKEN_EQUAL_EQUAL
-	ParseRule(NO_FUNC, &Compiler::binary, ParsePrecedence::Comparison),		// TOKEN_GREATER
-	ParseRule(NO_FUNC, &Compiler::binary, ParsePrecedence::Comparison),		// TOKEN_GREATER_EQUAL
-	ParseRule(NO_FUNC, &Compiler::binary, ParsePrecedence::Comparison),		// TOKEN_LESS
-	ParseRule(NO_FUNC, &Compiler::binary, ParsePrecedence::Comparison),		// TOKEN_LESS_EQUAL
-	ParseRule(&Compiler::binary, NO_FUNC, ParsePrecedence::And),			// Token And
-	ParseRule(&Compiler::binary, NO_FUNC, ParsePrecedence::Or),				// Token Or
-	ParseRule(),															// Token Identifier
-	ParseRule(&Compiler::character, NO_FUNC),								// Token Character
-	ParseRule(&Compiler::string, NO_FUNC),									// Token String
-	ParseRule(&Compiler::integer, NO_FUNC),									// Token Integer
-	ParseRule(&Compiler::_float, NO_FUNC),									// Token Float
-	ParseRule(),															// Token Class
-	ParseRule(),															// TOKEN_ELSE
-	ParseRule(&Compiler::literals, NO_FUNC),								// TOKEN_FALSE
-	ParseRule(),															// TOKEN_FOR
-	ParseRule(),															// TOKEN_IF
-	ParseRule(),															// TOKEN_RETURN
-	ParseRule(),															// TOKEN_SUPER
-	ParseRule(),															// TOKEN_THIS
-	ParseRule(&Compiler::literals, NO_FUNC),								// TOKEN_TRUE
-	ParseRule(),															// TOKEN_VAR
-	ParseRule(),															// TOKEN_WHILE
-	ParseRule(),															// TOKEN_ERROR
-	ParseRule(),															// TOKEN_EOF
+	ParseRule(&Compiler::grouping, NO_FUNC, ParsePrecedence::Call),			//!< Token LeftParen
+	ParseRule(),															//!< Token RightParen
+	ParseRule(),															//!< Token LeftBrace
+	ParseRule(),															//!< Token RightBrace
+	ParseRule(),															//!< Token Comma
+	ParseRule(),															//!< Token Dot
+	ParseRule(&Compiler::unary, &Compiler::binary, ParsePrecedence::Term),	//!< Token Minus
+	ParseRule(NO_FUNC, &Compiler::binary, ParsePrecedence::Term),			//!< Token Plus
+	ParseRule(),															//!< Token Semicolon
+	ParseRule(NO_FUNC, &Compiler::binary, ParsePrecedence::Factor),			//!< Token Slash
+	ParseRule(NO_FUNC, &Compiler::binary, ParsePrecedence::Factor),			//!< Token Star
+	ParseRule(&Compiler::unary, NO_FUNC),									//!< Token Bang
+	ParseRule(NO_FUNC, &Compiler::binary, ParsePrecedence::Equality),		//!< Token BangEquals
+	ParseRule(&Compiler::binary, NO_FUNC),									//!< Token Equals
+	ParseRule(NO_FUNC, &Compiler::binary, ParsePrecedence::Equality),		//!< Token EqualEquals
+	ParseRule(NO_FUNC, &Compiler::binary, ParsePrecedence::Comparison),		//!< Token Greater
+	ParseRule(NO_FUNC, &Compiler::binary, ParsePrecedence::Comparison),		//!< Token GreaterEqual
+	ParseRule(NO_FUNC, &Compiler::binary, ParsePrecedence::Comparison),		//!< Token Less
+	ParseRule(NO_FUNC, &Compiler::binary, ParsePrecedence::Comparison),		//!< Token LessEqual
+	ParseRule(&Compiler::binary, NO_FUNC, ParsePrecedence::And),			//!< Token And
+	ParseRule(&Compiler::binary, NO_FUNC, ParsePrecedence::Or),				//!< Token Or
+	ParseRule(&Compiler::variable, NO_FUNC),								//!< Token Identifier
+	ParseRule(&Compiler::character, NO_FUNC),								//!< Token Character
+	ParseRule(&Compiler::string, NO_FUNC),									//!< Token String
+	ParseRule(&Compiler::integer, NO_FUNC),									//!< Token Integer
+	ParseRule(&Compiler::_float, NO_FUNC),									//!< Token Float
+	ParseRule(),															//!< Token DecInt8
+	ParseRule(),															//!< Token DecInt16
+	ParseRule(),															//!< Token DecInt32
+	ParseRule(),															//!< Token DecInt64
+	ParseRule(),															//!< Token DecFloat
+	ParseRule(),															//!< Token DecDouble
+	ParseRule(),															//!< Token DecChar
+	ParseRule(),															//!< Token DecString
+	ParseRule(),															//!< Token DecBool
+	ParseRule(),															//!< Token Var
+	ParseRule(),															//!< Token Class
+	ParseRule(),															//!< Token Else
+	ParseRule(&Compiler::literals, NO_FUNC),								//!< Token False
+	ParseRule(),															//!< Token For
+	ParseRule(),															//!< Token If
+	ParseRule(),															//!< Token Return
+	ParseRule(),															//!< Token Super
+	ParseRule(),															//!< Token This
+	ParseRule(&Compiler::literals, NO_FUNC),								//!< Token True
+	ParseRule(),															//!< Token While
+	ParseRule(),															//!< Token Error
+	ParseRule(),															//!< Token EoF
 };
 
 bool Compiler::Compile(const std::string& source, std::shared_ptr<Chunk> chunk) {
@@ -55,8 +64,9 @@ bool Compiler::Compile(const std::string& source, std::shared_ptr<Chunk> chunk) 
 	m_CompilingChunk = chunk;
 
 	m_Parser.StartParser(*m_Scanner);
-	expression();
-	consume(TokenType::EoF, "Expeceded end of file.");
+	do {
+		declaration();
+	} while (CurrentToken().type != TokenType::EoF);
 	endCompiler();
 	return !m_Parser.hadError;
 }
@@ -75,7 +85,15 @@ void Compiler::advance() {
 	}
 }
 
-void Compiler::consume(TokenType expectedToken, const char * message) {
+bool Compiler::match(TokenType expectedToken) {
+	if ((m_Parser.currentToken)->type == expectedToken) {
+		advance();
+		return true;
+	}
+	return false;
+}
+
+void Compiler::consume(TokenType expectedToken, const std::string& message) {
 	if (CurrentToken().type == expectedToken) {
 		advance();
 		return;
@@ -84,7 +102,8 @@ void Compiler::consume(TokenType expectedToken, const char * message) {
 	errorAtCurrent(message);
 }
 
-void Compiler::unary() {
+void Compiler::unary(bool canAssign) {
+	if (canAssign) canAssign = canAssign && true;
 	// Get the operator
 	Token opToken = PreviousToken();
 	TokenType op = opToken.type;
@@ -106,7 +125,8 @@ void Compiler::unary() {
 	}
 }
 
-void Compiler::binary() {
+void Compiler::binary(bool canAssign) {
+	if (canAssign) canAssign = canAssign && true;
 	// Get the operator
 	Token opToken = PreviousToken();
 	TokenType op = opToken.type;
@@ -205,7 +225,8 @@ void Compiler::binary() {
 	}
 }
 
-void Compiler::grouping() {
+void Compiler::grouping(bool canAssign) {
+	if (canAssign) canAssign = canAssign && true;
 	expression();
 	consume(TokenType::RightParen, "Expected ')' after expression.");
 }
@@ -214,7 +235,8 @@ void Compiler::expression() {
 	parsePrecedence(ParsePrecedence::Assignment);
 }
 
-void Compiler::character() {
+void Compiler::character(bool canAssign) {
+	if (canAssign) canAssign = canAssign && true;
 	std::string lexeme = PreviousToken().lexeme;
 	char c = lexeme[1];
 	if (lexeme[1] == '\'') c = 0;
@@ -236,21 +258,27 @@ void Compiler::character() {
 	m_Parser.currentExpression = ValueType::Char;
 }
 
-void Compiler::integer() {
+void Compiler::integer(bool canAssign) {
+	if (canAssign) canAssign = canAssign && true;
+
 	int32_t numValue = std::stoi(PreviousToken().lexeme, nullptr);
 	Value value(FWD(numValue));
 	emitConstant(value);
 	m_Parser.currentExpression = ValueType::Int32;
 }
 
-void Compiler::_float() {
+void Compiler::_float(bool canAssign) {
+	if (canAssign) canAssign = canAssign && true;
+
 	float numValue = std::stof(PreviousToken().lexeme);
 	Value value(FWD(numValue));
 	emitConstant(value);
 	m_Parser.currentExpression = ValueType::Float;
 }
 
-void Compiler::string() {
+void Compiler::string(bool canAssign) {
+	if (canAssign) canAssign = canAssign && true;
+
 	auto lexeme = PreviousToken().lexeme;
 	std::string valueString = lexeme.substr(1, lexeme.length() - 2);
 	Value value(FWD(valueString));
@@ -258,19 +286,131 @@ void Compiler::string() {
 	m_Parser.currentExpression = ValueType::String;
 }
 
-void Compiler::literals() {
+void Compiler::literals(bool canAssign) {
+	if (canAssign) canAssign = canAssign && true;
+
 	switch (PreviousToken().type) {
-	case TokenType::True: 
+	case TokenType::True:
 		emitByte(OpCode::TrueLiteral);
 		m_Parser.currentExpression = ValueType::Bool;
 		break;
-	case TokenType::False: 
+	case TokenType::False:
 		emitByte(OpCode::FalseLiteral); 
 		m_Parser.currentExpression = ValueType::Bool;
 		break;
 	default:
 		return; // unreachable.
 	}
+}
+
+void Compiler::declaration() {
+	if (CurrentToken().type >= TokenType::DecInt8 && CurrentToken().type <= TokenType::Var) {
+		varDeclaration();
+	}
+	else {
+		statement();
+	}
+}
+
+void Compiler::varDeclaration() {
+	Token declType = CurrentToken();
+	advance();
+	consume(TokenType::Identifier, "Expected identifier.");
+	Token name = PreviousToken();
+
+	switch (declType.type) {
+	case TokenType::DecInt8: m_Parser.currentExpression = ValueType::Int8; break;
+	case TokenType::DecInt16: m_Parser.currentExpression = ValueType::Int16; break;
+	case TokenType::DecInt32: m_Parser.currentExpression = ValueType::Int32; break;
+	case TokenType::DecInt64: m_Parser.currentExpression = ValueType::Int64; break;
+	case TokenType::DecFloat: m_Parser.currentExpression = ValueType::Float; break;
+	case TokenType::DecDouble: m_Parser.currentExpression = ValueType::Double; break;
+	case TokenType::DecChar: m_Parser.currentExpression = ValueType::Char; break;
+	case TokenType::DecString: m_Parser.currentExpression = ValueType::String; break;
+	case TokenType::DecBool: m_Parser.currentExpression = ValueType::Bool; break;
+	}
+	ValueType varType = m_Parser.currentExpression;
+
+	if (m_Variables.find(name.lexeme) != m_Variables.end()) {
+		error("Variable " + name.lexeme + " already declared.");
+		return;
+	}
+
+	m_Variables.insert({ name.lexeme, m_Parser.currentExpression });
+
+	if (match(TokenType::Equal)) {
+		AssignVar(varType, name);
+		emitByte(OpCode::VarDeclarAndAssign);
+	} else {
+		emitByte(OpCode::VarDeclar);
+		emitByte(static_cast<uint8_t>(varType));
+	}
+
+	consume(TokenType::Semicolon, "Expected ';'.");
+
+	m_Parser.currentExpression = ValueType::Invalid;
+
+	Value id(FWD(name.lexeme));
+	emitByte(makeConstant(id));
+}
+
+void Compiler::AssignVar(ValueType varType, Token &name) {
+	parsePrecedence(ParsePrecedence::Assignment);
+
+	ValueType expType = m_Parser.currentExpression;
+
+	if (varType != expType) {
+		switch (varType) {
+		case ValueType::Int8:
+		case ValueType::Int16:
+		case ValueType::Int32:
+		case ValueType::Int64:
+		case ValueType::Float:
+		case ValueType::Double:
+			if (IsNumber(expType)) {
+				error("Cannot assign " + ValueTypeToString(expType) + " to " + ValueTypeToString(varType) + ".");
+			}
+			if (varType < expType) {
+				//! \todo Compiler warning.
+			}
+			break;
+		case ValueType::Char:
+			errorAt(name, "Cannot assign " + ValueTypeToString(expType) + " to char.");
+			break;
+		case ValueType::String:
+			errorAt(name, "Cannot assign " + ValueTypeToString(expType) + " to string.");
+			break;
+		case ValueType::Bool:
+			errorAt(name, "Cannot assign " + ValueTypeToString(expType) + " to bool.");
+			break;
+		}
+	}
+}
+
+void Compiler::variable(bool canAssign) {
+	Token nameTok = PreviousToken();
+	auto name = nameTok.lexeme;
+	if (m_Variables.find(name) == m_Variables.end()) {
+		errorAtCurrent("Unknown variable '" + name + "'.");
+	} else {
+		m_Parser.currentExpression = (*m_Variables.find(name)).second;
+	}
+
+	if (canAssign && match(TokenType::Equal)) {
+		AssignVar(m_Parser.currentExpression, nameTok);
+		emitByte(OpCode::VarAssign);
+	} else {
+		emitByte(OpCode::Var);
+	}
+	
+	Value stringVal(FWD(name));
+	emitByte(makeConstant(stringVal));
+}
+
+void Compiler::statement() {
+	expression();
+	consume(TokenType::Semicolon, "Expected ';'.");
+	m_Parser.currentExpression = ValueType::Invalid;
 }
 
 void Compiler::parsePrecedence(ParsePrecedence precedence) {
@@ -281,12 +421,14 @@ void Compiler::parsePrecedence(ParsePrecedence precedence) {
 		return;
 	}
 
-	(*this.*prefix)();
+	bool canAssign = precedence <= ParsePrecedence::Assignment;
+
+	(*this.*prefix)(canAssign);
 
 	while (precedence < getRule(CurrentToken().type)->precedence) {
 		advance();
 		ParseFun infix = getRule(PreviousToken().type)->infixRule;
-		(*this.*infix)();
+		(*this.*infix)(canAssign);
 	}
 
 }

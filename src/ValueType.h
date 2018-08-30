@@ -46,6 +46,7 @@ enum class ValueType {
 	String, //!< String
 
 	Bool, //!< Boolean
+	Null, //!< Null
 };
 
 //! Helper function to find the "smallest" value given.
@@ -65,17 +66,21 @@ inline bool IsBool(ValueType type) { return type == ValueType::Bool; }
 //! Get a string of the type name.
 std::string ValueTypeToString(ValueType type);
 
+//! Returns the default size of each Value associated with ValueType
+size_t ValueTypeSize(ValueType type);
 
-//!@{ \name Transformer
-//! \brief Converts type into appropriate ValueType enum
-/*!
-Will take a value and convert it's type into the appropriate ValueType. If
-passed a Value, it's the same as calling Value.Type().
-\tparam T Any supported ValueType, or Value
-\return Corresponding ValueType to type T, or type of Value.
-*/
+
+//! A static class to transform different types into the appropriate ValueType enum.
 class Transformer {
 public:
+	//!@{ \name Transformer
+	//! \brief Converts type into appropriate ValueType enum
+	/*!
+		Will take a value and convert it's type into the appropriate ValueType. If
+		passed a Value, it's the same as calling Value.Type().
+		\tparam T Any supported ValueType, or Value
+		\return Corresponding ValueType to type T, or type of Value.
+	*/
 	template <typename T>
 	static ValueType getType(T) {
 		static_assert(!std::is_same<T, T>::value, "This is not a supported type.");
@@ -129,16 +134,18 @@ public:
 	//!@}
 };
 
-//!@{ \name Serialize
-//! \brief Serializes a value into a vector of unsigned chars.
-/*!
-Takes a value of supported types and converts it to binary. If called on an
-instance of Value class, returns it's AsBytes method.
-\tparam value Any supported ValueType, or Value
-\return A binary representation of value, stored in vector<uint8_t>
-*/
+
+//! \brief A static class to serialize a value into a vector of unsigned chars.
 class Serialize {
 public:
+	//!@{ \name Serialize
+	//! Serializes values into byte arrays.
+	/*!
+		Takes a value of supported types and converts it to binary. If called on an
+		instance of Value class, returns it's AsBytes method.
+		\tparam value Any supported ValueType, or Value
+		\return A binary representation of value, stored in vector<uint8_t>
+	*/
 	template <typename T>
 	static ByteArray toBytes(T value) {
 		static_assert(std::is_arithmetic<T>::value, "This is not a supported type.");

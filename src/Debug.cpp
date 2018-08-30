@@ -30,6 +30,10 @@ int Debugger::DisassembleInstruction(Chunk* chunk, int offset) {
 	case OpCode::StringLiteral: return ConstantInstruction("Op String", chunk, offset);
 	case OpCode::TrueLiteral: return SimpleInstruction("OP True", offset);
 	case OpCode::FalseLiteral: return SimpleInstruction("OP False", offset);
+	case OpCode::VarDeclar: return DeclarationInstruction("Var declaration", chunk, offset);
+	case OpCode::VarAssign: return ConstantInstruction("Assign var", chunk, offset);
+	case OpCode::VarDeclarAndAssign: return ConstantInstruction("Var declaration", chunk, offset);
+	case OpCode::Var: return ConstantInstruction("Var", chunk, offset);
 	case OpCode::Equal: return SimpleInstruction("OP Equal", offset);
 	case OpCode::NotEqual: return SimpleInstruction("OP Not Equal", offset);
 	case OpCode::Greater: return SimpleInstruction("OP Greater", offset);
@@ -39,10 +43,11 @@ int Debugger::DisassembleInstruction(Chunk* chunk, int offset) {
 	case OpCode::Add: return SimpleInstruction("OP Add", offset);
 	case OpCode::Subtract: return SimpleInstruction("OP Subtract", offset);
 	case OpCode::Multiply: return SimpleInstruction("OP Multiply", offset);
+	case OpCode::Divide: return SimpleInstruction("OP Divide", offset);
 	case OpCode::Concatenate: return SimpleInstruction("Op Concatenate", offset);
 	case OpCode::Not: return SimpleInstruction("OP Not", offset);
 	case OpCode::Negate: return SimpleInstruction("OP Negate", offset);
-	case OpCode::Divide: return SimpleInstruction("OP Divide", offset);
+	case OpCode::Null: return SimpleInstruction("OP Null", offset);
 	case OpCode::Return: return SimpleInstruction("OP Return", offset);
 	default:
 		std::cout << "Unkown opcode " << instruction << std::endl;
@@ -50,14 +55,22 @@ int Debugger::DisassembleInstruction(Chunk* chunk, int offset) {
 	}
 }
 
-int Debugger::ConstantInstruction(const char* name, Chunk* chunk, int offset) {
+int Debugger::DeclarationInstruction(const std::string& name, Chunk* chunk, int offset) {
+	ValueType type = static_cast<ValueType>(chunk->m_Code[offset + 1]);
+	std::cout << name << " type:  " << ValueTypeToString(type) << std::endl;
+	std::cout << std::setw(8) << " ";
+	ConstantInstruction("Var name: ", chunk, offset + 1);
+	return offset + 3;
+}
+
+int Debugger::ConstantInstruction(const std::string& name, Chunk* chunk, int offset) {
 	byte constant = chunk->m_Code[offset + 1];
 	std::cout << std::left << std::setw(16) << name << std::right << (int)constant;
 	std::cout << " | " << chunk->m_Constants[constant].ToString() << " |" << std::endl;
 	return offset + 2;
 }
 
-int Debugger::SimpleInstruction(const char * name, int offset) {
+int Debugger::SimpleInstruction(const std::string& name, int offset) {
 	std::cout << name << std::endl;
 	return offset + 1;
 }

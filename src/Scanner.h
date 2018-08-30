@@ -40,6 +40,15 @@ enum class TokenType {
 	Integer, //!< A whole number
 	Float, //!< A decimal number
 
+	// Type keywords
+	DecInt8, DecInt16,
+	DecInt32, DecInt64,
+	DecFloat, DecDouble,
+	DecChar, DecString,
+	DecBool,
+	Var, //!< "var"
+
+
 	// Keywords
 	Class, //!< Instatiates a class
 	Else, //!< else
@@ -50,7 +59,6 @@ enum class TokenType {
 	Super, //!< super
 	This, //!< this
 	True, //!< true
-	Var, //!< var
 	While, //!< while
 
 	Error, //!< A Token representing a compile-time error.

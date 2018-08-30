@@ -5,6 +5,7 @@
 #include <string>
 #include <memory>
 #include <array>
+#include <unordered_map>
 
 #include "Chunk.h"
 #include "Scanner.h"
@@ -51,7 +52,7 @@ private:
 	std::shared_ptr<Chunk> m_CompilingChunk; //!< \brief A Chunk shared with by the VM that is currently being written to.
 
 	//! Function pointer for Parsing functions, which are used for ParseRule
-	typedef void(Compiler::*ParseFun)();
+	typedef void(Compiler::*ParseFun)(bool canAssign);
 
 	//! Stores functions on how to parse different tokens, as well as the precedence in parsing.
 	struct ParseRule {
@@ -73,8 +74,11 @@ private:
 
 	static const std::array<ParseRule, Token::NUMBER_OF_TOKENS> m_Rules; //!< Rules for parsing each individual token.
 
+	std::unordered_map<std::string, ValueType> m_Variables; //!< A hash map containing the Value and their ValueType for type-checking.
+
 public:
 
+	//! Default constructor
 	Compiler() = default;
 
 	//! Compiles text into bytecode.
@@ -85,26 +89,46 @@ public:
 	*/
 	bool Compile(const std::string& source, std::shared_ptr<Chunk> chunk);
 
+
+	//!@{ \name Token Getters
+
+	//! Current Token
 	const Token& CurrentToken() const { return *m_Parser.currentToken; }
+	//! Previous Token
 	const Token& PreviousToken() const { return *(m_Parser.currentToken - 1); }
 
-	const Token& TokenAt(size_t distance) const { return *(m_Parser.currentToken + distance); }
+	//! Gets token from specified location.
+	/*!
+	  Retrieves the token a set distance back from current one being parsed.
+	  \param distance How many tokens before the current one. 0 = current token, 1 = previous token.
+	  \return Token
+	*/
+	const Token& TokenAt(size_t distance) const { return *(m_Parser.currentToken - distance); }
+	//!@}
 
 private:
 
 	
-	//!@{
+	//!@{ \name Advance
 	//! Functions used for advancing the parser.
 
 	//! Gets the next token from the scanner to parse.
 	void advance();
+
+	//! Check if the next Token is one that is expected
+	/*! Checks one Token ahead of the current one, and consumes it if it is the predicted Token.
+		If the Token is not the predicted one, the scanner goes back to it's original place.
+		\param expectedToken The Token that is predicted to come next in the sequence.
+		\return Returns true if the next Token in the source is expected, else false
+	*/
+	bool match(TokenType expectedToken);
 
 	//! Takes an expected token and throws an error if it isn't found.
 	/*!
 	  \param expectedToken Token type that is expected to come next.
 	  \param message Message to attach to error if expectedToken isn't found.
 	*/
-	void consume(TokenType expectedToken, const char* message);
+	void consume(TokenType expectedToken, const std::string& message);
 	//!@}
 
 	//! Add a token to the parser.
@@ -114,25 +138,39 @@ private:
 	//! A set of functions to be given to ParseRule as its ParseFun members.
 
 	//! Function for parsing unary operators.
-	void unary();
+	void unary(bool canAssign);
 	//! Function for parsing binary operators.
-	void binary();
+	void binary(bool canAssign);
 	//! Function for parsing parentheses.
-	void grouping();
+	void grouping(bool canAssign);
+	//! Function for parsing a character token.
+	void character(bool canAssign);
+	//! Function for parsing integers.
+	void integer(bool canAssign);
+	//! Function for parsing floats.
+	void _float(bool canAssign);
+	//! Function for parsing strings.
+	void string(bool canAssign);
+	//! Function for parsing literals.
+	void literals(bool canAssign);
+	//! Function for parsing variables.
+	void variable(bool canAssign);
+	//! An empty function, meant for parse rules with nothing to parse
+	void emptyFunction(bool canAssign) { canAssign = canAssign && true; }
+	//!@}
+
+	//!@{ \name Statements and Expressions.
+
 	//! Function for parsing expressions.
 	void expression();
-	//! Function for parsing a character token.
-	void character();
-	//! Function for parsing integers.
-	void integer();
-	//! Function for parsing floats.
-	void _float();
-	//! Function for parsing strings.
-	void string();
-	//!function for parsing literals
-	void literals();
-	//! An empty function, meant for parse rules with nothing to parse
-	void emptyFunction() {}
+	//! Function for declarations.
+	void declaration();
+	//! Function for variable declaration.
+	void varDeclaration();
+	//! Function to assign a variable.
+	void AssignVar(ValueType varType, Token &name);
+	//! Function for parsing statements.
+	void statement();
 	//!@}
 
 

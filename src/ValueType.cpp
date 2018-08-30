@@ -18,6 +18,24 @@ std::string ValueTypeToString(ValueType type) {
 	}
 }
 
+size_t ValueTypeSize(ValueType type) {
+	switch (type) {
+	case ValueType::Invalid: return 0;
+	case ValueType::Int8: return sizeof(int8_t);
+	case ValueType::Int16: return sizeof(int16_t);
+	case ValueType::Int32: return sizeof(int32_t);
+	case ValueType::Int64: return sizeof(int64_t);
+	case ValueType::Float: return sizeof(float);
+	case ValueType::Double: return sizeof(double);
+	case ValueType::Char: return sizeof(char);
+	case ValueType::String: return 0;
+	case ValueType::Bool: return sizeof(bool);
+	case ValueType::Null: return 0;
+	default:
+		return 0; // Unreachable.
+	}
+}
+
 ValueType smallestTypeNeeded(ValueType a, ValueType b) {
 	return a > b ? a : b;
 }
