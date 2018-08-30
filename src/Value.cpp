@@ -4,11 +4,11 @@
 #include <sstream>
 #include <iomanip>
 
-Value::Value(const Value & value) : m_Type(value.Type()), m_Size(value.Size()) {
+Value::Value(const Value & value) : m_Type(value.Type()), m_Size(value.Size()), m_Initialized(true) {
 	m_Data = value.AsBytes();
 }
 
-Value::Value(ByteArray bytes, ValueType type) : m_Type(type), m_Size(bytes.size()) {
+Value::Value(ByteArray bytes, ValueType type) : m_Type(type), m_Size(bytes.size()), m_Initialized(true) {
 	m_Data = bytes;
 }
 
@@ -43,6 +43,7 @@ std::string Value::ToString() const {
 	case ValueType::Char: valueString << "'" << AsValue<char>() << "'"; break;
 	case ValueType::String: valueString << "\"" << AsValue<std::string>() << "\""; break;
 	case ValueType::Bool: valueString << (static_cast<bool>(*this) ? "true" : "false"); break;
+	case ValueType::Null: valueString << "Null"; break;
 	default: return "Unknown value type.";
 	}
 
@@ -130,10 +131,50 @@ Value Value::operator/(Value value) const {
 	}
 }
 
-Value & Value::operator=(const Value & value) {
+Value& Value::operator=(const Value& value) {
 	
-	if (m_Type != value.Type()) return *this;
-	m_Data = value.AsBytes();
+	if (m_Type == value.Type()) {
+		m_Data = value.AsBytes();
+		m_Initialized = true;
+	}
+	else {
+		// Hopefule the compiler is taking care of type-checking, so we can assume
+		// that the types are easily convertable.
+		switch (m_Type) {
+		case ValueType::Invalid: 
+			static_assert(true, "Dear god, what have you done?");
+		case ValueType::Int8: 
+			*this = value.AsValue<int8_t>();
+			return *this;
+		case ValueType::Int16:
+			*this = value.AsValue<int16_t>();
+			return *this;
+		case ValueType::Int32:
+			*this = value.AsValue<int32_t>();
+			return *this;
+		case ValueType::Int64:
+			*this = value.AsValue<int64_t>();
+			return *this;
+		case ValueType::Float:
+			*this = value.AsValue<float>();
+			return *this;
+		case ValueType::Double:
+			*this = value.AsValue<double>();
+			return *this;
+		case ValueType::Char:
+			*this = value.AsValue<char>();
+			return *this;
+		case ValueType::String:
+			*this = value.AsValue<std::string>();
+			return *this;
+		case ValueType::Bool:
+			*this = value.AsValue<bool>();
+			return *this;
+		default:
+			return *this; // Unreachable.
+		}
+	}
+
 	return *this;
 }
 

@@ -31,6 +31,15 @@ public:
 	*/
 	static int DisassembleInstruction(Chunk* chunk, int i);
 
+	//! Disassembles Declaration instructions and prints out human readable information.
+	/*!
+	  \param name The name of the Op Code (e.g. "Var declaration").
+	  \param chunk Chunk containing the instruction.
+	  \param offset Index of bytearray for the instruction.
+	  \return Index of bytearray the next instruction is in (skips over operands).
+	*/
+	static int DeclarationInstruction(const std::string& name, Chunk* chunk, int offset);
+
 	//! Disassembles number literals and prints out the type and value of the literal.
 	/*!
 	  \param name The name of the Op Code (e.g. "OP Int").
@@ -38,7 +47,7 @@ public:
 	  \param offset Index of bytearray for the instruction.
 	  \return Index of bytearray the next instruction is in (skips over operands).
 	*/
-	static int ConstantInstruction(const char* name, Chunk* chunk, int offset);
+	static int ConstantInstruction(const std::string& name, Chunk* chunk, int offset);
 
 	//! Disassembles simpler instructions (without operands) into a human readable format.
 	/*!
@@ -46,5 +55,5 @@ public:
 	  \param offset Index of bytearray for the instruction.
 	  \return Index of bytearray the next instruction is in.
 	*/
-	static int SimpleInstruction(const char* name, int offset);
+	static int SimpleInstruction(const std::string& name, int offset);
 };

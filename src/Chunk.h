@@ -16,13 +16,14 @@ enum class OpCode : byte {
 	//!@{
 	//! Literal values
 	IntLiteral, FloatLiteral,
-	TrueLiteral, FalseLiteral,
 	CharLiteral, StringLiteral,
+	TrueLiteral, FalseLiteral,
 	//!@}
 
 	//!@{
 	//! Variables
-	IntVar,
+	VarDeclar, VarAssign,
+	VarDeclarAndAssign, Var,
 	//!@}
 
 	//!@{
@@ -41,10 +42,14 @@ enum class OpCode : byte {
 	Negate,
 	//!@}
 
+	//!
+	Null,
+
 	//! Return
 	Return
 };
 
+//! A Helper function to convert a ValueType into byte code.
 OpCode valueTypeToOpCode(ValueType type);
 
 //! A chunk of byte code.
@@ -71,12 +76,10 @@ public:
 	  \param line Line on which the code occurred on.
 	  */
 	void writeByte(byte byte, int line);
-	//! \copybrief writeByte(Byte byte, int line)
-	/*!
-	 \param opCode OpCode representation of byte to write to m_Code.
-	 \param line Line on which the code occurred on.
-	*/
+
+	//! \overload void writeByte(byte byte, int line);
 	void writeByte(OpCode opCode, int line) { writeByte(static_cast<byte>(opCode), line); }
+
 	//! Add a constant Value to m_Constants.
 	/*!
 	  \param constant Value to add to m_Constants

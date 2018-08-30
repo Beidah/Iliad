@@ -16,8 +16,9 @@
 class Value {
 private:
 	const ValueType m_Type; //!< The type the value represents.
-	const size_t m_Size; //!< Size of the data in bytes.
+	size_t m_Size; //!< Size of the data in bytes.
 	ByteArray m_Data; //!< Bytes of data. Stored in little endian.
+	bool m_Initialized; //!< If it has been given a value to begin with or not.
 
 
 public:
@@ -25,8 +26,8 @@ public:
 	//!@{ \name Constructors
 	//! Initilizes values
 
-	//! Default constructor, returns an "Invalid" value
-	Value() : m_Type(ValueType::Invalid), m_Size(0) {}
+	//! Default constructor, returns an "Null" value
+	Value() : m_Type(ValueType::Null), m_Size(0), m_Initialized(false) {}
 
 
 	//! Copy constructor
@@ -51,8 +52,8 @@ public:
 	template<typename T, typename = std::enable_if_t<!std::is_same_v<T, Value&>&& !std::is_same_v<T, Value>>>
 	Value(T&& value) : Value(Serialize::toBytes<T>(value), Transformer::getType(value)) {}
 
-	//! Creates and returns a char Value.
-	static Value charValue(char c) { return Value(Serialize::toBytes(c), ValueType::Char); }
+	//! Creates an "uninitilized" value of the given type.
+	Value(ValueType type) : m_Type(type), m_Size(ValueTypeSize(type)), m_Initialized(false) { m_Data.reserve(m_Size); }
 
 	
 
@@ -166,7 +167,22 @@ public:
 	//!@}
 
 	//!@{ Assignment
-	Value &operator = (const Value& value);
+	Value& operator=(const Value& value);
+
+	template<typename T>
+	Value& operator=(T value) { 
+		m_Data = Serialize::toBytes(FWD(value));
+		m_Initialized = true;
+		return *this;
+	}
+
+	template<>
+	Value& operator=<std::string>(std::string value) {
+		m_Size = value.size();
+		m_Data.assign(value.begin(), value.end());
+		m_Initialized = true;
+		return *this;
+	}
 	//!@}
 
 	//!@{ Comparison
@@ -192,6 +208,8 @@ public:
 	inline bool IsBoolean() const { return m_Type == ValueType::Bool; }
 	inline bool IsChar() const { return m_Type == ValueType::Char; }
 	inline bool IsString() const { return m_Type == ValueType::String; }
+	inline bool IsNull() const { return m_Type == ValueType::Null; }
+	inline bool IsInitilized() const { return m_Initialized; }
 	inline bool IsValid() const { return m_Type != ValueType::Invalid; }
 	//!@}
 };

@@ -2,6 +2,7 @@
 #include "VM.h"
 
 #include <cstdarg>
+#include <iomanip>
 
 #include "Compiler.h"
 #include "Debug.h"
@@ -11,7 +12,7 @@ VM::VM() {
 }
 
 InterpretResults VM::Interpret(const std::string& source) {
-	Compiler compiler;
+	static Compiler compiler;
 	m_Chunk = std::make_shared<Chunk>();
 
 	if (!compiler.Compile(source, m_Chunk)) {
@@ -24,7 +25,6 @@ InterpretResults VM::Interpret(const std::string& source) {
 }
 
 InterpretResults VM::run() {
-#define READ_CONSTANT() (m_Chunk->m_Constants[ReadByte()])
 #define BINARY_OP(op) do { \
 		Value b = pop(); \
 		Value a = pop(); \
@@ -46,16 +46,93 @@ InterpretResults VM::run() {
 		case OpCode::IntLiteral:
 		case OpCode::FloatLiteral:
 		case OpCode::StringLiteral:
-		case OpCode::CharLiteral: push(READ_CONSTANT()); break;
+		case OpCode::CharLiteral: push(ReadConstant()); break;
 		case OpCode::TrueLiteral:
 		{
 			Value val(true);
-			push(val); break;
+			push(val); 
+			break;
 		}
 		case OpCode::FalseLiteral: 
 		{ 
 			Value val(false);
-			push(val); break;
+			push(val); 
+			break;
+		}
+		case OpCode::VarDeclar:
+		{
+			auto type = static_cast<ValueType>(ReadByte());
+			Value value(type);
+			Value nameVal = ReadConstant();
+			std::string name = nameVal.AsValue<std::string>();
+			if (m_Variables.find(name) == m_Variables.end()) {
+				m_Variables.insert({ name, value });
+			} else {
+				runtimeError("Identifier '%s' already declared.", name.c_str());
+				return InterpretResults::RuntimeError;
+			}
+			break;
+		}
+		case OpCode::VarAssign:
+		{
+			Value nameVal = ReadConstant();
+			std::string name = nameVal.AsValue<std::string>();
+			auto iter = m_Variables.find(name);
+			if (iter != m_Variables.end()) {
+				Value val = pop();
+				m_Variables[name] = val;
+				push(val);
+#ifdef _DEBUG
+				std::cout << std::setw(8) << " " << "| Var " << name;
+				std::cout << " = | " << val.ToString() << " | " << std::endl;
+#endif // DEBUG
+			} else {
+				runtimeError("Unknown identifier: '%s'.", name.c_str());
+				return InterpretResults::RuntimeError;
+			}
+			break;
+		}
+		case OpCode::VarDeclarAndAssign:
+		{
+			Value nameVal = ReadConstant();
+			std::string name = nameVal.AsValue<std::string>();
+			if (m_Variables.find(name) == m_Variables.end()) {
+				Value val = pop();
+				m_Variables.insert({ name, val });
+				push(val);
+#ifdef _DEBUG
+				std::cout << std::setw(8) << " " << "| Var " << name;
+				std::cout << " = | " << val.ToString() << " | " << std::endl;
+#endif // DEBUG
+			} else {
+				runtimeError("Variable %s already declared.", name.c_str());
+				return InterpretResults::RuntimeError;
+			}
+			break;
+		}
+		case OpCode::Var:
+		{
+			Value nameVal = ReadConstant();
+			std::string name = nameVal.AsValue<std::string>();
+			auto valIter = m_Variables.find(name);
+			if (valIter != m_Variables.end()) {
+				Value value = (*valIter).second;
+				if (!value.IsInitilized()) {
+					runtimeError("Identifier '%s' unitiliazed.", name.c_str());
+					return InterpretResults::RuntimeError;
+				}
+#ifdef _DEBUG
+				std::cout << std::setw(8) << " " << "| Var " << name;
+				std::cout << " = | " << value.ToString() << " | " << std::endl;
+#endif // DEBUG
+				push(value);
+			} else {
+				runtimeError("Unknown identifier: '%s'.", name.c_str());
+				return InterpretResults::RuntimeError;
+			}
+			
+
+			break;
 		}
 		case OpCode::Equal: BINARY_OP(== ); break;
 		case OpCode::NotEqual: BINARY_OP(!= ); break;
@@ -88,14 +165,19 @@ InterpretResults VM::run() {
 			push(val);
 			break;
 		}
+		case OpCode::Null:
+		{
+			Value null;
+			push(null);
+			break;
+		}
 		case OpCode::Return:
-			pop();
+			// pop();
 			return InterpretResults::OK;
 		}
 	}
 
 #undef BINARY_OP
-#undef READ_CONSTANT
 }
 
 void VM::push(Value& value) {
