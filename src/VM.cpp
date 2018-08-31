@@ -46,7 +46,12 @@ InterpretResults VM::run() {
 		case OpCode::IntLiteral:
 		case OpCode::FloatLiteral:
 		case OpCode::StringLiteral:
-		case OpCode::CharLiteral: push(ReadConstant()); break;
+		case OpCode::CharLiteral:
+		{
+			Value constant = ReadConstant();
+			push(constant); 
+			break;
+		}
 		case OpCode::TrueLiteral:
 		{
 			Value val(true);

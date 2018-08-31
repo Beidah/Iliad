@@ -7,7 +7,7 @@
 
 //! \todo write assert macros.
 #if _DEBUG
-#define ASSERT(x)
+#define ASSERT(x) 
 #else
 #define ASSERT(x)
 #endif

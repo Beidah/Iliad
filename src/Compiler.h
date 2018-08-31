@@ -233,6 +233,22 @@ private:
 	void endCompiler();
 	//!@}
 
+	//!@{ \name Warnings
+	//! Generate compiler warnings, but otherwise keeps the process going.
+
+	//! Warning at current token.
+	//! \param message Message to attach to error.
+	void warningAtCurrent(const std::string& message) { warningAt(CurrentToken(), message); }
+
+	//! Warning at previous token.
+	//! \param message Message to attach to error.
+	void warning(const std::string& message) { warningAt(PreviousToken(), message); }
+
+	//! Warning at specified token.
+	//! \param token Token that generated the error.
+	//! \param message Message to attach to error.
+	void warningAt(Token token, const std::string& message);
+
 	//!@{ \name Errors
 	//! Functions to generate errors.
 
