@@ -15,7 +15,7 @@ var indexSectionsWithContent =
   5: "bp",
   6: "ioptv",
   7: "abcdefgilmnoprstvw",
-  8: "afs",
+  8: "fs",
   9: "gt"
 };
 

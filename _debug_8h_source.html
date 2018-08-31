@@ -91,39 +91,34 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a href="_debug_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;</div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_chunk_8h.html">Chunk.h</a>&quot;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;cassert&gt;</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#if _DEBUG</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define ASSERT(x)</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#else</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="_debug_8h.html#aca68c0d4ac8df0838e209fb5300f7be3">   12</a></span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define ASSERT(x)</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;</div>
-<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="class_debugger.html">   17</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_debugger.html">Debugger</a> {</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="class_debugger.html#aa42f721899b95b17686b49aa8b0394d8">DisassembleChunk</a>(<a class="code" href="class_chunk.html">Chunk</a>* chunk, <span class="keyword">const</span> <span class="keywordtype">char</span>* name);</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_chunk_8h.html">Chunk.h</a>&quot;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;</div>
+<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="class_debugger.html">   11</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_debugger.html">Debugger</a> {</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="class_debugger.html#aa42f721899b95b17686b49aa8b0394d8">DisassembleChunk</a>(<a class="code" href="class_chunk.html">Chunk</a>* chunk, <span class="keyword">const</span> <span class="keywordtype">char</span>* name);</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">int</span> <a class="code" href="class_debugger.html#ac3cbfa0697e3883a6523a4e31146ec9c">DisassembleInstruction</a>(<a class="code" href="class_chunk.html">Chunk</a>* chunk, <span class="keywordtype">int</span> i);</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">int</span> <a class="code" href="class_debugger.html#ac3cbfa0697e3883a6523a4e31146ec9c">DisassembleInstruction</a>(<a class="code" href="class_chunk.html">Chunk</a>* chunk, <span class="keywordtype">int</span> i);</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">int</span> <a class="code" href="class_debugger.html#a6df9b6e459bc1384ef6c4fb3685e2362">DeclarationInstruction</a>(<span class="keyword">const</span> std::string&amp; name, <a class="code" href="class_chunk.html">Chunk</a>* chunk, <span class="keywordtype">int</span> offset);</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">int</span> <a class="code" href="class_debugger.html#afb7d52fc70392254781f5e593ac88da3">ConstantInstruction</a>(<span class="keyword">const</span> std::string&amp; name, <a class="code" href="class_chunk.html">Chunk</a>* chunk, <span class="keywordtype">int</span> offset);</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">int</span> <a class="code" href="class_debugger.html#a5f1d0bf9c37d6b06e06b76513dcd78d2">SimpleInstruction</a>(<span class="keyword">const</span> std::string&amp; name, <span class="keywordtype">int</span> offset);</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;};</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">int</span> <a class="code" href="class_debugger.html#a6df9b6e459bc1384ef6c4fb3685e2362">DeclarationInstruction</a>(<span class="keyword">const</span> std::string&amp; name, <a class="code" href="class_chunk.html">Chunk</a>* chunk, <span class="keywordtype">int</span> offset);</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">int</span> <a class="code" href="class_debugger.html#afb7d52fc70392254781f5e593ac88da3">ConstantInstruction</a>(<span class="keyword">const</span> std::string&amp; name, <a class="code" href="class_chunk.html">Chunk</a>* chunk, <span class="keywordtype">int</span> offset);</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">int</span> <a class="code" href="class_debugger.html#a5f1d0bf9c37d6b06e06b76513dcd78d2">SimpleInstruction</a>(<span class="keyword">const</span> std::string&amp; name, <span class="keywordtype">int</span> offset);</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;};</div>
 <div class="ttc" id="class_debugger_html_a5f1d0bf9c37d6b06e06b76513dcd78d2"><div class="ttname"><a href="class_debugger.html#a5f1d0bf9c37d6b06e06b76513dcd78d2">Debugger::SimpleInstruction</a></div><div class="ttdeci">static int SimpleInstruction(const std::string &amp;name, int offset)</div><div class="ttdoc">Disassembles simpler instructions (without operands) into a human readable format. </div><div class="ttdef"><b>Definition:</b> Debug.cpp:73</div></div>
 <div class="ttc" id="class_debugger_html_aa42f721899b95b17686b49aa8b0394d8"><div class="ttname"><a href="class_debugger.html#aa42f721899b95b17686b49aa8b0394d8">Debugger::DisassembleChunk</a></div><div class="ttdeci">static void DisassembleChunk(Chunk *chunk, const char *name)</div><div class="ttdoc">Reads the chunk and translate it&#39;s bytecode into human readable instructions. </div><div class="ttdef"><b>Definition:</b> Debug.cpp:8</div></div>
 <div class="ttc" id="class_debugger_html_afb7d52fc70392254781f5e593ac88da3"><div class="ttname"><a href="class_debugger.html#afb7d52fc70392254781f5e593ac88da3">Debugger::ConstantInstruction</a></div><div class="ttdeci">static int ConstantInstruction(const std::string &amp;name, Chunk *chunk, int offset)</div><div class="ttdoc">Disassembles number literals and prints out the type and value of the literal. </div><div class="ttdef"><b>Definition:</b> Debug.cpp:66</div></div>
 <div class="ttc" id="class_chunk_html"><div class="ttname"><a href="class_chunk.html">Chunk</a></div><div class="ttdoc">A chunk of byte code. </div><div class="ttdef"><b>Definition:</b> Chunk.h:61</div></div>
 <div class="ttc" id="class_debugger_html_ac3cbfa0697e3883a6523a4e31146ec9c"><div class="ttname"><a href="class_debugger.html#ac3cbfa0697e3883a6523a4e31146ec9c">Debugger::DisassembleInstruction</a></div><div class="ttdeci">static int DisassembleInstruction(Chunk *chunk, int i)</div><div class="ttdoc">Disassembles instruction and prints out human readable opcodes. </div><div class="ttdef"><b>Definition:</b> Debug.cpp:16</div></div>
 <div class="ttc" id="_chunk_8h_html"><div class="ttname"><a href="_chunk_8h.html">Chunk.h</a></div><div class="ttdoc">Details the bytecode that the program compiles to. </div></div>
-<div class="ttc" id="class_debugger_html"><div class="ttname"><a href="class_debugger.html">Debugger</a></div><div class="ttdoc">A class used to disassemble a chunk and print it&#39;s values in a human readable code. </div><div class="ttdef"><b>Definition:</b> Debug.h:17</div></div>
+<div class="ttc" id="class_debugger_html"><div class="ttname"><a href="class_debugger.html">Debugger</a></div><div class="ttdoc">A class used to disassemble a chunk and print it&#39;s values in a human readable code. </div><div class="ttdef"><b>Definition:</b> Debug.h:11</div></div>
 <div class="ttc" id="class_debugger_html_a6df9b6e459bc1384ef6c4fb3685e2362"><div class="ttname"><a href="class_debugger.html#a6df9b6e459bc1384ef6c4fb3685e2362">Debugger::DeclarationInstruction</a></div><div class="ttdeci">static int DeclarationInstruction(const std::string &amp;name, Chunk *chunk, int offset)</div><div class="ttdoc">Disassembles Declaration instructions and prints out human readable information. </div><div class="ttdef"><b>Definition:</b> Debug.cpp:58</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
