@@ -3,15 +3,9 @@
 
 #pragma once
 
+#include <cassert>
+
 #include "Chunk.h"
-
-//! \todo write assert macros.
-#if _DEBUG
-#define ASSERT(x)
-#else
-#define ASSERT(x)
-#endif
-
 
 //! A class used to disassemble a chunk and print it's values in a human readable code.
 class Debugger {

@@ -95,7 +95,7 @@ public:
 			case ValueType::Int16: return static_cast<float>(AsValue<int16_t>());
 			case ValueType::Int32: return static_cast<float>(AsValue<int32_t>());
 			case ValueType::Int64: return static_cast<float>(AsValue<int64_t>());
-			case ValueType::Double: return static_cast<float>(AsValue<double>());	//! \todo compiler warning about loss of percision
+			case ValueType::Double: return static_cast<float>(AsValue<double>());
 			default: return 0; // Unreachable
 			}
 		}
@@ -235,7 +235,6 @@ T Value::AsValue() const {
 	}
 
 	if (IsDecimal()) {
-		// TODO: Compiler Warning about potential loss of data
 		if (m_Type == ValueType::Float) {
 			int32_t intermediate = 0;
 
@@ -256,12 +255,6 @@ T Value::AsValue() const {
 			return static_cast<T>(doubleVal);
 		}
 	}
-
-	
-	// TODO: Compiler Warning about potential loss of data
-	//if (sizeof(T) < m_Size) {
-
-	//}
 
 	// If types do not match up, get origianl type and convert.
 	switch (m_Type) {

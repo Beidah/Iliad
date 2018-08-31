@@ -139,11 +139,11 @@ void Compiler::binary(bool canAssign) {
 	ValueType rhs = m_Parser.currentExpression;
 
 	switch (op) {
-	case TokenType::EqualEqual: 
-		emitByte(OpCode::Equal); 
+	case TokenType::EqualEqual:
+		emitByte(OpCode::Equal);
 		m_Parser.currentExpression = ValueType::Bool;
 		break;
-	case TokenType::BangEqual: 
+	case TokenType::BangEqual:
 		emitByte(OpCode::NotEqual);
 		m_Parser.currentExpression = ValueType::Bool;
 		break;
@@ -163,7 +163,7 @@ void Compiler::binary(bool canAssign) {
 		emitByte(OpCode::GreaterEqual);
 		m_Parser.currentExpression = ValueType::Bool;
 		break;
-	case TokenType::Less: 
+	case TokenType::Less:
 		if (!IsNumber(lhs) || !IsNumber(rhs)) {
 			errorAt(opToken, "Invalid operands. Expected two numbers, found " + ValueTypeToString(lhs) + ", and " + ValueTypeToString(rhs) + ".");
 			break;
@@ -171,7 +171,7 @@ void Compiler::binary(bool canAssign) {
 		emitByte(OpCode::Less);
 		m_Parser.currentExpression = ValueType::Bool;
 		break;
-	case TokenType::LessEqual: 
+	case TokenType::LessEqual:
 		if (!IsNumber(lhs) || !IsNumber(rhs)) {
 			errorAt(opToken, "Invalid operands. Expected two numbers, found " + ValueTypeToString(lhs) + ", and " + ValueTypeToString(rhs) + ".");
 			break;
@@ -181,13 +181,13 @@ void Compiler::binary(bool canAssign) {
 		break;
 	case TokenType::Minus:
 		if (!IsNumber(lhs) || !IsNumber(rhs)) {
-			errorAt(opToken, "Invalid operands. Expected two numbers, found " + ValueTypeToString(lhs) + ", and " + ValueTypeToString(rhs) +".");
+			errorAt(opToken, "Invalid operands. Expected two numbers, found " + ValueTypeToString(lhs) + ", and " + ValueTypeToString(rhs) + ".");
 			break;
 		}
 		emitByte(OpCode::Subtract);
 		m_Parser.currentExpression = smallestTypeNeeded(lhs, rhs);
 		break;
-	case TokenType::Plus: 
+	case TokenType::Plus:
 		if (IsString(lhs)) {
 			if (!IsString(rhs)) {
 				errorAt(opToken, "Cannot convert " + ValueTypeToString(rhs) + " explicity to string.");
@@ -212,7 +212,7 @@ void Compiler::binary(bool canAssign) {
 		emitByte(OpCode::Multiply);
 		m_Parser.currentExpression = smallestTypeNeeded(lhs, rhs);
 		break;
-	case TokenType::Slash: 
+	case TokenType::Slash:
 		if (!IsNumber(lhs) || !IsNumber(rhs)) {
 			errorAt(opToken, "Invalid operands. Expected two numbers, found " + ValueTypeToString(lhs) + ", and " + ValueTypeToString(rhs) + ".");
 			break;
@@ -295,7 +295,7 @@ void Compiler::literals(bool canAssign) {
 		m_Parser.currentExpression = ValueType::Bool;
 		break;
 	case TokenType::False:
-		emitByte(OpCode::FalseLiteral); 
+		emitByte(OpCode::FalseLiteral);
 		m_Parser.currentExpression = ValueType::Bool;
 		break;
 	default:
@@ -306,8 +306,7 @@ void Compiler::literals(bool canAssign) {
 void Compiler::declaration() {
 	if (CurrentToken().type >= TokenType::DecInt8 && CurrentToken().type <= TokenType::Var) {
 		varDeclaration();
-	}
-	else {
+	} else {
 		statement();
 	}
 }
@@ -328,7 +327,9 @@ void Compiler::varDeclaration() {
 	case TokenType::DecChar: m_Parser.currentExpression = ValueType::Char; break;
 	case TokenType::DecString: m_Parser.currentExpression = ValueType::String; break;
 	case TokenType::DecBool: m_Parser.currentExpression = ValueType::Bool; break;
+	case TokenType::Var: m_Parser.currentExpression = ValueType::Null; break;
 	}
+
 	ValueType varType = m_Parser.currentExpression;
 
 	if (m_Variables.find(name.lexeme) != m_Variables.end()) {
@@ -342,6 +343,9 @@ void Compiler::varDeclaration() {
 		AssignVar(varType, name);
 		emitByte(OpCode::VarDeclarAndAssign);
 	} else {
+		if (varType == ValueType::Null) {
+			errorAtCurrent("Variables declared with 'var' keyword must be assigned at declaration.");
+		}
 		emitByte(OpCode::VarDeclar);
 		emitByte(static_cast<uint8_t>(varType));
 	}
@@ -355,9 +359,13 @@ void Compiler::varDeclaration() {
 }
 
 void Compiler::AssignVar(ValueType varType, Token &name) {
+
 	parsePrecedence(ParsePrecedence::Assignment);
 
 	ValueType expType = m_Parser.currentExpression;
+
+	// If declaration was made with the "Var" keyword.
+	if (varType == ValueType::Null) varType = expType;
 
 	if (varType != expType) {
 		switch (varType) {
@@ -367,11 +375,11 @@ void Compiler::AssignVar(ValueType varType, Token &name) {
 		case ValueType::Int64:
 		case ValueType::Float:
 		case ValueType::Double:
-			if (IsNumber(expType)) {
-				error("Cannot assign " + ValueTypeToString(expType) + " to " + ValueTypeToString(varType) + ".");
+			if (!IsNumber(expType)) {
+				errorAt(name, "Cannot assign " + ValueTypeToString(expType) + " to " + ValueTypeToString(varType) + ".");
 			}
 			if (varType < expType) {
-				//! \todo Compiler warning.
+				warningAt(name, "Possible loss of data in conversion of " + ValueTypeToString(expType) + " to " + ValueTypeToString(varType) + ".");
 			}
 			break;
 		case ValueType::Char:
@@ -402,7 +410,7 @@ void Compiler::variable(bool canAssign) {
 	} else {
 		emitByte(OpCode::Var);
 	}
-	
+
 	Value stringVal(FWD(name));
 	emitByte(makeConstant(stringVal));
 }
@@ -445,7 +453,7 @@ uint8_t Compiler::makeConstant(const Value& value) {
 	return static_cast<uint8_t>(constant);
 }
 
-void Compiler::endCompiler() { 
+void Compiler::endCompiler() {
 	emitReturn();
 #ifdef DEBUG_PRINT_CODE
 	if (!m_Parser.hadError) {
@@ -453,6 +461,20 @@ void Compiler::endCompiler() {
 	}
 #endif // DEBUG_PRINT_CODE
 
+}
+
+void Compiler::warningAt(Token token, const std::string & message) {
+	std::clog << "[line " << token.line << "] Warning";
+
+	if (token.type == TokenType::EoF) {
+		std::clog << " at end";
+	} else if (token.type == TokenType::Error) {
+		// Nothing
+	} else {
+		std::clog << " at " << token.lexeme;
+	}
+
+	std::cerr << ": " << message << std::endl;
 }
 
 void Compiler::errorAt(Token token, const std::string& message) {
